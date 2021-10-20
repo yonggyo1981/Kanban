@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<servlet>
+		<servlet-name>Kanban</servlet-name>
+		<servlet-class>com.controller.KanbanController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Kanban</servlet-name>
+		<url-pattern>/kanban/*</url-pattern>
+	</servlet-mapping>
+</web-app>
