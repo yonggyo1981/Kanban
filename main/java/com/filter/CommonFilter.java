@@ -26,7 +26,7 @@ public class CommonFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 		/** 사이트 설정 초기화 */
 		Config.init(request);
-		
+	
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();
 		request.setAttribute("rootURL", rootURL);

@@ -16,7 +16,7 @@ public class Config {
 	
 	private static ServletRequest request;
 
-	private static Config instance = new Config();
+	private static Config instance = null;
 	
 	private HashMap<String, Object> conf = new HashMap<>(); // 설정 담기
 	
@@ -71,6 +71,7 @@ public class Config {
 	 * 
 	 * @return
 	 */
+
 	public static Config getInstance() {
 		if (instance == null) {
 			instance = new Config();
