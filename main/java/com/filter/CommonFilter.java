@@ -16,8 +16,13 @@ public class CommonFilter implements Filter {
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 		
+		// 헤더 출력 
+		printHeader(request, response);
+		
 		chain.doFilter(request, response);
-		// 후처리
+		
+		// 푸터 출력
+		printFooter(request, response);
 	}
 	
 	/** 
@@ -25,16 +30,18 @@ public class CommonFilter implements Filter {
 	 * 
 	 */
 	private void printHeader(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=utf-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/views/outline/header/main.jsp");
+		rd.include(request, response);
 	}
 	
 	/**
 	 * 푸터 출력 
 	 */
 	private void printFooter(ServletRequest request, ServletResponse response) throws ServletException, IOException {
-		
-	}
-	
+		RequestDispatcher rd = request.getRequestDispatcher("/views/outline/footer/main.jsp");
+		rd.include(request, response);
+	}	
 }
 
 
