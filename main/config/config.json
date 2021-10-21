@@ -1,0 +1,9 @@
+{ 
+	"Environment" : "development",
+	"DB":  { 
+		"Driver": "com.mysql.cj.jdbc.Driver",
+		"Url" : "jdbc:mysql://localhost:3306/JSPBookDB",
+		"user" : "root", 
+		"password" : "aA!12345"
+	}
+ }

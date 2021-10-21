@@ -4,6 +4,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+import com.core.*;
+
 /**
  * 공통 필터 - 사이트 전역 적용 
  * 
@@ -22,6 +24,9 @@ public class CommonFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+		/** 사이트 설정 처리 */
+		Config conf = new Config(request);
+		
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();
 		request.setAttribute("rootURL", rootURL);
