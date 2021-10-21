@@ -1,10 +1,16 @@
 { 
-	"Environment" : "production",
+	"Environment" : "development",
 	"DB":  { 
 		"Driver": "com.mysql.cj.jdbc.Driver",
 		"Url" : "jdbc:mysql://localhost:3306/JSPBookDB",
 		"user" : "root", 
 		"password" : "aA!12345"
 	},
-	"LogDir" : "D:\\logs"
+	"LogDir" : "D:\\logs",
+	"css": {
+		"/kanban":"kanban/test||kanban/test2"
+	},
+	"js" : {
+		"/kanban":"kanban/test||kanban/test2"
+	}
  }

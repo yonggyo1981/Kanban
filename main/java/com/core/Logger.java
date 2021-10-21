@@ -55,8 +55,8 @@ public class Logger {
 	
 	public static void init() {
 		Config config = Config.getInstance();
-		String logDir = (String)config.get("LogDir");
-		String status = ((String)config.get("Environment")).equals("production")?"service":"dev";
+		logDir = (String)config.get("LogDir");
+		status = ((String)config.get("Environment")).equals("production")?"service":"dev";
 		init(status, logDir);
 	}
 	
