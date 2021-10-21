@@ -52,6 +52,36 @@ public class Config {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 설정 조회 
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public Object get(String key) {
+		if (!conf.containsKey(key)) {
+			return null;
+		}
+		
+		Object value = conf.get(key);
+		// 설정 값이 문자열이면 그냥 반환 
+		if (value instanceof String) {
+			return value;
+		}
+		
+		// 아니면 JSONObject -> HashMap -> Object
+		HashMap<String, String> map = new HashMap<>();
+		JSONObject json = (JSONObject)value;
+		Iterator<String> ir = json.keySet().iterator();
+		while(ir.hasNext()) {
+			String k = ir.next();
+			String v = (String)json.get(k);
+			map.put(k, v);
+		}
+		
+		return map;
+	}
 }
 
 
