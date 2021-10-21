@@ -9,7 +9,7 @@
 	<head>
 		<meta charset='utf-8'>
 		<link rel="stylesheet" type="text/css" href="${rootURL}/resources/css/style.css" />
-		<script type="text/javascript" src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 		<script type="text/babel" src="${rootURL}/resources/js/common.js"></script>
 		<title>작업 관리자</title>
 	</head>
