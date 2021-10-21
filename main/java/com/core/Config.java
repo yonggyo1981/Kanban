@@ -42,6 +42,12 @@ public class Config {
 		
 		try {
 			JSONObject  json = (JSONObject)new JSONParser().parse(sb.toString());
+			Iterator<String> ir = json.keySet().iterator();
+			while(ir.hasNext()) {
+				String key = ir.next();
+				conf.put(key, json.get(key));
+			}
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
