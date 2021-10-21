@@ -23,13 +23,17 @@ public class CommonFilter implements Filter {
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 		
-		// 헤더 출력 
-		printHeader(request, response);
+		// 헤더 출력
+		if (isPrintOk(request)) {
+			printHeader(request, response);
+		}
 		
 		chain.doFilter(request, response);
 		
 		// 푸터 출력
-		printFooter(request, response);
+		if (isPrintOk(request)) {
+			printFooter(request, response);
+		}
 	}
 	
 	/** 
@@ -60,12 +64,14 @@ public class CommonFilter implements Filter {
 		if (request instanceof HttpServletRequest) {
 			HttpServletRequest req = (HttpServletRequest)request;
 			
+			/** 정적 경로 제외 S */
 			String URI = req.getRequestURI();
 			for (String dir : staticDirs) {
 				if (URI.indexOf("/" + dir) != -1) { // 정적 경로가 포함되어 있으면 false
-					
+					return false;
 				}
 			}
+			/** 정적 경로 제외 E */
 		}
 		
 		return true;
