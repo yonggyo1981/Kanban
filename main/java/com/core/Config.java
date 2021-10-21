@@ -14,13 +14,16 @@ import org.json.simple.parser.*;
  */
 public class Config {
 	
+	private static ServletRequest request;
+	
+	
 	private HashMap<String, Object> conf = new HashMap<>(); // 설정 담기
 	
 	/** 
 	* src/main/config/config.json을 읽어서 설정 HashMap
 	*  
 	*/
-	public Config(ServletRequest request) {
+	public Config() {
 		String configPath = request.getServletContext().getRealPath(".");
 		configPath += File.separator + ".." + File.separator + "config" + File.separator + "config.json";
 		
@@ -51,6 +54,15 @@ public class Config {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 초기화
+	 * 
+	 * @param request
+	 */
+	public static void init(ServletRequest request) {
+		Config.request = request;
 	}
 	
 	/**
