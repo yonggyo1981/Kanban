@@ -22,6 +22,9 @@ public class CommonFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+		/** rootURL */
+		String rootURL = request.getServletContext().getContextPath();
+		request.setAttribute("rootURL", rootURL);
 		
 		// 헤더 출력
 		if (isPrintOk(request)) {
