@@ -26,7 +26,13 @@ public class CommonFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 		/** 사이트 설정 초기화 */
 		Config.init(request);
-	
+		
+		/** 로거 초기화 */
+		Logger.init();
+		
+		/** 접속자 정보 로그 */
+		Logger.log(request);
+		
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();
 		request.setAttribute("rootURL", rootURL);
