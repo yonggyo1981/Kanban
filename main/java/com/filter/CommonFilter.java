@@ -76,9 +76,17 @@ public class CommonFilter implements Filter {
 			}
 			/** 정적 경로 제외 E */
 			
-			/** 요청 메서드 GET 방식 방식이 아닌 경우 제외 */
+			/** 요청 메서드 GET 방식이 아닌 경우 제외 */
+			String method = req.getMethod().toUpperCase();
+			if (!method.equals("GET")) {
+				return false;
+			}
 			
-			
+			/** 요청 파라미터 중에서 outline = none일때 제외 */
+			String outline = request.getParameter("outline");
+			if (outline != null && outline.equals("none")) {
+				return false;
+			}
 		}
 		
 		return true;
