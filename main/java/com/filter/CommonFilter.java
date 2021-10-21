@@ -25,7 +25,7 @@ public class CommonFilter implements Filter {
 	 * 
 	 */
 	private void printHeader(ServletRequest request, ServletResponse response) throws ServletException, IOException {
-		
+		RequestDispatcher rd = request.getRequestDispatcher("/views/outline/header/main.jsp");
 	}
 	
 	/**
