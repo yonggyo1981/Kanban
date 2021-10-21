@@ -21,7 +21,25 @@ public class Config {
 		String configPath = request.getServletContext().getRealPath(".");
 		configPath += File.separator + ".." + File.separator + "config" + File.separator + "config.json";
 		
-		System.out.println(configPath);
+		File file = new File(configPath);
+		if (!file.exists()) { // 설정 파일 존재 X 중지 
+			return;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		try (FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr)) {
+			String line = null;
+			while((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String json = sb.toString();
+		System.out.println(json);
+ 	
 	}
 }
 
