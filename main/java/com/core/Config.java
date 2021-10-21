@@ -13,6 +13,9 @@ import org.json.simple.parser.*;
  * 
  */
 public class Config {
+	
+	private HashMap<String, Object> conf = new HashMap<>(); // 설정 담기
+	
 	/** 
 	* src/main/config/config.json을 읽어서 설정 HashMap
 	*  
@@ -37,9 +40,11 @@ public class Config {
 			e.printStackTrace();
 		}
 		
-		String json = sb.toString();
-		System.out.println(json);
- 	
+		try {
+			JSONObject  json = (JSONObject)new JSONParser().parse(sb.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }
 
