@@ -15,7 +15,8 @@ import org.json.simple.parser.*;
 public class Config {
 	
 	private static ServletRequest request;
-	
+
+	private static Config instance = new Config();
 	
 	private HashMap<String, Object> conf = new HashMap<>(); // 설정 담기
 	
@@ -23,7 +24,7 @@ public class Config {
 	* src/main/config/config.json을 읽어서 설정 HashMap
 	*  
 	*/
-	public Config() {
+	private Config() {
 		String configPath = request.getServletContext().getRealPath(".");
 		configPath += File.separator + ".." + File.separator + "config" + File.separator + "config.json";
 		
@@ -63,6 +64,19 @@ public class Config {
 	 */
 	public static void init(ServletRequest request) {
 		Config.request = request;
+	}
+	
+	/**
+	 * 싱글톤 인스턴스 반환
+	 * 
+	 * @return
+	 */
+	public static Config getInstance() {
+		if (instance == null) {
+			instance = new Config();
+		}
+		
+		return instance;
 	}
 	
 	/**
