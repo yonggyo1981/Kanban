@@ -70,8 +70,8 @@ nav ul a:hover {
 /** main/index.jsp */
 .body-index .login_box {
 	width: 400px; 
-	min-height: 400px;
-	margin: 150px auto;
+	min-height: 300px;
+	margin: 50px auto;
 	box-shadow: #666666 2px 2px 5px;
 	border-radius: 20px;
 	padding: 30px;
@@ -88,6 +88,26 @@ nav ul a:hover {
 	padding: 0 10px;
 }
 
+.login_box .links {
+	padding: 10px 0;	
+}
 
+.login_box .links .left {
+	float: left; 
+} 
 
+.login_box .links .right {
+	float: right;
+}
+
+.login_box .links:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.login_box .links a:hover {
+	text-decoration: underline;
+}
+.login_box .links .left a { margin-right: 10px; }
 
