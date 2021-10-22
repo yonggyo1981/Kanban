@@ -42,7 +42,7 @@ public class MemberController extends HttpServlet {
 				findpwController(request, response);
 				break;
 			default : // 없는 페이지 
-				RequestDispatcher rd = request.getRequestDispatcher("/error/404.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/views/error/404.jsp");
 				rd.forward(request, response);
 		}
 	}
@@ -59,7 +59,12 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void joinController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		if (httpMethod.equals("GET")) { // 양식 출력 
+			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
+			rd.include(request, response);
+		} else { // 양식 처리 
+			
+		}
 	}
 	
 	/**
