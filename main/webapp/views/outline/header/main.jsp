@@ -1,9 +1,14 @@
 <%@ page contentType="text/html; charset=utf-8" %>
+<%@ page import="java.util.HashSet" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String rootURL = (String)request.getAttribute("rootURL");
+	HashSet<String> addCss = (HashSet<String>)request.getAttribute("addCss");	
+	HashSet<String> addScripts = (HashSet<String>)request.getAttribute("addScripts");
 %>
 <c:set var="rootURL" value="<%=rootURL%>" />
+<c:set var="addCss" value="<%=addCss%>" />
+<c:set var="addScripts" value="<%=addScripts%>" />
 <!DOCTYPE html>
 <html>
 	<head>
