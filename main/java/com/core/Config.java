@@ -191,8 +191,13 @@ public class Config {
 			return null;
 		}
 		
+		String type = addonType.equals("AddonHeader")?"header":"footer";
+		
 		StringBuilder sb = new StringBuilder();
-		sb.append("/views/outline/header/inc/");
+		sb.append("/views/outline/");
+		sb.append(type);
+		sb.append("/inc/");
+		
 		if (addon == null) { // 공통 
 			sb.append(commonAddon);
 		} else { 
