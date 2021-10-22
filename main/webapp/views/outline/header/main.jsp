@@ -19,15 +19,15 @@
 	<head>
 		<meta charset='utf-8'>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-		<link rel="stylesheet" type="text/css" href="${rootURL}/resources/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="${rootURL}/resources/css/style.css${version}" />
 		<c:forEach var="css" items="${addCss}">
-		<link rel="stylesheet" type="text/css" href="${rootURL}/resources/css/${css}.css" />
+		<link rel="stylesheet" type="text/css" href="${rootURL}/resources/css/${css}.css${version}" />
 		</c:forEach>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script type="text/babel" src="${rootURL}/resources/js/common.js"></script>
+		<script type="text/babel" src="${rootURL}/resources/js/common.js${version}"></script>
 		<c:forEach var="script" items="${addScripts}">
-		<script type="text/babel" src="${rootURL}/resources/js/${script}.js"></script>
+		<script type="text/babel" src="${rootURL}/resources/js/${script}.js${version}"></script>
 		</c:forEach>
 		<title><c:out value="${pageTitle}" /></title>
 	</head>

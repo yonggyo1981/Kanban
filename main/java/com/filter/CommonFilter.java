@@ -45,7 +45,7 @@ public class CommonFilter implements Filter {
 		
 		/** Environment - development(개발중), production(서비스 중) */
 		String env = ((String)config.get("Environment")).equals("production")?"production":"development";
-		
+		request.setAttribute("environment", env);
 		
 		/** CSS, JS 버전 */
 		String cssJsVersion = null;
