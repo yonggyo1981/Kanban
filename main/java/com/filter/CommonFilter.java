@@ -43,6 +43,18 @@ public class CommonFilter implements Filter {
 		/** 사이트 기본 제목 */
 		request.setAttribute("pageTitle", config.get("PageTitle"));
 		
+		/** Environment - development(개발중), production(서비스 중) */
+		String env = ((String)config.get("Environment")).equals("production")?"production":"development";
+		
+		
+		/** CSS, JS 버전 */
+		String cssJsVersion = null;
+		if (env.equals("development")) {
+			cssJsVersion = "?v=" + String.valueOf(System.currentTimeMillis());
+		}
+		request.setAttribute("cssJsVersion", cssJsVersion);
+		
+		
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();
 		request.setAttribute("rootURL", rootURL);

@@ -7,11 +7,13 @@
 	HashSet<String> addScripts = (HashSet<String>)request.getAttribute("addScripts");
 	
 	String pageTitle = (String)request.getAttribute("pageTitle"); // 사이트 기본 제목
+	String cssJsVersion = (String)request.getAttribute("cssJsVersion"); 
 %>
 <c:set var="rootURL" value="<%=rootURL%>" />
 <c:set var="addCss" value="<%=addCss%>" />
 <c:set var="addScripts" value="<%=addScripts%>" />
 <c:set var="pageTitle" value="<%=pageTitle%>" />
+<c:set var="version" value="<%=cssJsVersion%>" />
 <!DOCTYPE html>
 <html>
 	<head>
