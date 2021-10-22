@@ -221,7 +221,3 @@ public class Config {
 		return getAddon("AddonFooter");
 	}
 }
-
-
-
-

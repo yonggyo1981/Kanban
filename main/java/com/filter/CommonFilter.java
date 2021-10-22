@@ -96,6 +96,14 @@ public class CommonFilter implements Filter {
 	private void printFooter(ServletRequest request, ServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/views/outline/footer/main.jsp");
 		rd.include(request, response);
+		
+		/** 푸터 추가 영역 처리 */
+		Config config = Config.getInstance();
+		String addonURL = config.getFooterAddon();
+		if (addonURL != null) {
+			RequestDispatcher inc = request.getRequestDispatcher(addonURL);
+			inc.include(request, response);
+		}
 	}
 	
 	/**
