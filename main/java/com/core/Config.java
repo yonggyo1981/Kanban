@@ -161,6 +161,26 @@ public class Config {
 		
 		return list;
 	}
+	
+	/**
+	 * 사이트 헤더 영역에 추가될 jsp 경로
+	 * 
+	 * @return
+	 */
+	public String getHeaderAddon() {
+		
+		return null;
+	}
+	
+	/**
+	 * 사이트 푸터 영역에 추가될 jsp 경로
+	 * 
+	 * @return
+	 */
+	public String getFooterAddon() {
+		
+		return null;
+	}
 }
 
 
