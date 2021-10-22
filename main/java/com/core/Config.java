@@ -123,19 +123,21 @@ public class Config {
 	 * 
 	 * @return
 	 */
-	public String[] getCss() {
+	public HashSet<String> getCss() {
 		
-		String[] list = null;
+		HashSet<String> list = new HashSet<>();
 		HashMap<String, String> css = (HashMap<String, String>)get("css");
 		Iterator<String> ir = css.keySet().iterator();
 		while(ir.hasNext()) {
 			String URI = ir.next();
 			if (requestURI.indexOf(URI) != -1) {
-				list = css.get(URI).split("||");
-				break;
+				StringTokenizer st = new StringTokenizer(css.get(URI), "||");
+				while(st.hasMoreTokens()) {
+					list.add(st.nextToken());
+				}
 			}
 		}
-		System.out.println(list);
+		
 		return list;
 	}
 	
@@ -143,9 +145,21 @@ public class Config {
 	 * URI 패턴에 따른 JS 파일 목록 
 	 * @return
 	 */
-	public String[] getScripts() {
-		
-		return null;
+	public HashSet<String> getScripts() {
+		HashSet<String> list = new HashSet<>();
+		HashMap<String, String> js = (HashMap<String, String>)get("js");
+		Iterator<String> ir = js.keySet().iterator();
+		while(ir.hasNext()) {
+			String URI = ir.next();
+			if (requestURI.indexOf(URI) != -1) { // URI 포함되어 있다면 
+				StringTokenizer st = new StringTokenizer(js.get(URI), "||");
+				while(st.hasMoreTokens()) {
+					list.add(st.nextToken());
+				}
+			}
+		}
+		System.out.println(list);
+		return list;
 	}
 }
 
