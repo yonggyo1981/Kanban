@@ -225,4 +225,19 @@ public class Config {
 	public String getFooterAddon() {
 		return getAddon("AddonFooter");
 	}
+	
+	/**
+	 * 페이지 URI를 가지고 body에 추가할 클래스명
+	 * 	
+	 * @return
+	 */
+	public String[] getBodyClass() {
+		String rootURL = request.getServletContext().getContextPath();
+		String URI = requestURI.replace(rootURL, "");
+		System.out.println(URI);
+		return null;
+	}
 }
+
+
+

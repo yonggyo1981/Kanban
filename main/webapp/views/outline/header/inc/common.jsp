@@ -6,13 +6,15 @@
 <c:set var="rootURL" value="<%=rootURL%>" />
 <header>
 	<div class="main_top">
-		<a href="${rootURL}/member/login">로그인</a>
-		<a href="${rootURL}/member/join">회원가입</a>
+		<div class='inner layout_width'>
+			<a href="${rootURL}/member/login">로그인</a>
+			<a href="${rootURL}/member/join">회원가입</a>
+		</div>
 	</div>
 	<div class='main_logo'>작업 관리자</div>
 </header>
 <nav>
-	<ul>
+	<ul class='layout_width'>
 		<li>
 			<a href='"${rootURL}/kanban/work'">작업요약</a>
 		</li>

@@ -1,9 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
 * { font-family: 'Nanum Gothic', sans-serif; box-sizing: border-box;  outline: none; }
 html { font-size: 13px; color: #212121; }
-body { padding: 0; }
+body { margin: 0; }
 a { color: #212121; text-decoration: none; }
 ul { list-style: none; padding: 0; margin: 0; }
 li { margin: 0; }
 
 .dn { display: none !important; }
+
+.layout_width {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+/** header/inc/common.jsp */
+header .main_top  { 
+	background-color: #f8f8f8; 
+	border-bottom: 1px solid #d5d5d5;
+	padding: 10px; 
+	text-align: right; 
+}
+
+header .main_top a {
+	margin-left: 10px; 	
+}
+
+header .main_logo { 
+	text-align: center; 
+	font-size: 30px; 
+	font-weight: bold; 
+	padding: 50px 0; 
+}
+
+nav {
+	background-color: #cccccc;
+}
+
+nav ul li { 
+	float: left; 
+}
+
+nav ul:after {
+	content: '';
+	display: block;
+	clear: left;
+}
+
+nav ul a {
+	display: block;
+	padding: 15px 30px;
+	font-size: 15px; 
+	font-weight: bold;
+}
+
+nav ul a:hover {
+	background-color: orange;
+}
+
+
+
+
