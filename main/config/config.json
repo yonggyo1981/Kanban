@@ -1,5 +1,5 @@
 { 
-	"Environment" : "development",
+	"Environment" : "production",
 	"PageTitle" : "사이트 기본제목",
 	"DB":  { 
 		"Driver": "com.mysql.cj.jdbc.Driver",
@@ -11,5 +11,9 @@
 	"css": {
 	},
 	"js" : {
-	}
+	},
+	"AddonHeader" : {
+		"*" : "common",
+		"/kanban" : "test"
+	}	
  }
