@@ -80,6 +80,14 @@ public class CommonFilter implements Filter {
 		response.setContentType("text/html; charset=utf-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/views/outline/header/main.jsp");
 		rd.include(request, response);
+		
+		/** 헤더 추가 영역 처리 */
+		Config config = Config.getInstance();
+		String addonURL = config.getHeaderAddon();
+		if (addonURL != null) {
+			RequestDispatcher inc = request.getRequestDispatcher(addonURL);
+			inc.include(request, response);
+		}
 	}
 	
 	/**

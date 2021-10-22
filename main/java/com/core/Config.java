@@ -163,15 +163,17 @@ public class Config {
 	}
 	
 	/**
-	 * 사이트 헤더 영역에 추가될 jsp 경로
+	 * 헤더, 푸터 addon 경로 
 	 * 
+	 * @param addonType 
+	 * 				 - AddonHeader - 헤더 추가 영역, AddonFooter - 푸터 추가영역 
 	 * @return
 	 */
-	public String getHeaderAddon() {
+	public String getAddon(String addonType) {
 		String addon = null;
 		String commonAddon = null;
 		
-		HashMap<String, String> addons = (HashMap<String, String>)get("AddonHeader");
+		HashMap<String, String> addons = (HashMap<String, String>)get(addonType);
 		Iterator<String> ir = addons.keySet().iterator();
 		while(ir.hasNext()) {
 			String URI = ir.next();
@@ -183,7 +185,31 @@ public class Config {
 				}
 			}
 		}
-		return null;
+		
+		// 헤더 추가 영역 없는 경우 
+		if (addon != null && addon.equals("none")) {
+			return null;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("/views/outline/header/inc/");
+		if (addon == null) { // 공통 
+			sb.append(commonAddon);
+		} else { 
+			sb.append(addon);
+		}
+		sb.append(".jsp");
+		
+		return sb.toString();
+	}
+	
+	/**
+	 * 사이트 헤더 영역에 추가될 jsp 경로
+	 * 
+	 * @return
+	 */
+	public String getHeaderAddon() {
+		return getAddon("AddonHeader");
 	}
 	
 	/**
@@ -192,8 +218,7 @@ public class Config {
 	 * @return
 	 */
 	public String getFooterAddon() {
-		
-		return null;
+		return getAddon("AddonFooter");
 	}
 }
 
