@@ -15,5 +15,9 @@
 	"AddonHeader" : {
 		"*" : "common",
 		"/kanban" : "test"
-	}	
+	},
+	"AddonFooter" : {
+		"*" : "common",
+		"/kanban" : "test"	
+	}
  }
