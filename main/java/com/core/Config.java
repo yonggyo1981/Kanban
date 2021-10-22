@@ -168,7 +168,21 @@ public class Config {
 	 * @return
 	 */
 	public String getHeaderAddon() {
+		String addon = null;
+		String commonAddon = null;
 		
+		HashMap<String, String> addons = (HashMap<String, String>)get("AddonHeader");
+		Iterator<String> ir = addons.keySet().iterator();
+		while(ir.hasNext()) {
+			String URI = ir.next();
+			if (URI.equals("*")) { // 공통
+				commonAddon = addons.get(URI);
+			} else { // 별도 패턴 -> 체크 
+				if (requestURI.indexOf(URI) != -1) {
+					addon = addons.get(URI);
+				}
+			}
+		}
 		return null;
 	}
 	
