@@ -158,7 +158,7 @@ public class Config {
 				}
 			}
 		}
-		System.out.println(list);
+		
 		return list;
 	}
 }

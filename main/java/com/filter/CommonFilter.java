@@ -35,7 +35,10 @@ public class CommonFilter implements Filter {
 		Logger.log(request);
 		
 		/** URI별 추가 CSS */
-		config.getCss();
+		request.setAttribute("addCss", config.getCss());
+		
+		/** URI별 추가 JS */
+		request.setAttribute("addScripts", config.getScripts());
 		
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();
