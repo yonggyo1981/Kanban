@@ -5,10 +5,13 @@
 	String rootURL = (String)request.getAttribute("rootURL");
 	HashSet<String> addCss = (HashSet<String>)request.getAttribute("addCss");	
 	HashSet<String> addScripts = (HashSet<String>)request.getAttribute("addScripts");
+	
+	String pageTitle = (String)request.getAttribute("pageTitle"); // 사이트 기본 제목
 %>
 <c:set var="rootURL" value="<%=rootURL%>" />
 <c:set var="addCss" value="<%=addCss%>" />
 <c:set var="addScripts" value="<%=addScripts%>" />
+<c:set var="pageTitle" value="<%=pageTitle%>" />
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,8 +27,7 @@
 		<c:forEach var="script" items="${addScripts}">
 		<script type="text/babel" src="${rootURL}/resources/js/${script}.js"></script>
 		</c:forEach>
-		
-		<title>작업 관리자</title>
+		<title><c:out value="${pageTitle}" /></title>
 	</head>
 	<body>
 	

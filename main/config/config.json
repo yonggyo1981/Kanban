@@ -1,5 +1,6 @@
 { 
 	"Environment" : "development",
+	"PageTitle" : "사이트 기본제목",
 	"DB":  { 
 		"Driver": "com.mysql.cj.jdbc.Driver",
 		"Url" : "jdbc:mysql://localhost:3306/JSPBookDB",
