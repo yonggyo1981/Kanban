@@ -55,8 +55,7 @@ public class CommonFilter implements Filter {
 		request.setAttribute("cssJsVersion", cssJsVersion);
 		
 		/** Body 태그 추가 클래스 */
-		String bodyClass = config.getBodyClass();
-		
+		request.setAttribute("bodyClass",  config.getBodyClass());
 		
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();

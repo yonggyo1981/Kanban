@@ -234,10 +234,15 @@ public class Config {
 	public String getBodyClass() {
 		String rootURL = request.getServletContext().getContextPath();
 		String URI = requestURI.replace(rootURL, "").replace("index.jsp", "");
+		if (URI.equals("/")) { // 메인페이지
+			return "body-main body-index";
+		}
+		
 		
 		StringTokenizer st = new StringTokenizer(URI, "/");
 		StringBuilder sb = new StringBuilder();
 		String prevClassNm = null;
+		
 		while(st.hasMoreTokens()) {
 			String classNm = st.nextToken();
 			if (classNm != null && !classNm.equals("")) {
@@ -252,10 +257,8 @@ public class Config {
 				prevClassNm = classNm;
 			}
 		}
-		
-		System.out.println(sb.toString());
-		
-		return null;
+			
+		return sb.toString();
 	}
 }
 

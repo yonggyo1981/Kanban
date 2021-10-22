@@ -8,12 +8,15 @@
 	
 	String pageTitle = (String)request.getAttribute("pageTitle"); // 사이트 기본 제목
 	String cssJsVersion = (String)request.getAttribute("cssJsVersion"); 
+	
+	String bodyClass = (String)request.getAttribute("bodyClass");
 %>
 <c:set var="rootURL" value="<%=rootURL%>" />
 <c:set var="addCss" value="<%=addCss%>" />
 <c:set var="addScripts" value="<%=addScripts%>" />
 <c:set var="pageTitle" value="<%=pageTitle%>" />
 <c:set var="version" value="<%=cssJsVersion%>" />
+<c:set var="bodyClass" value="<%=bodyClass%>" />
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,5 +34,4 @@
 		</c:forEach>
 		<title><c:out value="${pageTitle}" /></title>
 	</head>
-	<body>
-	
+	<body class="${bodyClass}">
