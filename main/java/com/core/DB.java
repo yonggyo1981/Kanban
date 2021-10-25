@@ -82,15 +82,17 @@ public class DB {
 	 * 
 	 * @param sql
 	 * @param bindings
+	 * @param isReturnGeneratedKey Insert인 경우 추가된 번호 반환
 	 * @return int - INSERT인 경우 -> 추가된 증감번호(Primary Key, Auto Increment), 나머지는 - 반영된 투플의 개수
+	 * 		
 	 */
-	public static int executeUpdate(String sql, ArrayList<Map<String,String>> bindings) {
+	public static int executeUpdate(String sql, ArrayList<Map<String,String>> bindings, boolean isReturnGeneratedKey) {
 		
 		int rs = 0;
 		ArrayList<String> logBindings = new ArrayList<>();
 		
 		try(Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			
 			int no = 1;
 			for(Map<String, String> map : bindings) {
@@ -117,6 +119,15 @@ public class DB {
 			} // endfor
 			
 			rs = pstmt.executeUpdate();
+			
+			/** INSERT후 추가된 증감번호 */
+			if (isReturnGeneratedKey) {
+				ResultSet gkrs = pstmt.getGeneratedKeys();
+				if (gkrs.next()) {
+					rs = gkrs.getInt(1);
+				}
+				gkrs.close();
+			}
 			
 			// SQL 로그 기록
 			StringBuilder sb = new StringBuilder();
