@@ -1,12 +1,13 @@
 package com.models.member;
 
 import java.sql.*;
+import com.models.*;
 
 /**
  * Member bean 클래스 
  *
  */
-public class Member {
+public class Member extends Dto {
 	private int memNo; // 회원번호
 	private String memId; // 회원아이디
 	private String memPw; // 비밀번호
@@ -95,6 +96,17 @@ public class Member {
 	
 	public void setRegDt(String regDt) {
 		this.regDt = regDt;
+	}
+
+	@Override
+	public void setResultSet(ResultSet rs) throws SQLException {
+		this.memNo = rs.getInt("memNo");
+		this.memId = rs.getString("memId");
+		this.memPw = rs.getString("memPw");
+		this.memPw = rs.getString("memPwHint");
+		this.memPw = rs.getString("memNm");
+		this.cellPhone = rs.getString("cellPhone");
+		this.regDt = rs.getString("regDt");
 	}	
 }
 
