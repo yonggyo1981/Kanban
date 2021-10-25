@@ -39,9 +39,9 @@ public class MemberDao {
 		bindings.add(setBinding("String", request.getParameter("memNm")));
 		bindings.add(setBinding("String", cellPhone));
 		
-		int memNo = DB.executeUpdate(sql, bindings, true);
-		System.out.println("memNo : " + memNo);
-		return false;
+		int rs  = DB.executeUpdate(sql, bindings);
+		
+		return (rs > 0)?true:false;
 	}
 	
 	/**

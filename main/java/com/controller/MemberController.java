@@ -65,7 +65,8 @@ public class MemberController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
 			rd.include(request, response);
 		} else { // 양식 처리 
-			
+			MemberDao dao = MemberDao.getInstance();
+			dao.join(request);
 		}
 	}
 	
