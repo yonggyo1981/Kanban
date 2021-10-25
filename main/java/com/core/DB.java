@@ -87,6 +87,7 @@ public class DB {
 	public static int executeUpdate(String sql, ArrayList<Map<String,String>> bindings) {
 		
 		int rs = 0;
+		ArrayList<String> logBindings = new ArrayList<>();
 		
 		try(Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -97,6 +98,8 @@ public class DB {
 				if (ir.hasNext()) { // Map은 1개씩만 추가
 					String dataType = ir.next();
 					String value = map.get(dataType);
+					logBindings.add(value);
+					
 					switch(dataType) {
 						case "String" :
 							pstmt.setString(no, value);
@@ -114,6 +117,14 @@ public class DB {
 			} // endfor
 			
 			rs = pstmt.executeUpdate();
+			
+			// SQL 로그 기록
+			StringBuilder sb = new StringBuilder();
+			sb.append("SQL : ");
+			sb.append(sql);
+			sb.append(" / Bindings : ");
+			sb.append(logBindings.toString());
+			Logger.log(sb, Logger.INFO);
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger.log(e);
