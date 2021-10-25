@@ -3,6 +3,8 @@ package com.models.member;
 import java.util.*;
 import javax.servlet.http.*;
 
+import org.mindrot.jbcrypt.*;
+
 import com.core.DB;
 
 /**
@@ -31,8 +33,12 @@ public class MemberDao {
 		ArrayList<Map<String, String>> bindings = new ArrayList<>();
 		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone) VALUES (?,?,?,?,?)";
 		String memPw = request.getParameter("memPw");
-		String hash = "";
+		String hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
+		
+		/** 휴대전화번호 형식 -> 숫자로만 구성 */
 		String cellPhone = request.getParameter("cellPhone");
+		cellPhone = cellPhone.replaceAll("[^\\d]", ""); // 숫자가 아닌 문자 제거 -> 숫자만 남는다
+		
 		bindings.add(setBinding("String", request.getParameter("memId")));
 		bindings.add(setBinding("String", hash));
 		bindings.add(setBinding("String", request.getParameter("memPwHint")));
