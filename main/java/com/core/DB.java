@@ -136,8 +136,7 @@ public class DB {
 			sb.append(" / Bindings : ");
 			sb.append(logBindings.toString());
 			sb.append("/ rs : ");
-			sb.append(rs);
-			
+			sb.append(rs);		
 			Logger.log(sb, Logger.INFO);
 			
 		} catch (SQLException | ClassNotFoundException e) {
@@ -145,5 +144,9 @@ public class DB {
 		}
 		
 		return rs;
+	}
+	
+	public static int executeUpdate(String sql, ArrayList<Map<String, String>> bindings) {
+		return executeUpdate(sql, bindings, false);
 	}
 }
