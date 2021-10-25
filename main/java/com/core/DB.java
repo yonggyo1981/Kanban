@@ -86,6 +86,8 @@ public class DB {
 	 */
 	public static int executeUpdate(String sql, ArrayList<Map<String,String>> bindings) {
 		
+		int rs = 0;
+		
 		try(Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			
@@ -95,16 +97,28 @@ public class DB {
 				if (ir.hasNext()) { // Map은 1개씩만 추가
 					String dataType = ir.next();
 					String value = map.get(dataType);
+					switch(dataType) {
+						case "String" :
+							pstmt.setString(no, value);
+							break;
+						case "Integer" :
+							pstmt.setInt(no, Integer.valueOf(value));
+							break;
+						case "Double" :
+							pstmt.setDouble(no, Double.valueOf(value));
+							break;
+					}
 				}
 				
 				no++;
 			} // endfor
 			
+			rs = pstmt.executeUpdate();
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger.log(e);
 		}
 		
-		return 0;
+		return rs;
 	}
 }
