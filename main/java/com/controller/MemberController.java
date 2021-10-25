@@ -2,7 +2,7 @@ package com.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.io.IOException;
+import java.io.*;
 
 import com.core.Logger;
 import com.models.member.*;
@@ -14,6 +14,7 @@ import com.models.member.*;
 public class MemberController extends HttpServlet {
 	
 	private String httpMethod; // Http 요청 메서드, GET, POST
+	private PrintWriter out;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -25,6 +26,8 @@ public class MemberController extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 		}
 		
+		/** PrintWriter 공통 */
+		out = response.getWriter();
 		
 		String URI = request.getRequestURI();
 		String mode = URI.substring(URI.lastIndexOf("/") + 1);
@@ -70,6 +73,7 @@ public class MemberController extends HttpServlet {
 			try {
 				dao.join(request);
 			} catch (Exception e) {
+				out.printf("<script>alert('%s');</script>", e.getMessage());
 				Logger.log(e);
 			}
 		}
