@@ -46,7 +46,8 @@ public class DB {
 						}
 					}
 					no++;
-				}
+				} // endfor 
+				
 			}
 			
 		} catch (SQLException | ClassNotFoundException e) {
