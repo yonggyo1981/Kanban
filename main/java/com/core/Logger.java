@@ -14,14 +14,15 @@ import javax.servlet.http.*;
 public class Logger {
 	
 	/** 로그 레벨 상수 */
-	private static final int DEBUG = 0;
-	private static final int INFO = 1;
-	private static final int NOTICE = 2;
-	private static final int WARNING = 3;
-	private static final int ERROR = 4;
-	private static final int CRITICAL = 5;
-	private static final int ALERT = 6;
-	private static final int EMERGENCY = 7;
+	public static final int DEBUG = 0;
+	public static final int INFO = 1;
+	public static final int NOTICE = 2;
+	public static final int WARNING = 3;
+	public static final int ERROR = 4;
+	public static final int CRITICAL = 5;
+	public static final int ALERT = 6;
+	public static final int EMERGENCY = 7;
+	
 	private static final String[] errorLevels = {"debug", "info", "notice", "warning", "error", "critical", "alert", "emergency" };
 
 	
