@@ -27,14 +27,8 @@ public class MemberDao {
 	public boolean join(HttpServletRequest request) {
 		
 		ArrayList<Map<String, String>> bindings = new ArrayList<>();
-		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone) VALUES (?,?,?,?,?)";
-		Map<String, String> map = new HashMap<>();
-		map.put("String", request.getParameter("memId"));
-		bindings.add(map);
-		
-		map = new HashMap<String, String>();
-		map.put("String", request.getParameter("memPw"));
-		bindings.add(map);
+		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone) VALUES (?,?,?,?,?)";		
+		bindings.add(setBinding("String", request.getParameter("memId")));
 		
 		
 		
