@@ -20,7 +20,6 @@ public class Member extends Dto {
 	
 	public Member(int memNo, String memId, String memPw, String memPwHint, String memNm, String cellPhone,
 			String regDt) {
-		super();
 		this.memNo = memNo;
 		this.memId = memId;
 		this.memPw = memPw;

@@ -4,6 +4,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+import com.models.member.*;
+
 /**
  *  /member/* 컨트롤러
  *
