@@ -3,6 +3,8 @@ package com.core;
 import java.sql.*;
 import java.util.*;
 
+import com.core.*;
+
 /**
  * DB 연결 클래스
  *
@@ -19,4 +21,35 @@ public class DB {
 		
 		return conn;
 	}
+	
+	public static <E> ArrayList<E> executeQuery(String sql, ArrayList<Map<String, String>> bindings, E dto) {
+		ArrayList<E> list = null;
+		try (Connection conn = DB.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			if (bindings != null) {
+				for (Map<String, String> map : bindings) {
+					Iterator<String> ir = map.keySet().iterator();
+					if (ir.hasNext()) {
+						String dataType = ir.next();
+						String value = map.get(dataType);
+						switch(dataType) {
+							case "String" :
+								break;
+							case "Integer" :
+								break;
+							case "Double" : 
+								break;
+						}
+					}
+				}
+			}
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			
+		}
+		
+		
+		return null;
+	}
+
 }
