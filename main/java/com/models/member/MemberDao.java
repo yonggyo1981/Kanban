@@ -80,7 +80,7 @@ public class MemberDao {
 		 * 1. 필수 항목 체크(O)
 		 * 2. 아이디 체크
 		 * 			- 1) 자리수 체크(8~30) - O
-		 * 			- 2) 알파벳 + 숫자만 입력
+		 * 			- 2) 알파벳 + 숫자만 입력(O)
 		 *          - 3) 아이디 중복 체크
 		 * 3. 비밀번호
 		 * 			- 1) 자리수 체크(8자리 이상~)
@@ -119,6 +119,12 @@ public class MemberDao {
 		if (!memId.matches("[a-zA-Z0-9]+")) {
 			throw new Exception("아이디는 알파벳과 숫자로만 구성해 주세요.");
 		}
+		
+		// 아이디 중복 체크 
+		String sql = "SELECT COUNT(*) cnt FROM member WHERE memId = ?";
+		ArrayList<Map<String, String>> bindings = new ArrayList<>();
+		bindings.add(setBinding("String", memId));
+		
 		
 		/** 아이디 체크 E */
 		
