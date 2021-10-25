@@ -76,6 +76,21 @@ public class MemberDao {
 	 * @throws Exception
 	 */
 	public void checkJoinData(HttpServletRequest request) throws Exception {
+		/**
+		 * 1. 필수 항목 체크 
+		 * 2. 아이디 체크
+		 * 			- 1) 자리수 체크(8~30)
+		 * 			- 2) 알파벳 + 숫자만 입력
+		 *          - 3) 아이디 중복 체크
+		 * 3. 비밀번호
+		 * 			- 1) 자리수 체크(8자리 이상~)
+		 * 			- 2) 복잡성 체크
+		 * 					- 비밀번호에는 숫자, 알파벳, 특수문자가 각각 1개씩 포함
+		 * 			- 3) 비밀번호 확인
+		 * 4. 휴대전화번호(필수 항목 X)
+		 * 			- 휴대전화번호가 들어오면 - 휴대전화번호 형식에 맞는지 체크 
+		 */
+		
 		
 	}
 }
