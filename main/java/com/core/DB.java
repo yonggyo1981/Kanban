@@ -27,6 +27,7 @@ public class DB {
 		try (Connection conn = DB.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			if (bindings != null) {
+				int no = 1;
 				for (Map<String, String> map : bindings) {
 					Iterator<String> ir = map.keySet().iterator();
 					if (ir.hasNext()) {
@@ -34,13 +35,17 @@ public class DB {
 						String value = map.get(dataType);
 						switch(dataType) {
 							case "String" :
+								pstmt.setString(no, value);
 								break;
 							case "Integer" :
+								pstmt.setInt(no, Integer.valueOf(value));
 								break;
 							case "Double" : 
+								pstmt.setDouble(no, Double.valueOf(value));
 								break;
 						}
 					}
+					no++;
 				}
 			}
 			
