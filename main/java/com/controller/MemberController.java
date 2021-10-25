@@ -23,12 +23,12 @@ public class MemberController extends HttpServlet {
 		if (httpMethod.equals("GET")) {
 			response.setContentType("text/html; charset=utf-8");
 		} else { // GET이 아닌 경우 -> 유입된 입력 양식 데이터 처
-			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("utf-8");
+
 		}
 		
-		/** PrintWriter 공통 */
 		out = response.getWriter();
-		
+
 		String URI = request.getRequestURI();
 		String mode = URI.substring(URI.lastIndexOf("/") + 1);
 		switch(mode) {
@@ -68,11 +68,12 @@ public class MemberController extends HttpServlet {
 		if (httpMethod.equals("GET")) { // 양식 출력 
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
 			rd.include(request, response);
-		} else { // 양식 처리 
+		} else { // 양식 처리
 			MemberDao dao = MemberDao.getInstance();
 			try {
 				dao.join(request);
 			} catch (Exception e) {
+				response.setContentType("text/html; charset=utf-8");
 				out.printf("<script>alert('%s');</script>", e.getMessage());
 				Logger.log(e);
 			}
