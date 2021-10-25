@@ -135,6 +135,9 @@ public class DB {
 			sb.append(sql);
 			sb.append(" / Bindings : ");
 			sb.append(logBindings.toString());
+			sb.append("/ rs : ");
+			sb.append(rs);
+			
 			Logger.log(sb, Logger.INFO);
 			
 		} catch (SQLException | ClassNotFoundException e) {
