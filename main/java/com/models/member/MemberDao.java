@@ -77,9 +77,9 @@ public class MemberDao {
 	 */
 	public void checkJoinData(HttpServletRequest request) throws Exception {
 		/**
-		 * 1. 필수 항목 체크 
+		 * 1. 필수 항목 체크(O)
 		 * 2. 아이디 체크
-		 * 			- 1) 자리수 체크(8~30)
+		 * 			- 1) 자리수 체크(8~30) - O
 		 * 			- 2) 알파벳 + 숫자만 입력
 		 *          - 3) 아이디 중복 체크
 		 * 3. 비밀번호
@@ -90,6 +90,7 @@ public class MemberDao {
 		 * 4. 휴대전화번호(필수 항목 X)
 		 * 			- 휴대전화번호가 들어오면 - 휴대전화번호 형식에 맞는지 체크 
 		 */
+		/** 필수 항목 체크 S */
 		String[] required = {
 			"memId//아이디를 입력해 주세요.",
 			"memPw//비밀번호를 입력해 주세요.",
@@ -105,7 +106,21 @@ public class MemberDao {
 				throw new Exception(params[1]);
 			}
 		}
+		/** 필수 항목 체크 E */
+		/** 아이디 체크 S */
+		// 아이디 자리수 체크(8~30)
+		// String - length()
+		String memId = request.getParameter("memId");
+		if (memId.length() < 8 || memId.length() > 30) {
+			throw new Exception("아이디는 8~30개 이하로 입력해 주세요.");
+		}
 		
+		// 알파벳 + 숫자로만 구성 
+		if (!memId.matches("[a-zA-Z0-9]+")) {
+			throw new Exception("아이디는 알파벳과 숫자로만 구성해 주세요.");
+		}
+		
+		/** 아이디 체크 E */
 		
 	}
 }
