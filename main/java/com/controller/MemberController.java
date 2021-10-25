@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+import com.core.Logger;
 import com.models.member.*;
 
 /**
@@ -66,7 +67,11 @@ public class MemberController extends HttpServlet {
 			rd.include(request, response);
 		} else { // 양식 처리 
 			MemberDao dao = MemberDao.getInstance();
-			dao.join(request);
+			try {
+				dao.join(request);
+			} catch (Exception e) {
+				Logger.log(e);
+			}
 		}
 	}
 	

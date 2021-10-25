@@ -28,7 +28,12 @@ public class MemberDao {
 	 * @param request
 	 * @return
 	 */
-	public boolean join(HttpServletRequest request) {
+	public boolean join(HttpServletRequest request) throws Exception {
+		
+		/**
+		 * 회원 가입데이트의 유효성 검사
+		 */
+		checkJoinData(request);
 		
 		ArrayList<Map<String, String>> bindings = new ArrayList<>();
 		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone) VALUES (?,?,?,?,?)";
@@ -62,5 +67,15 @@ public class MemberDao {
 		map.put(dataType, data);
 		
 		return map;
+	}
+	
+	/**
+	 * 회원 가입 데이터 검증
+	 * 
+	 * @param request
+	 * @throws Exception
+	 */
+	public void checkJoinData(HttpServletRequest request) throws Exception {
+		
 	}
 }
