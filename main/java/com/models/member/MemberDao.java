@@ -50,8 +50,8 @@ public class MemberDao {
 		bindings.add(setBinding("String", request.getParameter("memNm")));
 		bindings.add(setBinding("String", cellPhone));
 		
-		int rs  = DB.executeUpdate(sql, bindings);
-		
+		//int rs  = DB.executeUpdate(sql, bindings);
+		int rs = 0;
 		return (rs > 0)?true:false;
 	}
 	
@@ -90,7 +90,21 @@ public class MemberDao {
 		 * 4. 휴대전화번호(필수 항목 X)
 		 * 			- 휴대전화번호가 들어오면 - 휴대전화번호 형식에 맞는지 체크 
 		 */
+		String[] required = {
+			"memId//아이디를 입력해 주세요.",
+			"memPw//비밀번호를 입력해 주세요.",
+			"memPwRe//비밀번호를 확인해 주세요.",
+			"memPwHint//비밀번호 힌트를 입력해 주세요.",
+			"memNm//회원명을 입력해 주세요."
+		};
 		
+		for(String re : required) {
+			String[] params = re.split("//");
+			String value = request.getParameter(params[0]);
+			if (value == null || value.trim().equals("")) { // 필수 값이 없는 경우 
+				throw new Exception(params[1]);
+			}
+		}
 		
 	}
 }
