@@ -51,18 +51,17 @@ public class DB {
 			
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
-					
-					list.add();
+					dto.setResultSet(rs);
+					list.add(dto);
 				}
-				
+				rs.close();
 			}
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			
 		}
 		
-		
-		return null;
+		return list;
 	}
 
 }
