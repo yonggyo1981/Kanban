@@ -77,4 +77,34 @@ public class DB {
 		return list;
 	}
 
+	/**
+	 * UPDATE, INSERT, DELETE에서 사용
+	 * 
+	 * @param sql
+	 * @param bindings
+	 * @return int - INSERT인 경우 -> 추가된 증감번호(Primary Key, Auto Increment), 나머지는 - 반영된 투플의 개수
+	 */
+	public static int executeUpdate(String sql, ArrayList<Map<String,String>> bindings) {
+		
+		try(Connection conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			int no = 1;
+			for(Map<String, String> map : bindings) {
+				Iterator<String> ir = map.keySet().iterator();
+				if (ir.hasNext()) { // Map은 1개씩만 추가
+					String dataType = ir.next();
+					String value = map.get(dataType);
+				}
+				
+				no++;
+			} // endfor
+			
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger.log(e);
+		}
+		
+		return 0;
+	}
 }
