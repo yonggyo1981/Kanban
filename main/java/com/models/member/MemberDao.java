@@ -3,6 +3,8 @@ package com.models.member;
 import java.util.*;
 import javax.servlet.http.*;
 
+import com.core.DB;
+
 /**
  * MemberDao 클래스 
  *
@@ -37,7 +39,8 @@ public class MemberDao {
 		bindings.add(setBinding("String", request.getParameter("memNm")));
 		bindings.add(setBinding("String", cellPhone));
 		
-		
+		int memNo = DB.executeUpdate(sql, bindings, true);
+		System.out.println("memNo : " + memNo);
 		return false;
 	}
 	
