@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import com.core.*;
+import com.models.*;
 
 /**
  * DB 연결 클래스
@@ -22,8 +23,8 @@ public class DB {
 		return conn;
 	}
 	
-	public static <E> ArrayList<E> executeQuery(String sql, ArrayList<Map<String, String>> bindings, E dto) {
-		ArrayList<E> list = null;
+	public static <E extends Dto> ArrayList<E> executeQuery(String sql, ArrayList<Map<String, String>> bindings, E dto) { // E -> Object
+		ArrayList<E> list = new ArrayList<>();
 		try (Connection conn = DB.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			if (bindings != null) {
@@ -47,6 +48,12 @@ public class DB {
 					}
 					no++;
 				} // endfor 
+			
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					
+					list.add();
+				}
 				
 			}
 			
