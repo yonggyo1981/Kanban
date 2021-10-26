@@ -178,7 +178,31 @@ public class DB {
 		} // endif 
 		
 		String sql = sb.toString();
-		System.out.println("SQL : " + sql);
+		try(                 ) _{
+		/** 데이터 바인딩 S */
+		if (fields != null && fields.length > 0 && bindings != null) {
+			int no = 1;
+			for(Map<String, String> map : bindings) {
+				Iterator<String> ir = map.keySet().iterator();
+				if (ir.hasNext()) {
+					String dataType = ir.next();
+					String value = map.get(dataType);
+					switch(dataType) {
+						case "String":
+							
+						case "Integer":
+						case "Double":
+							
+					}
+				} // endif 
+				no++;
+			}
+		}
+		/** 데이터 바인딩 E */
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger.log(e);
+		}
+		
 		return count;
 	}
 	
