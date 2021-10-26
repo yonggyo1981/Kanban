@@ -191,16 +191,26 @@ public class DB {
 						String value = map.get(dataType);
 						switch(dataType) {
 							case "String":
-								
+								pstmt.setString(no, value);
+								break;
 							case "Integer":
+								pstmt.setInt(no, Integer.valueOf(value));
+								break;
 							case "Double":
-								
+								pstmt.setDouble(no, Double.valueOf(value));
+								break;
 						}
 					} // endif 
 					no++;
 				}
 			}
 			/** 데이터 바인딩 E */
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt("cnt");
+			}
+			rs.close();
+			
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger.log(e);
 		}
