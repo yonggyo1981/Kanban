@@ -125,10 +125,12 @@ public class MemberDao {
 			throw new Exception("비밀번호는 8자리 이상 입력해 주세요.");
 		}
 		// 비밀번호 복잡성(숫자 + 알파벳 + 특수문자가 각각 1개 이상 입력)
+		/*
 		if (memPw.matches("[^0-9]+") || memPw.matches("[^a-zA-Z]+") || memPw.matches("[^~!@#$%^&*()]+")) {
 			throw new Exception("비밀번호는 1개 이상의 알파벳, 숫자, 특수문자를 각각 포함해야 합니다.");
 		}
-	
+		*/
+		
 		// 비밀번호 확인
 		String memPwRe = request.getParameter("memPwRe");
 		if (!memPw.equals(memPwRe)) {
@@ -136,5 +138,20 @@ public class MemberDao {
 		}
 		/** 비밀번호 체크 E */
 		
+		/** 휴대전화 번호 체크 S */
+		String cellPhone = request.getParameter("cellPhone");
+		if (cellPhone != null && !cellPhone.trim().equals("")) {
+			/** 
+			 * 1. 통일성 있도록 숫자로만 추출(숫자가 아닌 문자만 제거 -> 숫자) 
+			 * 2. 패턴 체크
+			 */
+			cellPhone = cellPhone.replaceAll("[^0-9]", "");
+			String pattern = "01[016789][0-9]{3,4}[0-9]{4}";
+			if (!cellPhone.matches(pattern)) {
+				throw new Exception("휴대전화번호 형식이 아닙니다.");
+			}
+		}
+		
+		/** 휴대전화 번호 체크 E */
 	}
 }
