@@ -175,8 +175,9 @@ public class DB {
 				
 				isFirst = false;
 			}
-		}
+		} // endif 
 		
+		String sql = sb.toString();
 		
 		return count;
 	}
