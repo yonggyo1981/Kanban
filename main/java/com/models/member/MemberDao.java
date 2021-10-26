@@ -1,11 +1,13 @@
 package com.models.member;
 
 import java.util.*;
+import java.sql.*;
 import javax.servlet.http.*;
 import static com.core.DB.setBinding;
 
 import org.mindrot.jbcrypt.*;
 import com.core.DB;
+import com.core.Logger;
 
 /**
  * MemberDao 클래스 
@@ -180,8 +182,23 @@ public class MemberDao {
 	}
 	
 	public Member getMember(String memId) {
+		int memNo = 0;
+		String sql = "SELECT memNo FROM member WHERE memId = ?";
+		try (Connection conn = DB.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memId);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				memNo = rs.getInt("memNo");
+			}
+			rs.close();
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger.log(e);
+		}
 		
-		return null;
+		return (memNo == 0)?null:getMember(memNo);
 	}
 	
 	/**
@@ -196,7 +213,7 @@ public class MemberDao {
 		bindings.add(setBinding("Integer", String.valueOf(memNo)));
 		
 		Member member = DB.executeQueryOne(sql, bindings, new Member());
-		
+	
 		return member;
 	}
 	
