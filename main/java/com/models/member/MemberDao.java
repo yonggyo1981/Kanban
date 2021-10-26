@@ -167,6 +167,8 @@ public class MemberDao {
 		 * 3. 비밀번호도 일치? -> 세션 처리(회원 번호 - memNo 세션에 저장)
 		 */
 		
+		getMember(1);
+		
 		return false;
 	}
 	
@@ -193,12 +195,8 @@ public class MemberDao {
 		ArrayList<Map<String, String>> bindings = new ArrayList<>();
 		bindings.add(setBinding("Integer", String.valueOf(memNo)));
 		
-		ArrayList<Member> members = DB.executeQuery(sql, bindings, new Member());
-		Member member = null;
-		if (members != null) {
-			member = members.get(0);
-		}
-		System.out.println(member.getMemId());
+		Member member = DB.executeQueryOne(sql, bindings, new Member());
+		
 		return member;
 	}
 	

@@ -96,8 +96,7 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void infoController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberDao dao = MemberDao.getInstance();
-		dao.login(request);
+		
 	}
 	
 	/**
@@ -109,7 +108,8 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void loginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		MemberDao dao = MemberDao.getInstance();
+		dao.login(request);
 	}
 	
 	/**

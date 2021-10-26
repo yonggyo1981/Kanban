@@ -75,7 +75,16 @@ public class DB {
 		
 		return list;
 	}
-
+	
+	public static<E extends Dto> E executeQueryOne(String sql, ArrayList<Map<String, String>> bindings, E dto) {
+		ArrayList<E> list = executeQuery(sql, bindings, dto);
+		if (list == null) {
+			return null;
+		} else {
+			return list.get(0);
+		}
+	}
+	
 	/**
 	 * UPDATE, INSERT, DELETE에서 사용
 	 * 
