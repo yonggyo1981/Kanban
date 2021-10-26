@@ -55,8 +55,7 @@ public class DB {
 			
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
-					dto.setResultSet(rs);
-					list.add(dto);
+					list.add((E)dto.setResultSet(rs));
 				}
 				rs.close();
 				
@@ -148,5 +147,24 @@ public class DB {
 	
 	public static int executeUpdate(String sql, ArrayList<Map<String, String>> bindings) {
 		return executeUpdate(sql, bindings, false);
+	}
+	
+	/**
+	 * 테이블 + 조건(=)에 따른 개수 
+	 * 
+	 * @param tableName
+	 * @param fields 조건 속성명
+	 * @param bindings
+	 * @return
+	 */
+	public static int getCount(String tableName, String[] fields, ArrayList<Map<String, String>> bindings) {
+		int count = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT COUNT(*) cnt FROM ");
+		sb.append(tableName);
+		
+		
+		
+		return count;
 	}
 }
