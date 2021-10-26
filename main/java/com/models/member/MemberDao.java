@@ -110,7 +110,9 @@ public class MemberDao {
 		
 		// 아이디 중복 체크 
 		String[] fields = { "memId" };
-		DB.getCount("member", fields, null);
+		ArrayList<Map<String, String>> bindings = new ArrayList<>();
+		bindings.add(setBinding("String", memId));
+		DB.getCount("member", fields, bindings);
 		
 		
 		/** 아이디 체크 E */
