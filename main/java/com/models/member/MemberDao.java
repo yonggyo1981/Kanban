@@ -177,5 +177,29 @@ public class MemberDao {
 				);
 	}
 	
+	public Member getMember(String memId) {
+		
+		return null;
+	}
+	
+	/**
+	 * 회원정보 조회
+	 * 
+	 * @param memNo
+	 * @return
+	 */
+	public Member getMember(int memNo) {
+		String sql = "SELECT * FROM member WHERE memNo = ?";
+		ArrayList<Map<String, String>> bindings = new ArrayList<>();
+		bindings.add(setBinding("Integer", String.valueOf(memNo)));
+		
+		ArrayList<Member> members = DB.executeQuery(sql, bindings, new Member());
+		Member member = null;
+		if (members != null) {
+			member = members.get(0);
+		}
+		System.out.println(member.getMemId());
+		return member;
+	}
 	
 }
