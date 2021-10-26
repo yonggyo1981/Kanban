@@ -50,8 +50,7 @@ public class MemberDao {
 		bindings.add(setBinding("String", request.getParameter("memNm")));
 		bindings.add(setBinding("String", cellPhone));
 		
-		//int rs  = DB.executeUpdate(sql, bindings);
-		int rs = 0;
+		int rs  = DB.executeUpdate(sql, bindings);
 		return (rs > 0)?true:false;
 	}
 	
@@ -75,7 +74,7 @@ public class MemberDao {
 		 * 			- 2) 복잡성 체크 (보류)
 		 * 					- 비밀번호에는 숫자, 알파벳, 특수문자가 각각 1개씩 포함
 		 * 			- 3) 비밀번호 확인
-		 * 4. 휴대전화번호(필수 항목 X)
+		 * 4. 휴대전화번호(필수 항목 X) (O)
 		 * 			- 휴대전화번호가 들어오면 - 휴대전화번호 형식에 맞는지 체크 
 		 */
 		/** 필수 항목 체크 S */
