@@ -72,7 +72,7 @@ public class MemberDao {
 		 *          - 3) 아이디 중복 체크 (O)
 		 * 3. 비밀번호
 		 * 			- 1) 자리수 체크(8자리 이상~) (O)
-		 * 			- 2) 복잡성 체크
+		 * 			- 2) 복잡성 체크 (보류)
 		 * 					- 비밀번호에는 숫자, 알파벳, 특수문자가 각각 1개씩 포함
 		 * 			- 3) 비밀번호 확인
 		 * 4. 휴대전화번호(필수 항목 X)
@@ -125,10 +125,17 @@ public class MemberDao {
 			throw new Exception("비밀번호는 8자리 이상 입력해 주세요.");
 		}
 		// 비밀번호 복잡성(숫자 + 알파벳 + 특수문자가 각각 1개 이상 입력)
-		if (!(memPw.matches("[0-9]+") && memPw.matches("[a-zA-Z]+") && memPw.matches("[~!@#$%^&*()]+"))) {
+		/**
+		if (!(memPw.matches("*[0-9]+") && memPw.matches("*[a-zA-Z]+") && memPw.matches("*[~!@#$%^&*()]+"))) {
 			throw new Exception("비밀번호는 1개 이상의 알파벳, 숫자, 특수문자를 각각 포함해야 합니다.");
 		}
-		
+		*/
+		// 비밀번호 확인
+		String memPwRe = request.getParameter("memPwRe");
+		if (!memPw.equals(memPwRe)) {
+			throw new Exception("비밀번호를 확인해 주세요.");
+		}
 		/** 비밀번호 체크 E */
+		
 	}
 }
