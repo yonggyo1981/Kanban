@@ -163,6 +163,19 @@ public class DB {
 		sb.append("SELECT COUNT(*) cnt FROM ");
 		sb.append(tableName);
 		
+		if (fields != null && fields.length > 0) {
+			boolean isFirst = true;
+			sb.append(" WHERE ");
+			for(String field : fields) {
+				if (!isFirst) {
+					sb.append(" AND ");
+				}
+				sb.append(field);
+				sb.append("= ?");
+				
+				isFirst = false;
+			}
+		}
 		
 		
 		return count;
