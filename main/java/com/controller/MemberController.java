@@ -24,6 +24,7 @@ public class MemberController extends HttpServlet {
 			response.setContentType("text/html; charset=utf-8");
 		} else { // GET이 아닌 경우 -> 유입된 입력 양식 데이터 처
 			response.setCharacterEncoding("utf-8");
+			request.setCharacterEncoding("utf-8");
 		}
 		
 		out = response.getWriter();
@@ -70,7 +71,14 @@ public class MemberController extends HttpServlet {
 		} else { // 양식 처리
 			MemberDao dao = MemberDao.getInstance();
 			try {
-				dao.join(request);
+				boolean result = dao.join(request);
+				if (!result) { // 가입 실패
+					throw new Exception("가입에 실패하였습니다.");
+				}
+				
+				// 가입 성공 -> 로그인페이지
+				out.printf("<script>parent.location.replace('%s');</script>", "../index.jsp");
+				
 			} catch (Exception e) {
 				response.setContentType("text/html; charset=utf-8");
 				out.printf("<script>alert('%s');</script>", e.getMessage());
@@ -88,7 +96,8 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void infoController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		MemberDao dao = MemberDao.getInstance();
+		dao.login(request);
 	}
 	
 	/**

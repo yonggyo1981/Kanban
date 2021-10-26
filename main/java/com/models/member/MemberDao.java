@@ -54,8 +54,6 @@ public class MemberDao {
 		return (rs > 0)?true:false;
 	}
 	
-	
-	
 	/**
 	 * 회원 가입 데이터 검증
 	 * 
@@ -153,4 +151,31 @@ public class MemberDao {
 		
 		/** 휴대전화 번호 체크 E */
 	}
+	
+	/**
+	 * 로그인 처리 
+	 * 
+	 * @param request - 세션을 사용하기 위해서(HttpSession getSession())
+	 * @param memId
+	 * @param memPw
+	 * @return
+	 */
+	public boolean login(HttpServletRequest request, String memId, String memPw) {
+		/**
+		 * 1. memId를 통해 회원 정보를 조회
+		 * 2. 회원 정보가 조회가 되면(실제 회원 있으면) - 비밀번호를 체크
+		 * 3. 비밀번호도 일치? -> 세션 처리(회원 번호 - memNo 세션에 저장)
+		 */
+		
+		return false;
+	}
+	
+	public boolean login(HttpServletRequest request) {
+		return login(request,
+						request.getParameter("memId"),
+						request.getParameter("memPw")
+				);
+	}
+	
+	
 }
