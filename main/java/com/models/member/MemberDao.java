@@ -2,9 +2,9 @@ package com.models.member;
 
 import java.util.*;
 import javax.servlet.http.*;
+import static com.core.DB.setBinding;
 
 import org.mindrot.jbcrypt.*;
-
 import com.core.DB;
 
 /**
@@ -55,19 +55,7 @@ public class MemberDao {
 		return (rs > 0)?true:false;
 	}
 	
-	/**
-	 * SQL 바인데이터를 Map 형태로 지정
-	 * 
-	 * @param dataType
-	 * @param data
-	 * @return
-	 */
-	public Map<String, String> setBinding(String dataType, String data) {
-		Map<String, String> map = new HashMap<>();
-		map.put(dataType, data);
-		
-		return map;
-	}
+	
 	
 	/**
 	 * 회원 가입 데이터 검증
@@ -121,7 +109,7 @@ public class MemberDao {
 		}
 		
 		// 아이디 중복 체크 
-		String[] fields = { "memId", "memNm" };
+		String[] fields = { "memId" };
 		DB.getCount("member", fields, null);
 		
 		
