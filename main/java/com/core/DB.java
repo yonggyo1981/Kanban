@@ -159,6 +159,9 @@ public class DB {
 	 */
 	public static int getCount(String tableName, String[] fields, ArrayList<Map<String, String>> bindings) {
 		int count = 0;
+		
+		ArrayList<String> logBindings = new ArrayList<>();
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT COUNT(*) cnt FROM ");
 		sb.append(tableName);
@@ -189,6 +192,8 @@ public class DB {
 					if (ir.hasNext()) {
 						String dataType = ir.next();
 						String value = map.get(dataType);
+						logBindings.add(value);
+						
 						switch(dataType) {
 							case "String":
 								pstmt.setString(no, value);
@@ -214,6 +219,16 @@ public class DB {
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger.log(e);
 		}
+		
+		// SQL 로그 기록
+		sb = new StringBuilder();
+		sb.append("SQL : ");
+		sb.append(sql);
+		sb.append(" / Bindings : ");
+		sb.append(logBindings.toString());
+		sb.append("/ count : ");
+		sb.append(count);		
+		Logger.log(sb, Logger.INFO);
 		
 		return count;
 	}
