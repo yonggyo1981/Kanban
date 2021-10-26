@@ -178,7 +178,21 @@ public class DB {
 		} // endif 
 		
 		String sql = sb.toString();
-		
+		System.out.println("SQL : " + sql);
 		return count;
+	}
+	
+	/**
+	 * SQL 바인데이터를 Map 형태로 지정
+	 * 
+	 * @param dataType
+	 * @param data
+	 * @return
+	 */
+	public static Map<String, String> setBinding(String dataType, String data) {
+		Map<String, String> map = new HashMap<>();
+		map.put(dataType, data);
+		
+		return map;
 	}
 }

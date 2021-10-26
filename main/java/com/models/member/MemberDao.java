@@ -121,9 +121,8 @@ public class MemberDao {
 		}
 		
 		// 아이디 중복 체크 
-		String sql = "SELECT COUNT(*) cnt FROM member WHERE memId = ?";
-		ArrayList<Map<String, String>> bindings = new ArrayList<>();
-		bindings.add(setBinding("String", memId));
+		String[] fields = { "memId", "memNm" };
+		DB.getCount("member", fields, null);
 		
 		
 		/** 아이디 체크 E */
