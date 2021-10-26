@@ -169,7 +169,8 @@ public class MemberDao {
 		 * 3. 비밀번호도 일치? -> 세션 처리(회원 번호 - memNo 세션에 저장)
 		 */
 		
-		getMember(1);
+		Member member = getMember(memId);
+		System.out.println(member.getMemNm());
 		
 		return false;
 	}
