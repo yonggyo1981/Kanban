@@ -233,6 +233,10 @@ public class DB {
 		return count;
 	}
 	
+	public static int getCount(String tableName) {
+		return getCount(tableName, null, null);
+	}
+	
 	/**
 	 * SQL 바인데이터를 Map 형태로 지정
 	 * 

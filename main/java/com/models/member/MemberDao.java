@@ -69,9 +69,9 @@ public class MemberDao {
 		 * 2. 아이디 체크
 		 * 			- 1) 자리수 체크(8~30) - O
 		 * 			- 2) 알파벳 + 숫자만 입력(O)
-		 *          - 3) 아이디 중복 체크
+		 *          - 3) 아이디 중복 체크 (O)
 		 * 3. 비밀번호
-		 * 			- 1) 자리수 체크(8자리 이상~)
+		 * 			- 1) 자리수 체크(8자리 이상~) (O)
 		 * 			- 2) 복잡성 체크
 		 * 					- 비밀번호에는 숫자, 알파벳, 특수문자가 각각 1개씩 포함
 		 * 			- 3) 비밀번호 확인
@@ -112,10 +112,23 @@ public class MemberDao {
 		String[] fields = { "memId" };
 		ArrayList<Map<String, String>> bindings = new ArrayList<>();
 		bindings.add(setBinding("String", memId));
-		DB.getCount("member", fields, bindings);
-		
-		
+		int count = DB.getCount("member", fields, bindings);
+		if (count > 0) { // 아이디 중복
+			throw new Exception("이미 가입된 아이디 입니다.");
+		}
 		/** 아이디 체크 E */
 		
+		/** 비밀번호 체크 S */
+		// 비밀번호 자리수 체크(8자리 이상)
+		String memPw = request.getParameter("memPw");
+		if (memPw.length() < 8) {
+			throw new Exception("비밀번호는 8자리 이상 입력해 주세요.");
+		}
+		// 비밀번호 복잡성(숫자 + 알파벳 + 특수문자가 각각 1개 이상 입력)
+		if (!memPw.matches("[0-9]+") || !memPw.matches("[a-zA-Z]+") || !memPw.matches("[~!@#$%^&*()]+")) {
+			
+		}
+		
+		/** 비밀번호 체크 E */
 	}
 }
