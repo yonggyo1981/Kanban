@@ -113,7 +113,7 @@ public class DB {
 		return rs;
 	}
 	
-	public static int executeUpdate(String sql, ArrayList<Map<String, String>> bindings) {
+	public static int executeUpdate(String sql, ArrayList<DBField> bindings) {
 		return executeUpdate(sql, bindings, false);
 	}
 	
@@ -125,10 +125,10 @@ public class DB {
 	 * @param bindings
 	 * @return
 	 */
-	public static int getCount(String tableName, String[] fields, ArrayList<Map<String, String>> bindings) {
+	public static int getCount(String tableName, String[] fields, ArrayList<DBField> bindings) {
 		int count = 0;
 		
-		ArrayList<String> logBindings = new ArrayList<>();
+		ArrayList<String> logBindings = null;
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT COUNT(*) cnt FROM ");
@@ -154,28 +154,7 @@ public class DB {
 			
 			/** 데이터 바인딩 S */
 			if (fields != null && fields.length > 0 && bindings != null) {
-				int no = 1;
-				for(Map<String, String> map : bindings) {
-					Iterator<String> ir = map.keySet().iterator();
-					if (ir.hasNext()) {
-						String dataType = ir.next();
-						String value = map.get(dataType);
-						logBindings.add(value);
-						
-						switch(dataType) {
-							case "String":
-								pstmt.setString(no, value);
-								break;
-							case "Integer":
-								pstmt.setInt(no, Integer.valueOf(value));
-								break;
-							case "Double":
-								pstmt.setDouble(no, Double.valueOf(value));
-								break;
-						}
-					} // endif 
-					no++;
-				}
+				logBindings = processBinding(pstmt, bindings);
 			}
 			/** 데이터 바인딩 E */
 			ResultSet rs = pstmt.executeQuery();
