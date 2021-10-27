@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 import com.core.*;
+import com.models.member.*;
 
 /**
  * 공통 필터 - 사이트 전역 적용 
@@ -60,6 +61,9 @@ public class CommonFilter implements Filter {
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();
 		request.setAttribute("rootURL", rootURL);
+		
+		/** 로그인 유지 */
+		
 		
 		// 헤더 출력
 		if (isPrintOk(request)) {

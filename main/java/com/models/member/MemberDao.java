@@ -3,6 +3,7 @@ package com.models.member;
 import java.util.*;
 import java.sql.*;
 import javax.servlet.http.*;
+import javax.servlet.*;
 import static com.core.DB.setBinding;
 
 import org.mindrot.jbcrypt.*;
@@ -23,6 +24,15 @@ public class MemberDao {
 			instance = new MemberDao();
 		}
 		return instance;
+	}
+	
+	/**
+	 * 로그인 유지 처리 
+	 * 
+	 * @param request
+	 */
+	public static void init(ServletRequest request) {
+		
 	}
 	
 	/**
