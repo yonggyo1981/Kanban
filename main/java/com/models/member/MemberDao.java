@@ -32,7 +32,25 @@ public class MemberDao {
 	 * @param request
 	 */
 	public static void init(ServletRequest request) {
-		
+		if (request instanceof HttpServletRequest) {
+			MemberDao dao = getInstance();
+			HttpServletRequest req = (HttpServletRequest)request;
+			
+			HttpSession session = req.getSession();
+			int memNo = 0;
+			Member member = null;
+			if (session.getAttribute("memNo") != null) {
+				memNo = (Integer)session.getAttribute("memNo");
+				member = dao.getMember(memNo);
+			}
+			
+			boolean isLogin = false;
+			if (member != null) {
+				request.setAttribute("member", member);
+				isLogin = true;
+			} // endif 
+			request.setAttribute("isLogin", isLogin);
+		} // endif 
 	}
 	
 	/**

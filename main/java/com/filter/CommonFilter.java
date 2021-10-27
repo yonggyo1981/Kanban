@@ -63,7 +63,7 @@ public class CommonFilter implements Filter {
 		request.setAttribute("rootURL", rootURL);
 		
 		/** 로그인 유지 */
-		
+		MemberDao.init(request);
 		
 		// 헤더 출력
 		if (isPrintOk(request)) {
