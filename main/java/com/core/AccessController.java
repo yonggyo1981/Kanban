@@ -19,13 +19,25 @@ public class AccessController {
 	 * 페이지별 접속 체크 
 	 * @param request
 	 */
-	public static void init(ServletRequest request, ServletResponse response) {
+	public static void init(ServletRequest request, ServletResponse response) throws IOException {
 		try {
 			
 		} catch (Exception e) {
 			Logger.log(e);
 			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 		}
+	}
+	
+	/**
+	 * 비회원 전용 URI 체크 
+	 * 
+	 * @throws Exception
+	 */
+	private static void checkGuestOnly() throws Exception {
+		
 	}
 }
 
