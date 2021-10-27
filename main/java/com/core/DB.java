@@ -26,15 +26,14 @@ public class DB {
 	public static <E extends Dto> ArrayList<E> executeQuery(String sql, ArrayList<DBField> bindings, E dto) { // E -> Object
 		
 		ArrayList<E> list = new ArrayList<>();
-		ArrayList<String> logBindings = new ArrayList<>();
+		ArrayList<String> logBindings = null;
 		
 		try (Connection conn = DB.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			if (bindings != null) {
 				// 바인딩 처리
-				processBinding(pstmt, bindings);
-					
-			
+				logBindings = processBinding(pstmt, bindings);
+
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
 					list.add((E)dto.setResultSet(rs));
@@ -248,7 +247,7 @@ public class DB {
 	 * @param pstmt
 	 * @param bindings
 	 */
-	public ArrayList<String> processBinding(PreparedStatement pstmt, ArrayList<DBField> bindings) throws SQLException {
+	public static ArrayList<String> processBinding(PreparedStatement pstmt, ArrayList<DBField> bindings) throws SQLException {
 		
 		ArrayList<String> logBindings = new ArrayList<>(); // 로그용 바인딩 데이터
 		
@@ -275,5 +274,3 @@ public class DB {
 		return logBindings;
 	}
 }
-
-
