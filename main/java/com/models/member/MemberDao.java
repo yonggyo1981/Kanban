@@ -5,9 +5,9 @@ import java.sql.*;
 import javax.servlet.http.*;
 import static com.core.DB.setBinding;
 
-
 import org.mindrot.jbcrypt.*;
 import com.core.DB;
+import com.core.DBField;
 import com.core.Logger;
 
 /**
@@ -38,7 +38,7 @@ public class MemberDao {
 		 */
 		checkJoinData(request);
 		
-		ArrayList<Map<String, String>> bindings = new ArrayList<>();
+		ArrayList<DBField> bindings = new ArrayList<>();
 		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone) VALUES (?,?,?,?,?)";
 		String memPw = request.getParameter("memPw");
 		String hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
@@ -110,7 +110,7 @@ public class MemberDao {
 		
 		// 아이디 중복 체크 
 		String[] fields = { "memId" };
-		ArrayList<Map<String, String>> bindings = new ArrayList<>();
+		ArrayList<DBField> bindings = new ArrayList<>();
 		bindings.add(setBinding("String", memId));
 		int count = DB.getCount("member", fields, bindings);
 		if (count > 0) { // 아이디 중복
@@ -210,12 +210,11 @@ public class MemberDao {
 	 */
 	public Member getMember(int memNo) {
 		String sql = "SELECT * FROM member WHERE memNo = ?";
-		ArrayList<Map<String, String>> bindings = new ArrayList<>();
+		ArrayList<DBField> bindings = new ArrayList<>();
 		bindings.add(setBinding("Integer", String.valueOf(memNo)));
 		
 		Member member = DB.executeQueryOne(sql, bindings, new Member());
 	
 		return member;
 	}
-	
 }
