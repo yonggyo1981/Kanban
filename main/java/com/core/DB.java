@@ -23,7 +23,7 @@ public class DB {
 		return conn;
 	}
 	
-	public static <E extends Dto> ArrayList<E> executeQuery(String sql, ArrayList<Map<String, String>> bindings, E dto) { // E -> Object
+	public static <E extends Dto> ArrayList<E> executeQuery(String sql, ArrayList<DBField> bindings, E dto) { // E -> Object
 		
 		ArrayList<E> list = new ArrayList<>();
 		ArrayList<String> logBindings = new ArrayList<>();
@@ -31,27 +31,9 @@ public class DB {
 		try (Connection conn = DB.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			if (bindings != null) {
-				int no = 1;
-				for (Map<String, String> map : bindings) {
-					Iterator<String> ir = map.keySet().iterator();
-					if (ir.hasNext()) {
-						String dataType = ir.next();
-						String value = map.get(dataType);
-						logBindings.add(value); // 바인딩 데이터를 로그로 기록
-						switch(dataType) {
-							case "String" :
-								pstmt.setString(no, value);
-								break;
-							case "Integer" :
-								pstmt.setInt(no, Integer.valueOf(value));
-								break;
-							case "Double" : 
-								pstmt.setDouble(no, Double.valueOf(value));
-								break;
-						}
-					}
-					no++;
-				} // endfor 
+				// 바인딩 처리
+				processBinding(pstmt, bindings);
+					
 			
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -259,4 +241,32 @@ public class DB {
 		
 		return map;
 	}
+	
+	/**
+	 * SQL 바인딩 처리 
+	 *  
+	 * @param pstmt
+	 * @param bindings
+	 */
+	public ArrayList<String> processBinding(PreparedStatement pstmt, ArrayList<DBField> bindings) throws SQLException {
+		int no = 1;
+		for(DBField binding : bindings) {
+			String dataType = binding.getType();
+			String value = binding.getValue();
+			
+			switch(dataType) {
+				case "String" :
+					pstmt.setString(no, value);
+					break;
+				case "Integer" : 
+				case "Double" : 
+			} 
+			
+			no++;
+		}
+		
+		return null;
+	}
 }
+
+
