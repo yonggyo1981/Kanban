@@ -191,11 +191,9 @@ public class DB {
 	 * @param data
 	 * @return
 	 */
-	public static Map<String, String> setBinding(String dataType, String data) {
-		Map<String, String> map = new HashMap<>();
-		map.put(dataType, data);
+	public static DBField setBinding(String dataType, String data) {
 		
-		return map;
+		return new DBField(dataType, data);
 	}
 	
 	/**
