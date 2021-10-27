@@ -57,9 +57,9 @@ public class DB {
 		return list;
 	}
 	
-	public static<E extends Dto> E executeQueryOne(String sql, ArrayList<Map<String, String>> bindings, E dto) {
+	public static<E extends Dto> E executeQueryOne(String sql, ArrayList<DBField> bindings, E dto) {
 		ArrayList<E> list = executeQuery(sql, bindings, dto);
-		if (list == null) {
+		if (list == null || list.size() == 0) {
 			return null;
 		} else {
 			return list.get(0);
@@ -75,37 +75,15 @@ public class DB {
 	 * @return int - INSERT인 경우 -> 추가된 증감번호(Primary Key, Auto Increment), 나머지는 - 반영된 투플의 개수
 	 * 		
 	 */
-	public static int executeUpdate(String sql, ArrayList<Map<String,String>> bindings, boolean isReturnGeneratedKey) {
+	public static int executeUpdate(String sql, ArrayList<DBField> bindings, boolean isReturnGeneratedKey) {
 		
 		int rs = 0;
-		ArrayList<String> logBindings = new ArrayList<>();
+		ArrayList<String> logBindings = null;
 		
 		try(Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			
-			int no = 1;
-			for(Map<String, String> map : bindings) {
-				Iterator<String> ir = map.keySet().iterator();
-				if (ir.hasNext()) { // Map은 1개씩만 추가
-					String dataType = ir.next();
-					String value = map.get(dataType);
-					logBindings.add(value);
-					
-					switch(dataType) {
-						case "String" :
-							pstmt.setString(no, value);
-							break;
-						case "Integer" :
-							pstmt.setInt(no, Integer.valueOf(value));
-							break;
-						case "Double" :
-							pstmt.setDouble(no, Double.valueOf(value));
-							break;
-					}
-				}
-				
-				no++;
-			} // endfor
+			logBindings = processBinding(pstmt, bindings);
 			
 			rs = pstmt.executeUpdate();
 			
