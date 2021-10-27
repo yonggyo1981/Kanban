@@ -109,7 +109,13 @@ public class MemberController extends HttpServlet {
 	 */
 	private void loginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDao dao = MemberDao.getInstance();
-		dao.login(request);
+		try {
+			dao.login(request);
+			out.printf("<script>parent.location.replace('%s');</script>", "../kanban/work");
+		} catch (Exception e) {
+			Logger.log(e);
+			out.printf("<script>alert('%s');</script>", e.getMessage());
+		}
 	}
 	
 	/**

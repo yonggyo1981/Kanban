@@ -161,8 +161,9 @@ public class MemberDao {
 	 * @param memId
 	 * @param memPw
 	 * @return
+	 * @throws Exception 
 	 */
-	public boolean login(HttpServletRequest request, String memId, String memPw) {
+	public boolean login(HttpServletRequest request, String memId, String memPw) throws Exception {
 		/**
 		 * 1. memId를 통해 회원 정보를 조회
 		 * 2. 회원 정보가 조회가 되면(실제 회원 있으면) - 비밀번호를 체크
@@ -170,12 +171,24 @@ public class MemberDao {
 		 */
 		
 		Member member = getMember(memId);
-		System.out.println(member.getMemNm());
+		if (member == null) { // memId에 일치하는 회원이 X 
+			throw new Exception("가입하지 않은 아이디 입니다.");
+		}
 		
-		return false;
+		// 비밀번호 체크 
+		boolean match = BCrypt.checkpw(memPw, member.getMemPw());
+		if (!match) { // 비밀번호 불일치
+			throw new Exception("비밀번호가 일치하지 않습니다.");
+		}
+		
+		// 세션 처리
+		HttpSession session = request.getSession();
+		session.setAttribute("memNo", member.getMemNo());
+		
+		return true;
 	}
 	
-	public boolean login(HttpServletRequest request) {
+	public boolean login(HttpServletRequest request) throws Exception {
 		return login(request,
 						request.getParameter("memId"),
 						request.getParameter("memPw")
@@ -214,7 +227,7 @@ public class MemberDao {
 		bindings.add(setBinding("Integer", String.valueOf(memNo)));
 		
 		Member member = DB.executeQueryOne(sql, bindings, new Member());
-	
+		
 		return member;
 	}
 }
