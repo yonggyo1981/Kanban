@@ -249,23 +249,30 @@ public class DB {
 	 * @param bindings
 	 */
 	public ArrayList<String> processBinding(PreparedStatement pstmt, ArrayList<DBField> bindings) throws SQLException {
+		
+		ArrayList<String> logBindings = new ArrayList<>(); // 로그용 바인딩 데이터
+		
 		int no = 1;
 		for(DBField binding : bindings) {
 			String dataType = binding.getType();
 			String value = binding.getValue();
+			logBindings.add(value);
 			
 			switch(dataType) {
 				case "String" :
 					pstmt.setString(no, value);
 					break;
 				case "Integer" : 
-				case "Double" : 
-			} 
-			
+					pstmt.setInt(no, Integer.valueOf(value));
+					break;
+				case "Double" :
+					pstmt.setDouble(no, Double.valueOf(value));
+					break;
+			}	
 			no++;
 		}
 		
-		return null;
+		return logBindings;
 	}
 }
 
