@@ -1,6 +1,7 @@
 package com.core;
 
 import javax.servlet.*;
+import javax.servlet.http.*;
 import java.io.*;
 
 /**
@@ -8,6 +9,8 @@ import java.io.*;
  *
  */
 public class AccessController {
+	
+	private static String requestURI;
 	
 	/** 회원 전용 URI */
 	private static String[] memberOnlyURI = {"/member/info"};
@@ -21,6 +24,14 @@ public class AccessController {
 	 */
 	public static void init(ServletRequest request, ServletResponse response) throws IOException {
 		try {
+			if (request instanceof HttpServletRequest) {
+				HttpServletRequest req = (HttpServletRequest)request;
+				requestURI = req.getRequestURI();
+				
+				// 비회원 전용 URI 체크 
+				checkGuestOnly();
+				
+			}
 			
 		} catch (Exception e) {
 			Logger.log(e);
