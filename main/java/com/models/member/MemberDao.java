@@ -54,6 +54,21 @@ public class MemberDao {
 	}
 	
 	/**
+	 * 로그인 여부 체크 
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static boolean isLogin(ServletRequest request) {
+		boolean isLogin = false;
+		if (request.getAttribute("isLogin") != null) {
+			isLogin = (Boolean)request.getAttribute("isLogin");
+		}
+		
+		return isLogin;
+	}
+	
+	/**
 	 * 회원 가입 처리 
 	 * 
 	 * @param request
@@ -257,5 +272,14 @@ public class MemberDao {
 		Member member = DB.executeQueryOne(sql, bindings, new Member());
 		
 		return member;
+	}
+	
+	/**
+	 * 로그아웃
+	 *  
+	 */
+	public void logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
 	}
 }

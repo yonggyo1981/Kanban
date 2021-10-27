@@ -47,6 +47,9 @@ public class MemberController extends HttpServlet {
 			case "findpw" : // 비밀번호 찾기
 				findpwController(request, response);
 				break;
+			case "logout" : // 로그아웃 
+				logoutController(request, response);
+				break;
 			default : // 없는 페이지 
 				RequestDispatcher rd = request.getRequestDispatcher("/views/error/404.jsp");
 				rd.forward(request, response);
@@ -140,6 +143,19 @@ public class MemberController extends HttpServlet {
 	 */
 	private void findpwController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+	}
+	
+	/**
+	 * 로그아웃 
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void logoutController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MemberDao dao = MemberDao.getInstance();
+		dao.logout(request);
 	}
 }
 
