@@ -13,13 +13,14 @@ import com.models.member.*;
 public class AccessController {
 	
 	private static String requestURI;
+	private static PrintWriter out;
 	private static boolean isLogin;
 	
 	/** 회원 전용 URI */
 	private static String[] memberOnlyURI = {"/member/info"};
 	
 	/** 비회원 전용 URI */
-	private static String[] guestOnlyURI = {"/member/login", "/member/join"};
+	private static String[] guestOnlyURI = {"/member/join", "/member/findid", "/member/findpw"};
 	
 	/**
 	 * 페이지별 접속 체크 
@@ -31,9 +32,13 @@ public class AccessController {
 				HttpServletRequest req = (HttpServletRequest)request;
 				requestURI = req.getRequestURI();
 				isLogin = MemberDao.isLogin(request);
+				out = response.getWriter();
 				
 				// 비회원 전용 URI 체크 
 				checkGuestOnly();
+				
+				// 메인페이지 접속 체크 
+				checkMainPage();
 				
 			}
 			
@@ -41,7 +46,6 @@ public class AccessController {
 			Logger.log(e);
 			
 			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 		}
 	}
@@ -62,6 +66,18 @@ public class AccessController {
 				}
 			}
 		}	
+	}
+	
+	/**
+	 * 메인페이지 접속 권한 체크 
+	 * 		- 비회원만 접속 가능(로그인)
+	 * 		- 회원 -> 작업 요약 페이지 이동 
+	 */
+	private static void checkMainPage() {
+		// URI = "/" OR "/index.jsp
+		if (isLogin && (requestURI.indexOf("/index.jsp") != -1 || requestURI.equals("/"))) { // 로그인 한 경우 
+			out.printf("<script>location.replace('%s');</script>", "kanban/work");
+		}
 	}
 }
 
