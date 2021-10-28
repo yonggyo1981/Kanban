@@ -14,6 +14,7 @@ public class AccessController {
 	
 	private static ServletResponse response;
 	private static String requestURI;
+	private static String rootURL;
 	private static boolean isLogin;
 	
 	/** 회원 전용 URI */
@@ -33,6 +34,7 @@ public class AccessController {
 				requestURI = req.getRequestURI();
 				isLogin = MemberDao.isLogin(request);
 				AccessController.response = response; 
+				rootURL = (String)request.getAttribute("rootURL");
 				
 				// 비회원 전용 URI 체크 
 				checkGuestOnly();
@@ -75,9 +77,7 @@ public class AccessController {
 	 * 		- 회원 -> 작업 요약 페이지 이동 
 	 */
 	private static void checkMainPage() throws IOException {
-		// URI = "/" OR "/index.jsp
-		
-		if (isLogin && (requestURI.indexOf("/index.jsp") != -1 || requestURI.equals("/"))) { // 로그인 한 경우
+		if (isLogin && (requestURI.indexOf("/index.jsp") != -1 || requestURI.equals(rootURL + "/"))) { // 로그인 한 경우
 			PrintWriter out = response.getWriter();
 			out.printf("<script>location.replace('%s');</script>", "kanban/work");
 		}
