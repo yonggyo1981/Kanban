@@ -321,4 +321,9 @@ public class MemberDao {
 		
 		return findId(request.getParameter("memNm"), request.getParameter("cellPhone"));
 	}
+	
+	public Member findPw(HttpServletRequest request) {
+		
+		return null;
+	}
 }
