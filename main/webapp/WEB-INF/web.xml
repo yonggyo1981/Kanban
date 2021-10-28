@@ -42,6 +42,12 @@
 	</servlet-mapping>
 	<!-- /member E -->
 	<!-- 서블릿 E  -->
+	<!--  에러 페이지 S  -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/views/error/404.jsp</location>
+	</error-page>
+	<!--  에러 페이지 E  -->
 </web-app>
 
 
