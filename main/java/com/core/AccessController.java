@@ -12,8 +12,8 @@ import com.models.member.*;
  */
 public class AccessController {
 	
+	private static ServletResponse response;
 	private static String requestURI;
-	private static PrintWriter out;
 	private static boolean isLogin;
 	
 	/** 회원 전용 URI */
@@ -32,7 +32,7 @@ public class AccessController {
 				HttpServletRequest req = (HttpServletRequest)request;
 				requestURI = req.getRequestURI();
 				isLogin = MemberDao.isLogin(request);
-			
+				AccessController.response = response; 
 				
 				// 비회원 전용 URI 체크 
 				checkGuestOnly();
@@ -46,7 +46,7 @@ public class AccessController {
 			Logger.log(e);
 			
 			response.setContentType("text/html; charset=utf-8");
-			out = response.getWriter();
+			PrintWriter out = response.getWriter();
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 		}
 	}
@@ -74,9 +74,11 @@ public class AccessController {
 	 * 		- 비회원만 접속 가능(로그인)
 	 * 		- 회원 -> 작업 요약 페이지 이동 
 	 */
-	private static void checkMainPage() {
+	private static void checkMainPage() throws IOException {
 		// URI = "/" OR "/index.jsp
-		if (isLogin && (requestURI.indexOf("/index.jsp") != -1 || requestURI.equals("/"))) { // 로그인 한 경우 
+		
+		if (isLogin && (requestURI.indexOf("/index.jsp") != -1 || requestURI.equals("/"))) { // 로그인 한 경우
+			PrintWriter out = response.getWriter();
 			out.printf("<script>location.replace('%s');</script>", "kanban/work");
 		}
 	}
