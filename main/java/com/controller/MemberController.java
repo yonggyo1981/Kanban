@@ -156,6 +156,8 @@ public class MemberController extends HttpServlet {
 	private void logoutController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDao dao = MemberDao.getInstance();
 		dao.logout(request);
+		PrintWriter out = response.getWriter();
+		out.printf("<script>location.replace('%s');</script>", "../index.jsp");
 	}
 }
 
