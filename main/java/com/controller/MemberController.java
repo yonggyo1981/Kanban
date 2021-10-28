@@ -160,7 +160,13 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void findpwController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
+		if (httpMethod.equals("GET")) { // 비밀번호 찾기 양식 
+			RequestDispatcher rd = request.getRequestDispatcher("/views/member/findpw.jsp");
+			rd.include(request, response);
+		} else { // 일치 하는 회원 검증 -> 비밀번호 초기화 페이지로 이동 
+			
+		}
 	}
 	
 	/**
