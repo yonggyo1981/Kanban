@@ -32,7 +32,7 @@ public class AccessController {
 				HttpServletRequest req = (HttpServletRequest)request;
 				requestURI = req.getRequestURI();
 				isLogin = MemberDao.isLogin(request);
-				out = response.getWriter();
+			
 				
 				// 비회원 전용 URI 체크 
 				checkGuestOnly();
@@ -46,6 +46,7 @@ public class AccessController {
 			Logger.log(e);
 			
 			response.setContentType("text/html; charset=utf-8");
+			out = response.getWriter();
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 		}
 	}
