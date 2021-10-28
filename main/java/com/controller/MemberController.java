@@ -136,7 +136,8 @@ public class MemberController extends HttpServlet {
 	 */
 	private void findidController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) { // 아이디 찾기 양식 
-			
+			RequestDispatcher rd = request.getRequestDispatcher("/views/member/findid.jsp");
+			rd.include(request, response);
 		} else { // 아이디 찾기 
 			
 		}
