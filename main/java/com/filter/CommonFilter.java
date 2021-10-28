@@ -62,12 +62,14 @@ public class CommonFilter implements Filter {
 		String rootURL = request.getServletContext().getContextPath();
 		request.setAttribute("rootURL", rootURL);
 		
-		/** 요청 메서드 + requestURL */
+		/** 요청 메서드 + requestURL, Request Encoding 설정 */
 		if (request instanceof HttpServletRequest) {
 			HttpServletRequest req = (HttpServletRequest)request;
 			
 			request.setAttribute("httpMethod", req.getMethod().toUpperCase());
 			request.setAttribute("requestURL", req.getRequestURL().toString());
+			
+			req.setCharacterEncoding("UTF-8");
 		}
 		
 		/** 로그인 유지 */
@@ -75,6 +77,8 @@ public class CommonFilter implements Filter {
 		
 		/** URL 접속 권한 체크 */
 		AccessController.init(request, response);
+		
+		
 		
 		// 헤더 출력
 		if (isPrintOk(request)) {

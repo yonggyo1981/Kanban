@@ -309,8 +309,12 @@ public class MemberDao {
 		bindings.add(setBinding("String", cellPhone));
 		
 		Member member = DB.executeQueryOne(sql, bindings, new Member());
-		System.out.println(member.getMemId());
-		return null;
+		String memId = null;
+		if (member != null) {
+			memId = member.getMemId();
+		}
+		
+		return memId;
 	}
 	
 	public String findId(HttpServletRequest request) throws Exception {

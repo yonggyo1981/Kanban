@@ -24,7 +24,6 @@ public class MemberController extends HttpServlet {
 			response.setContentType("text/html; charset=utf-8");
 		} else { // GET이 아닌 경우 -> 유입된 입력 양식 데이터 처
 			response.setCharacterEncoding("utf-8");
-			request.setCharacterEncoding("utf-8");
 		}
 		
 		out = response.getWriter();
@@ -136,6 +135,16 @@ public class MemberController extends HttpServlet {
 	 */
 	private void findidController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
+		if (httpMethod.equals("POST")) {
+			MemberDao dao = MemberDao.getInstance();
+			try {
+				dao.findId(request);
+			} catch (Exception e) {
+				Logger.log(e);
+				out.printf("<script>alert('%s');</script>", e.getMessage());
+			}
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/views/member/findid.jsp");
 		rd.include(request, response);
 		
