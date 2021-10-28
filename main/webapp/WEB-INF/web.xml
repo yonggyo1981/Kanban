@@ -47,6 +47,10 @@
 		<error-code>404</error-code>
 		<location>/views/error/404.jsp</location>
 	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/views/error/error.jsp</location>
+	</error-page>
 	<!--  에러 페이지 E  -->
 </web-app>
 

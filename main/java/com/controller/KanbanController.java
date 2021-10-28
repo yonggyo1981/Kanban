@@ -51,6 +51,10 @@ public class KanbanController extends HttpServlet {
 	
 	/** 작업 목록 */
 	private void workController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String text = null;
+		text.toUpperCase();
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/main.jsp");
 		rd.include(request, response);
 	}

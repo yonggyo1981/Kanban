@@ -215,14 +215,16 @@ public class Logger {
 		
 		
 		log("------------------------------------- Error Stack Start ----------------------------", ERROR);
+		log("Message : " + e.getMessage(), ERROR);
+		log("Exception : " + e.getClass().getName(), ERROR);
 		StackTraceElement[] stacks = e.getStackTrace();
 		for (StackTraceElement stack : stacks) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Message : ");
-			sb.append(e.getMessage());
-			sb.append(" / Exception : ");
-			sb.append(e.getClass().getName());
-			sb.append(" / ClassName : ");
+			//sb.append("Message : ");
+			//sb.append(e.getMessage());
+			//sb.append(" / Exception : ");
+			//sb.append(e.getClass().getName());
+			sb.append("ClassName : ");
 			sb.append(stack.getClassName());
 			sb.append(" / File : ");
 			sb.append(stack.getFileName());
