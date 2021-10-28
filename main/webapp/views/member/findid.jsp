@@ -18,7 +18,15 @@
 			</c:when>
 			<c:otherwise>
 				<h3>아이디 : <c:out value="${memId}" /></h3>
-				<a href='../member/findid'>다시 찾기</a>
+				<div class='links'>
+					<div class='left'>
+						<a href='../member/findid'>다시 찾기</a> 
+						<a href='../member/findpw'>비밀번호 찾기</a>
+					</div>
+					<div class='right'>
+						<a href='../index.jsp'>로그인 하기</a>
+					</div>
+				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>
