@@ -292,11 +292,29 @@ public class MemberDao {
 	 * @throws Exception
 	 */
 	public String findId(String memNm, String cellPhone) throws Exception {
+		if (memNm == null || memNm.trim().equals("")) {
+			throw new Exception("회원명을 입력하세요.");
+		}
 		
+		if (cellPhone == null || cellPhone.trim().equals("")) {
+			throw new Exception("휴대전화번호를 입력하세요.");
+		}
+		
+		memNm = memNm.trim();
+		cellPhone = cellPhone.replaceAll("[^0-9]", "");
+		
+		String sql = "SELECT * FROM member WHERE memNm = ? AND cellPhone = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(setBinding("String", memNm));
+		bindings.add(setBinding("String", cellPhone));
+		
+		Member member = DB.executeQueryOne(sql, bindings, new Member());
+		System.out.println(member.getMemId());
 		return null;
 	}
 	
-	public String findId(HttpServletRequest request) {
+	public String findId(HttpServletRequest request) throws Exception {
 		
+		return findId(request.getParameter("memNm"), request.getParameter("cellPhone"));
 	}
 }
