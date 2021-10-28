@@ -282,4 +282,21 @@ public class MemberDao {
 		HttpSession session = request.getSession();
 		session.invalidate();
 	}
+	
+	/**
+	 * 아이디 찾기
+	 * 
+	 * @param memNm
+	 * @param cellPhone
+	 * @return
+	 * @throws Exception
+	 */
+	public String findId(String memNm, String cellPhone) throws Exception {
+		
+		return null;
+	}
+	
+	public String findId(HttpServletRequest request) {
+		
+	}
 }
