@@ -62,6 +62,14 @@ public class CommonFilter implements Filter {
 		String rootURL = request.getServletContext().getContextPath();
 		request.setAttribute("rootURL", rootURL);
 		
+		/** 요청 메서드 + requestURL */
+		if (request instanceof HttpServletRequest) {
+			HttpServletRequest req = (HttpServletRequest)request;
+			
+			request.setAttribute("httpMethod", req.getMethod().toUpperCase());
+			request.setAttribute("requestURL", req.getRequestURL().toString());
+		}
+		
 		/** 로그인 유지 */
 		MemberDao.init(request);
 		
