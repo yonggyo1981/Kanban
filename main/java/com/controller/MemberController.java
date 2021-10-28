@@ -138,7 +138,8 @@ public class MemberController extends HttpServlet {
 		if (httpMethod.equals("POST")) {
 			MemberDao dao = MemberDao.getInstance();
 			try {
-				dao.findId(request);
+				String memId = dao.findId(request);
+				request.setAttribute("memId", memId);
 			} catch (Exception e) {
 				Logger.log(e);
 				out.printf("<script>alert('%s');</script>", e.getMessage());
