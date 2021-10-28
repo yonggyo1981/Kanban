@@ -42,6 +42,9 @@ public class AccessController {
 				// 메인페이지 접속 체크 
 				checkMainPage();
 				
+				// 회원 전용 URI 체크
+				checkMemberOnly();
+				
 			}
 			
 		} catch (Exception e) {
@@ -80,6 +83,22 @@ public class AccessController {
 		if (isLogin && (requestURI.indexOf("/index.jsp") != -1 || requestURI.equals(rootURL + "/"))) { // 로그인 한 경우
 			PrintWriter out = response.getWriter();
 			out.printf("<script>location.replace('%s');</script>", "kanban/work");
+		}
+	}
+	
+	/**
+	 * 회원 전용 URI 접근 체크 
+	 * 
+	 * @throws Exception
+	 */
+	private static void checkMemberOnly() throws Exception {
+		/** 로그인 하지 않았을때 접속 하면 X */
+		if (!isLogin) {
+			for (String URI : memberOnlyURI) {
+				if (requestURI.indexOf(URI) != -1) { // 비회원이 회원전용 URI에 접속 
+					throw new Exception("회원 전용 페이지 입니다.");
+				}
+			}
 		}
 	}
 }
