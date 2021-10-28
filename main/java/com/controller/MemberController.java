@@ -112,7 +112,8 @@ public class MemberController extends HttpServlet {
 	 */
 	private void loginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) {
-			
+			RequestDispatcher rd = request.getRequestDispatcher("/views/main/index.jsp");
+			rd.include(request, response);
 		} else {
 			MemberDao dao = MemberDao.getInstance();
 			try {
