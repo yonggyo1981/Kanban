@@ -135,7 +135,11 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void findidController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		if (httpMethod.equals("GET")) { // 아이디 찾기 양식 
+			
+		} else { // 아이디 찾기 
+			
+		}
 	}
 	
 	/**
