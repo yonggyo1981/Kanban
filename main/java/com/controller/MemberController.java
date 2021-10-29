@@ -46,6 +46,9 @@ public class MemberController extends HttpServlet {
 			case "findpw" : // 비밀번호 찾기
 				findpwController(request, response);
 				break;
+			case "change_pw" : // 비밀번호 초기화 
+				changePwController(request, response);
+				break;
 			case "logout" : // 로그아웃 
 				logoutController(request, response);
 				break;
@@ -177,6 +180,23 @@ public class MemberController extends HttpServlet {
 				Logger.log(e);
 				out.printf("<script>alert('%s');</script>", e.getMessage());
 			}
+		}
+	}
+	
+	/**
+	 * 비밀번호 초기화 
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void changePwController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (httpMethod.equals("GET")) { // 초기화 양식 
+			RequestDispatcher rd = request.getRequestDispatcher("/views/member/changepw.jsp");
+			rd.include(request, response);
+		} else { // 초기화 처리 
+			
 		}
 	}
 	
