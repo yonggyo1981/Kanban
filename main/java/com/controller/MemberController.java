@@ -185,11 +185,13 @@ public class MemberController extends HttpServlet {
 				 *       만료시간 이후 초기화 페이지 접속 -> 접속이 만료 되었다는 메세지 출력, 접속 X
 				 */
 				HttpSession session = request.getSession();
-				long expireTime = System.currentTimeMillis() + (1 * 10 * 1000);
+				long expireTime = System.currentTimeMillis() + (3 * 60 * 1000);
 				session.setAttribute("expireTime", expireTime);
 				
+				// 회원번호 세션 처리
+				session.setAttribute("change_pw_memNo", member.getMemNo());
 				
-				out.printf("<script>parent.location.replace('%s');</script>", "../member/findpw");
+				out.printf("<script>parent.location.replace('%s');</script>", "../member/change_pw");
 			} catch (Exception e) {
 				Logger.log(e);
 				out.printf("<script>alert('%s');</script>", e.getMessage());
@@ -216,6 +218,7 @@ public class MemberController extends HttpServlet {
 				
 				// 만료시간이 지난 경우 
 				if (expireTime < System.currentTimeMillis()) {
+					session.removeAttribute("change_pw_memNo");
 					throw new Exception("페이지 접속이 만료 되었습니다.");
 				}
 				
