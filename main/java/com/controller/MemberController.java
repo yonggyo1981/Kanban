@@ -101,7 +101,29 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void infoController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member member = null;
+		try {
+			if (request.getAttribute("member") != null) {
+				member = (Member)request.getAttribute("member");
+			}
+			
+			if (member == null) {
+				throw new Exception("수정할 회원 정보가 없습니다.");
+			}
+		} catch (Exception e) {
+			Logger.log(e);
+			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
+			return;
+		}
 		
+		if (httpMethod.equals("GET")) { // 수정 양식
+			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
+			rd.include(request, response);
+			
+			
+		} else { // 수정 처리 
+			
+		}
 	}
 	
 	/**
