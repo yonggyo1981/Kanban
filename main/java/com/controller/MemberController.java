@@ -189,7 +189,7 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("expireTime", expireTime);
 				
 				
-				response.sendRedirect("../member/change_pw");
+				out.printf("<script>parent.location.replace('%s');</script>", "../member/findpw");
 			} catch (Exception e) {
 				Logger.log(e);
 				out.printf("<script>alert('%s');</script>", e.getMessage());
