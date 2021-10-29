@@ -58,13 +58,13 @@ String action = (String)request.getAttribute("action");
 			<dl>
 				<dt>회원명</dt>
 				<dd>
-					<input type="text" name="memNm">
+					<input type="text" name="memNm" value="${member.memNm}">
 				</dd>
 			</dl>
 			<dl>
 				<dt>휴대전화</dt>
 				<dd>
-					<input type="text" name="cellPhone">
+					<input type="text" name="cellPhone" value="${member.cellPhone}">
 				</dd>
 			</dl>
 			<input type="reset" value="다시입력">
