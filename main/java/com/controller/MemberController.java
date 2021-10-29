@@ -230,7 +230,18 @@ public class MemberController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/changepw.jsp");
 			rd.include(request, response);
 		} else { // 초기화 처리 
-			
+			try {
+				MemberDao dao = MemberDao.getInstance();
+				boolean result = dao.changePw(request);
+				if (!result) {
+					throw new Exception("비밀번호 변경 실패하였습니다.");
+				}
+				// 변경에 성공하면 -> 로그인 페이지(메인 페이지)
+				out.printf("<script>parent.location.replace('%s');</script>", "../index.jsp");
+			} catch (Exception e) {
+				Logger.log(e);
+				out.printf("<script>alert('%s');</script>", e.getMessage());
+			}
 		}
 	}
 	
