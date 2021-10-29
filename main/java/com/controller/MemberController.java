@@ -166,7 +166,17 @@ public class MemberController extends HttpServlet {
 			rd.include(request, response);
 		} else { // 일치 하는 회원 검증 -> 비밀번호 초기화 페이지로 이동 
 			MemberDao dao = MemberDao.getInstance();
-			dao.findPw(request);
+			try {
+				Member member = dao.findPw(request);
+				if (member == null) {
+					throw new Exception("일치하는 회원이 없습니다.");
+				}
+				
+				response.sendRedirect("../member/change_pw");
+			} catch (Exception e) {
+				Logger.log(e);
+				out.printf("<script>alert('%s');</script>", e.getMessage());
+			}
 		}
 	}
 	
