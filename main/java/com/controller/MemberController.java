@@ -175,6 +175,20 @@ public class MemberController extends HttpServlet {
 					throw new Exception("일치하는 회원이 없습니다.");
 				}
 				
+				/** 
+				 * 비밀번호 초기화 페이지 이동전 처리 
+				 * 1. 접속 만료 시간(O)
+				 * 2. 비번초기화시에 필요한 회원번호 숨겨서 처리 
+				 * 	  세션에 담아서 초기화 처리(POST)에서 조회하여 처리 
+				 * 3. 접속 시간 만료
+				 * 		 회원번호 삭제
+				 *       만료시간 이후 초기화 페이지 접속 -> 접속이 만료 되었다는 메세지 출력, 접속 X
+				 */
+				HttpSession session = request.getSession();
+				long expireTime = System.currentTimeMillis() + (1 * 10 * 1000);
+				session.setAttribute("expireTime", expireTime);
+				
+				
 				response.sendRedirect("../member/change_pw");
 			} catch (Exception e) {
 				Logger.log(e);
@@ -193,6 +207,13 @@ public class MemberController extends HttpServlet {
 	 */
 	private void changePwController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) { // 초기화 양식 
+			try {
+				
+			} catch (Exception e) {
+				Logger.log(e);
+				out.printf("<script>alert('%s');location.replace('%s');</script>", e.getMessage(), "../member/findpw");
+				return;
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/changepw.jsp");
 			rd.include(request, response);
 		} else { // 초기화 처리 
