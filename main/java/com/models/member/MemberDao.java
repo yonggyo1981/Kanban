@@ -101,6 +101,35 @@ public class MemberDao {
 	}
 	
 	/**
+	 * 회원정보 수정 
+	 * 
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean updateInfo(HttpServletRequest request) throws Exception {
+		
+		if (request.getAttribute("member") == null) {
+			throw new Exception("회원정보 수정은 로그인이 필요합니다.");
+		}
+		
+		Member member = (Member)request.getAttribute("member");
+		String memPwHint = request.getParameter("memPwHint");
+		String memNm = request.getParameter("memNm");
+		String cellPhone = request.getParameter("cellPhone");
+		if (cellPhone != null) {
+			cellPhone = cellPhone.replaceAll("[^0-9]", "");
+		}
+		String sql = "UPDATE member SET memPwHint = ?, memNm = ?, cellPhone = ? WHERE memNo = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(setBinding("String", memPwHint);
+		bindings.add(setBinding("String", memNm);
+		bindings.add(setBinding("String", cellPhone))
+		
+		return false;
+	}
+	
+	/**
 	 * 회원 가입 데이터 검증
 	 * 
 	 * @param request
