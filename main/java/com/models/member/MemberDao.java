@@ -359,4 +359,55 @@ public class MemberDao {
 		
 		return findPw(request.getParameter("memId"), request.getParameter("memNm"), request.getParameter("memPwHint"));
 	}
+	
+	/**
+	 * 비밀번호 변경 
+	 * 
+	 * @param memNo
+	 * @param memPw
+	 * @return
+	 */
+	public boolean changePw(int memNo, String memPw) {
+		
+		if (memNo == 0 || memPw == null || memPw.trim().equals("")) {
+			return false;
+		}
+		
+		String hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
+		String sql = "UPDATE member SET memPw = ? WHERE memNo = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(setBinding("String", hash));
+		bindings.add(setBinding("Integer", String.valueOf(memNo)));
+		
+		int rs = DB.executeUpdate(sql, bindings);
+		
+		return (rs > 0)?true:false;
+	}
+	
+	public boolean changePw(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute("change_pw_memNo") == null) {
+			throw new Exception("잘못된 접근 방식 입니다.");
+		}
+		
+		int memNo = (Integer)session.getAttribute("change_pw_memNo");
+	
+		String memPw = request.getParameter("memPw");
+		String memPwRe = request.getParameter("memPwRe");
+		
+		if (memPw == null || memPw.trim().equals("")) {
+			throw new Exception("변경할 비밀번호를 입력하세요.");
+		}
+		
+		if (memPwRe == null || memPwRe.trim().equals("")) {
+			throw new Exception("비밀번호를 확인해 주세요.");
+		}
+		
+		if (!memPw.equals(memPwRe)) {
+			throw new Exception("비밀번호를 다시 확인해 주세요.");
+		}
+		
+		 return changePw(memNo, memPw);
+	}
 }
