@@ -122,11 +122,14 @@ public class MemberDao {
 		}
 		String sql = "UPDATE member SET memPwHint = ?, memNm = ?, cellPhone = ? WHERE memNo = ?";
 		ArrayList<DBField> bindings = new ArrayList<>();
-		bindings.add(setBinding("String", memPwHint);
-		bindings.add(setBinding("String", memNm);
-		bindings.add(setBinding("String", cellPhone))
+		bindings.add(setBinding("String", memPwHint));
+		bindings.add(setBinding("String", memNm));
+		bindings.add(setBinding("String", cellPhone));
+		bindings.add(setBinding("Integer", String.valueOf(member.getMemNo())));
 		
-		return false;
+		int rs = DB.executeUpdate(sql, bindings);
+		
+		return (rs > 0)?true:false;
 	}
 	
 	/**
