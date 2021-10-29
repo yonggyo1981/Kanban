@@ -71,6 +71,7 @@ public class MemberController extends HttpServlet {
 	 */
 	private void joinController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) { // 양식 출력 
+			request.setAttribute("action", "../member/join"); // 양식 처리 경로
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
 			rd.include(request, response);
 		} else { // 양식 처리
@@ -117,6 +118,7 @@ public class MemberController extends HttpServlet {
 		}
 		
 		if (httpMethod.equals("GET")) { // 수정 양식
+			request.setAttribute("action", "../member/info");
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
 			rd.include(request, response);
 			

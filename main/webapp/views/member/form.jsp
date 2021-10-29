@@ -6,8 +6,11 @@ Member member = null;
 if (request.getAttribute("member") != null) {
 	member = (Member)request.getAttribute("member");
 }
+
+String action = (String)request.getAttribute("action");
 %>
 <c:set var="member" value="<%=member%>" />
+<c:set var="action" value="<%=action%>" />
 <main>
 	<div class='join_box login_box'>
 		<div class='tit'>
@@ -20,7 +23,7 @@ if (request.getAttribute("member") != null) {
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<form name='frmJoin' id='frmJoin' method="post" action="../member/join" target="ifrmHidden" autocomplete="off">
+		<form name='frmJoin' id='frmJoin' method="post" action="${action}" target="ifrmHidden" autocomplete="off">
 			<dl>
 				<dt>아이디</dt>
 				<dd>
