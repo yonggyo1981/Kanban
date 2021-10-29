@@ -208,6 +208,16 @@ public class MemberController extends HttpServlet {
 	private void changePwController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) { // 초기화 양식 
 			try {
+				HttpSession session = request.getSession();
+				long expireTime = 0L;
+				if (session.getAttribute("expireTime") != null) {
+					expireTime = (Long)session.getAttribute("expireTime");
+				}
+				
+				// 만료시간이 지난 경우 
+				if (expireTime < System.currentTimeMillis()) {
+					throw new Exception("페이지 접속이 만료 되었습니다.");
+				}
 				
 			} catch (Exception e) {
 				Logger.log(e);
