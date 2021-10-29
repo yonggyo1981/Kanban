@@ -121,10 +121,14 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("action", "../member/info");
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
 			rd.include(request, response);
-			
-			
 		} else { // 수정 처리 
-			
+			MemberDao dao = MemberDao.getInstance();
+			try {
+				dao.updateInfo(request);
+			} catch (Exception e) {
+				Logger.log(e);
+				out.printf("<script>alert('%s');</script>", e.getMessage());
+			}
 		}
 	}
 	
