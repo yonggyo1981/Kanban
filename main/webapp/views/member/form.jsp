@@ -52,7 +52,7 @@ String action = (String)request.getAttribute("action");
 			<dl>
 				<dt>비밀번호 힌트</dt>
 				<dd>
-					<input type="text" name="memPwHint">
+					<input type="text" name="memPwHint" value="${member.memPwHint}">
 				</dd>
 			</dl>
 			<dl>
@@ -68,7 +68,14 @@ String action = (String)request.getAttribute("action");
 				</dd>
 			</dl>
 			<input type="reset" value="다시입력">
-			<input type="submit" value="회원가입">
+			<c:choose>
+				<c:when test="${member == null}">
+					<input type="submit" value="회원가입">
+				</c:when>
+				<c:otherwise>
+					<input type="submit" value="정보수정">
+				</c:otherwise>
+			</c:choose>
 		</form>
 	</div>
 </main>
