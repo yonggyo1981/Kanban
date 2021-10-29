@@ -27,7 +27,14 @@ String action = (String)request.getAttribute("action");
 			<dl>
 				<dt>아이디</dt>
 				<dd>
-					<input type="text" name="memId">
+					<c:choose>
+						<c:when test="${member == null}">
+							<input type="text" name="memId">
+						</c:when>
+						<c:otherwise>
+							<c:out value="${member.memId}" />
+						</c:otherwise>
+					</c:choose>
 				</dd>
 			</dl>
 			<dl>
