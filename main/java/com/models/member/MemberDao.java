@@ -322,8 +322,41 @@ public class MemberDao {
 		return findId(request.getParameter("memNm"), request.getParameter("cellPhone"));
 	}
 	
-	public Member findPw(HttpServletRequest request) {
+	/**
+	 * 
+	 * @param memId
+	 * @param memNm
+	 * @param memPwHint
+	 * @return
+	 */
+	public Member findPw(String memId, String memNm, String memPwHint) throws Exception {
+		/** 입력 항목 체크 S */
+		if (memId == null || memId.trim().equals("")) {
+			throw new Exception("아이디를 입력하세요.");
+		}
 		
-		return null;
+		if (memNm == null || memNm.trim().equals("")) {
+			throw new Exception("회원명을 입력하세요.");
+		}
+		
+		if (memPwHint == null || memPwHint.trim().equals("")) {
+			throw new Exception("비밀번호 힌트를 입력하세요.");
+		}
+		/** 입력 항목 체크 E */
+		
+		String sql = "SELECT * FROM member WHERE memId = ? AND memNm = ? AND memPwHint = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(setBinding("String", memId));
+		bindings.add(setBinding("String", memNm));
+		bindings.add(setBinding("String", memPwHint));
+		
+		Member member = DB.executeQueryOne(sql, bindings, new Member());
+		
+		return member;
+	}
+	
+	public Member findPw(HttpServletRequest request) throws Exception {
+		
+		return findPw(request.getParameter("memId"), request.getParameter("memNm"), request.getParameter("memPwHint"));
 	}
 }
