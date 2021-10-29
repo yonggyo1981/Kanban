@@ -178,11 +178,11 @@ public class MemberController extends HttpServlet {
 				/** 
 				 * 비밀번호 초기화 페이지 이동전 처리 
 				 * 1. 접속 만료 시간(O)
-				 * 2. 비번초기화시에 필요한 회원번호 숨겨서 처리 
+				 * 2. 비번초기화시에 필요한 회원번호 숨겨서 처리 (O)
 				 * 	  세션에 담아서 초기화 처리(POST)에서 조회하여 처리 
 				 * 3. 접속 시간 만료
-				 * 		 회원번호 삭제
-				 *       만료시간 이후 초기화 페이지 접속 -> 접속이 만료 되었다는 메세지 출력, 접속 X
+				 * 		 회원번호 삭제(O)
+				 *       만료시간 이후 초기화 페이지 접속 -> 접속이 만료 되었다는 메세지 출력, 접속 X(O)
 				 */
 				HttpSession session = request.getSession();
 				long expireTime = System.currentTimeMillis() + (3 * 60 * 1000);
