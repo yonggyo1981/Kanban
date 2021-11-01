@@ -221,7 +221,7 @@ public class MemberDao {
 			return;
 		/**
 		 * 1. 필수 항목 체크 (회원명) - O
-		 * 2. 휴대전화번호 -> 변경이 있는 경우 형식 체크
+		 * 2. 휴대전화번호 -> 변경이 있는 경우 형식 체크(O)
 		 * 3. 비밀번호 변경 시도 하는 경우 -> 비밀번호 복잡성, 정확성 체크 
 		 */
 		String[] required = {
@@ -239,6 +239,12 @@ public class MemberDao {
 		String cellPhone = request.getParameter("cellPhone");
 		if (cellPhone != null && !cellPhone.trim().equals("")) {
 			checkCellPhone(cellPhone);
+		}
+		
+		String memPw = request.getParameter("memPw");
+		String memPwRe = request.getParameter("memPwRe");
+		if (memPw != null && !memPw.trim().equals("")) {
+			checkPassword(memPw, memPwRe);
 		}
 	}
 	
