@@ -62,8 +62,19 @@ public class NaverLogin extends SocialLogin {
 
 	@Override
 	public String getAccessToken(String code, String state) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("https://nid.naver.com/oauth2.0/token?");
+		sb.append("grant_type=authorization_code&client_id=");
+		sb.append(clientId);
+		sb.append("&client_secret=");
+		sb.append(clientSecret);
+		sb.append("&code=");
+		sb.append(code);
+		sb.append("&state=");
+		sb.append(state);
+		
+		return sb.toString();
 	}
 
 	@Override
