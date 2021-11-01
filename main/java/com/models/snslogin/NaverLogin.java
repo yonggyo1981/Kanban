@@ -70,6 +70,20 @@ public class NaverLogin extends SocialLogin {
 	public String getAccessToken(HttpServletRequest request) throws Exception {
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
+		if (code == null || code.trim().equals("")) {
+			throw new Exception("잘못된 요청입니다.");
+		}
+		
+		HttpSession session = request.getSession();
+		String _state = null;
+		if (session.getAttribute("state") != null) {
+			_state = (String)session.getAttribute("state");
+		}
+		
+		if (_state == null || state == null || !_state.equals(state)) {
+			throw new Exception("데이터가 변조되었습니다.");
+		}
+		
 		return getAccessToken(code, state);
 	}
 	
