@@ -1,6 +1,11 @@
 package com.models.snslogin;
 
+import java.net.*;
+import java.io.*;
+
 import javax.servlet.http.*;
+
+import com.core.Logger;
 import com.models.member.*;
 
 /**
@@ -38,7 +43,15 @@ public abstract class SocialLogin {
 	 * @param apiURL
 	 */
 	public void httpRequest(String apiURL) {
-		
+		try {
+			URL url = new URL(apiURL);
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("GET");
+			
+			
+		} catch (Exception e) {
+			Logger.log(e);
+		}
 	}
 }
 
