@@ -194,22 +194,10 @@ public class MemberDao {
 		/** 아이디 체크 E */
 		
 		/** 비밀번호 체크 S */
-		// 비밀번호 자리수 체크(8자리 이상)
+		
 		String memPw = request.getParameter("memPw");
-		if (memPw.length() < 8) {
-			throw new Exception("비밀번호는 8자리 이상 입력해 주세요.");
-		}
-		// 비밀번호 복잡성(숫자 + 알파벳 + 특수문자가 각각 1개 이상 입력)		
-		if (!memPw.matches(".*[0-9].*") || !memPw.matches(".*[a-zA-Z].*") || !memPw.matches(".*[!@#$%^&*()].*")) {
-			throw new Exception("비밀번호는 1개 이상의 알파벳, 숫자, 특수문자를 각각 포함해야 합니다.");
-		}
-		
-		
-		// 비밀번호 확인
 		String memPwRe = request.getParameter("memPwRe");
-		if (!memPw.equals(memPwRe)) {
-			throw new Exception("비밀번호를 확인해 주세요.");
-		}
+		checkPassword(memPw, memPwRe);
 		/** 비밀번호 체크 E */
 		
 		/** 휴대전화 번호 체크 S */
@@ -237,7 +225,19 @@ public class MemberDao {
 	 * @throws Exception
 	 */
 	public void checkPassword(String memPw, String memPwRe) throws Exception {
+		// 비밀번호 자리수 체크(8자리 이상)
+		if (memPw.length() < 8) {
+			throw new Exception("비밀번호는 8자리 이상 입력해 주세요.");
+		}
+		// 비밀번호 복잡성(숫자 + 알파벳 + 특수문자가 각각 1개 이상 입력)		
+		if (!memPw.matches(".*[0-9].*") || !memPw.matches(".*[a-zA-Z].*") || !memPw.matches(".*[!@#$%^&*()].*")) {
+			throw new Exception("비밀번호는 1개 이상의 알파벳, 숫자, 특수문자를 각각 포함해야 합니다.");
+		}
 		
+		// 비밀번호 확인
+		if (!memPw.equals(memPwRe)) {
+			throw new Exception("비밀번호를 확인해 주세요.");
+		}
 	}
 	
 	/**
