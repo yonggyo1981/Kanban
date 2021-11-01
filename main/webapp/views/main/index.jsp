@@ -22,6 +22,8 @@
 			</div>
 			
 			<input type="submit" value="로그인">
+			
+			<img src="${rootURL}/resources/image/naverlogin_btn.png" width="340">
 		</form>
 	</div>
 </main>
