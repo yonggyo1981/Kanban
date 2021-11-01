@@ -133,8 +133,8 @@ public class MemberDao {
 			sb.append(", memPw = ?");
 			hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
 		}
-		
 		sb.append(" WHERE memNo = ?");
+		
 		String sql = sb.toString();
 		
 		ArrayList<DBField> bindings = new ArrayList<>();
