@@ -305,7 +305,13 @@ public class MemberController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void naverLoginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		NaverLogin naver = NaverLogin.getInstance();
+		try {
+			naver.getAccessToken(request);
+		} catch (Exception e) {
+			Logger.log(e);
+			out.printf("<script>alert('%s');location.replace('../member/login');</script>", e.getMessage());
+		}
 	}
 }
 
