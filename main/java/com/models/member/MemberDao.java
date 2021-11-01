@@ -230,6 +230,17 @@ public class MemberDao {
 	}
 	
 	/**
+	 * 비밀번호 체크 
+	 * 
+	 * @param memPw
+	 * @param memPwRe
+	 * @throws Exception
+	 */
+	public void checkPassword(String memPw, String memPwRe) throws Exception {
+		
+	}
+	
+	/**
 	 * 로그인 처리 
 	 * 
 	 * @param request - 세션을 사용하기 위해서(HttpSession getSession())
