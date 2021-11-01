@@ -113,6 +113,9 @@ public class MemberDao {
 			throw new Exception("회원정보 수정은 로그인이 필요합니다.");
 		}
 		
+		/** 수정 데이터 체크 */
+		checkUpdateData(request);
+		
 		Member member = (Member)request.getAttribute("member");
 		String memPwHint = request.getParameter("memPwHint");
 		String memNm = request.getParameter("memNm");
@@ -194,7 +197,6 @@ public class MemberDao {
 		/** 아이디 체크 E */
 		
 		/** 비밀번호 체크 S */
-		
 		String memPw = request.getParameter("memPw");
 		String memPwRe = request.getParameter("memPwRe");
 		checkPassword(memPw, memPwRe);
@@ -205,8 +207,35 @@ public class MemberDao {
 		if (cellPhone != null && !cellPhone.trim().equals("")) {
 			checkCellPhone(cellPhone);
 		}
-		
 		/** 휴대전화 번호 체크 E */
+	}
+	
+	/**
+	 * 회원 정보 수정 데이터 체크 
+	 * 
+	 * @param request
+	 * @throws Exception
+	 */
+	public void checkUpdateData(HttpServletRequest request) throws Exception {
+		if (request == null)
+			return;
+		/**
+		 * 1. 필수 항목 체크 (회원명)
+		 * 2. 휴대전화번호 -> 변경이 있는 경우 형식 체크
+		 * 3. 비밀번호 변경 시도 하는 경우 -> 비밀번호 복잡성, 정확성 체크 
+		 */
+		String[] required = {
+			"memNm//회원명을 입력하세요."
+		};
+		
+		for (String s : required) {
+			String[] params = s.split("//");
+			String param = request.getParameter(params[0]);
+			if ( param == null || param.trim().equals("")) {
+				throw new Exception(params[1]);
+			}
+		}
+		
 	}
 	
 	/**
