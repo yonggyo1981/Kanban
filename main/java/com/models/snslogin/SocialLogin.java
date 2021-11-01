@@ -1,5 +1,6 @@
 package com.models.snslogin;
 
+import javax.servlet.http.*;
 import com.models.member.*;
 
 /**
@@ -11,7 +12,7 @@ public abstract class SocialLogin {
 	 * Access Token을 발급 받기위한 인증 code 발급 URL 생성 
 	 * @return
 	 */
-	public abstract String getCodeURL();
+	public abstract String getCodeURL(HttpServletRequest request);
 	
 	/**
 	 * Access Token 발급 

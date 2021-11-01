@@ -2,6 +2,7 @@ package com.models.snslogin;
 
 import java.util.*;
 import java.net.URLEncoder;
+import javax.servlet.http.*;
 
 import com.core.Config;
 import com.core.Logger;
@@ -41,9 +42,12 @@ public class NaverLogin extends SocialLogin {
 	}
 	
 	@Override
-	public String getCodeURL() {
+	public String getCodeURL(HttpServletRequest request) {
 		
+		HttpSession session = request.getSession();
 		String state = String.valueOf(System.currentTimeMillis());
+		session.setAttribute("state", state);
+				
 		StringBuilder sb = new StringBuilder();
 		sb.append("https://nid.naver.com/oauth2.0/authorize?");
 		sb.append("response_type=code&client_id=");
