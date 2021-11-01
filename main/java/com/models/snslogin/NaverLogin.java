@@ -74,7 +74,11 @@ public class NaverLogin extends SocialLogin {
 		sb.append("&state=");
 		sb.append(state);
 		
-		return sb.toString();
+		String apiURL = sb.toString();
+		httpRequest(apiURL);
+		
+		
+		return null;
 	}
 
 	@Override

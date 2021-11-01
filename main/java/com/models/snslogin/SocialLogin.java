@@ -31,6 +31,15 @@ public abstract class SocialLogin {
 	 * @return
 	 */
 	public abstract Member getProfile(String accessToken);
+	
+	/**
+	 * 원격 HTTP 요청...
+	 * 
+	 * @param apiURL
+	 */
+	public void httpRequest(String apiURL) {
+		
+	}
 }
 
 
