@@ -6,6 +6,7 @@ import java.io.*;
 
 import com.core.Logger;
 import com.models.member.*;
+import com.models.snslogin.*;
 
 /**
  *  /member/* 컨트롤러
@@ -143,6 +144,9 @@ public class MemberController extends HttpServlet {
 	 */
 	private void loginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) {
+			String naverCodeURL = NaverLogin.getInstance().getCodeURL();
+			request.setAttribute("naverCodeURL", naverCodeURL);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/main/index.jsp");
 			rd.include(request, response);
 		} else {
