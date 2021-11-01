@@ -203,15 +203,7 @@ public class MemberDao {
 		/** 휴대전화 번호 체크 S */
 		String cellPhone = request.getParameter("cellPhone");
 		if (cellPhone != null && !cellPhone.trim().equals("")) {
-			/** 
-			 * 1. 통일성 있도록 숫자로만 추출(숫자가 아닌 문자만 제거 -> 숫자) 
-			 * 2. 패턴 체크
-			 */
-			cellPhone = cellPhone.replaceAll("[^0-9]", "");
-			String pattern = "01[016789][0-9]{3,4}[0-9]{4}";
-			if (!cellPhone.matches(pattern)) {
-				throw new Exception("휴대전화번호 형식이 아닙니다.");
-			}
+			checkCellPhone(cellPhone);
 		}
 		
 		/** 휴대전화 번호 체크 E */
@@ -237,6 +229,24 @@ public class MemberDao {
 		// 비밀번호 확인
 		if (!memPw.equals(memPwRe)) {
 			throw new Exception("비밀번호를 확인해 주세요.");
+		}
+	}
+	
+	/**
+	 * 휴대전화번호 체크 
+	 * 
+	 * @param cellPhone
+	 * @throws Exception
+	 */
+	public void checkCellPhone(String cellPhone) throws Exception {
+		/** 
+		 * 1. 통일성 있도록 숫자로만 추출(숫자가 아닌 문자만 제거 -> 숫자) 
+		 * 2. 패턴 체크
+		 */
+		cellPhone = cellPhone.replaceAll("[^0-9]", "");
+		String pattern = "01[016789][0-9]{3,4}[0-9]{4}";
+		if (!cellPhone.matches(pattern)) {
+			throw new Exception("휴대전화번호 형식이 아닙니다.");
 		}
 	}
 	
