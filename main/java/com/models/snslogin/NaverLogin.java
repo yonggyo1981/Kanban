@@ -24,7 +24,6 @@ public class NaverLogin extends SocialLogin {
 		}
 		
 		/** 네이버 로그인 설정 처리 */
-		
 		if (instance.clientId == null || instance.clientSecret == null || instance.callbackURL == null) {
 			HashMap<String, String> conf = (HashMap<String, String>)Config.getInstance().get("NaverLogin");
 			instance.clientId = conf.get("clientId");
