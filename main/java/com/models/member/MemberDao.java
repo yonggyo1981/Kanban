@@ -123,11 +123,28 @@ public class MemberDao {
 		if (cellPhone != null) {
 			cellPhone = cellPhone.replaceAll("[^0-9]", "");
 		}
-		String sql = "UPDATE member SET memPwHint = ?, memNm = ?, cellPhone = ? WHERE memNo = ?";
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE member SET memPwHint = ?, memNm = ?, cellPhone = ?");
+		/** 비밀번호 변경 추가 처리 */
+		String memPw = request.getParameter("memPw");
+		String hash = null;
+		if (memPw != null && !memPw.trim().equals("")) {
+			sb.append(", memPw = ?");
+			hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
+		}
+		
+		sb.append(" WHERE memNo = ?");
+		String sql = sb.toString();
+		
 		ArrayList<DBField> bindings = new ArrayList<>();
 		bindings.add(setBinding("String", memPwHint));
 		bindings.add(setBinding("String", memNm));
 		bindings.add(setBinding("String", cellPhone));
+		if (hash != null) {
+			bindings.add(setBinding("String", hash));
+		}
+		
 		bindings.add(setBinding("Integer", String.valueOf(member.getMemNo())));
 		
 		int rs = DB.executeUpdate(sql, bindings);
