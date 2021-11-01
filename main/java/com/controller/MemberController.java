@@ -125,6 +125,7 @@ public class MemberController extends HttpServlet {
 			MemberDao dao = MemberDao.getInstance();
 			try {
 				dao.updateInfo(request);
+				out.println("<script>alert('수정되었습니다.');parent.location.reload();</script>");
 			} catch (Exception e) {
 				Logger.log(e);
 				out.printf("<script>alert('%s');</script>", e.getMessage());
