@@ -53,6 +53,9 @@ public class MemberController extends HttpServlet {
 			case "logout" : // 로그아웃 
 				logoutController(request, response);
 				break;
+			case "naver_login" : // 네이버 로그인 Callback URL
+				naverLoginController(request, response);
+				break;
 			default : // 없는 페이지 
 				RequestDispatcher rd = request.getRequestDispatcher("/views/error/404.jsp");
 				rd.forward(request, response);
@@ -144,7 +147,7 @@ public class MemberController extends HttpServlet {
 	 */
 	private void loginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) {
-			String naverCodeURL = NaverLogin.getInstance().getCodeURL();
+			String naverCodeURL = NaverLogin.getInstance().getCodeURL(request);
 			request.setAttribute("naverCodeURL", naverCodeURL);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/main/index.jsp");
@@ -291,6 +294,18 @@ public class MemberController extends HttpServlet {
 		dao.logout(request);
 		PrintWriter out = response.getWriter();
 		out.printf("<script>location.replace('%s');</script>", "../index.jsp");
+	}
+	
+	/**
+	 * 네이버 로그인 Callback URL 
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void naverLoginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 }
 

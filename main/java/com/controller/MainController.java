@@ -14,7 +14,7 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
 		
-		String naverCodeURL = NaverLogin.getInstance().getCodeURL();
+		String naverCodeURL = NaverLogin.getInstance().getCodeURL(request);
 		request.setAttribute("naverCodeURL", naverCodeURL);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/views/main/index.jsp");

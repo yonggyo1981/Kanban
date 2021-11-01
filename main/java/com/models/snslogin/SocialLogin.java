@@ -21,8 +21,8 @@ public abstract class SocialLogin {
 	 * @param state
 	 * @return
 	 */
-	public abstract String getAccessToken(String code, String state);
-	
+	public abstract String getAccessToken(String code, String state) throws Exception;
+	public abstract String getAccessToken(HttpServletRequest request) throws Exception;
 	
 	/**
 	 * 회원 프로필 조회 API를 통해서 각 소셜 채널별 회원 정보 추출 

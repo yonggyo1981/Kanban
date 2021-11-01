@@ -61,11 +61,18 @@ public class NaverLogin extends SocialLogin {
 	}
 
 	@Override
-	public String getAccessToken(String code, String state) {
+	public String getAccessToken(String code, String state) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public String getAccessToken(HttpServletRequest request) throws Exception {
+		String code = request.getParameter("code");
+		String state = request.getParameter("state");
+		return getAccessToken(code, state);
+	}
+	
 	@Override
 	public Member getProfile(String accessToken) {
 		// TODO Auto-generated method stub
