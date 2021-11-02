@@ -187,9 +187,21 @@ public class NaverLogin extends SocialLogin {
 		return false;
 	}
 	
+	/**
+	 * 네이버 회원 프로필 정보
+	 *  
+	 * @param request
+	 * @return
+	 */
 	public Member getMember(HttpServletRequest request) {
+		Member member = null;
 		
-		return null;
+		HttpSession session = request.getSession();
+		if (session.getAttribute("naver_member") != null) {
+			member = (Member)session.getAttribute("naver_member");
+		}
+		
+		return member;
 	}
 
 }
