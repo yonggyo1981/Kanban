@@ -144,8 +144,7 @@ public class NaverLogin extends SocialLogin {
 					"naver",
 					(String)res.get("id"),
 					null
-			);
-					
+			);				
 		}
 		
 		return member;

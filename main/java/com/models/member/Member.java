@@ -127,6 +127,8 @@ public class Member extends Dto<Member> {
 									rs.getString("memPwHint"),
 									rs.getString("memNm"),
 									rs.getString("cellPhone"),
+									rs.getString("socialType"),
+									rs.getString("socialId"),
 									rs.getString("regDt")
 								);
 	}
