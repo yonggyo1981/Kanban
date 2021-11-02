@@ -314,10 +314,11 @@ public class MemberController extends HttpServlet {
 			 *  네이버 소셜 채널로 이미 가입이 완료된 경우 -> 로그인 처리 
 			 *  가입이 안되어 있는 경우 -> 회원 가입 처리 
 			 */
-			if (naver.isJoin(request)) {
-				// 로그인 처리 
-			} else {
+			if (naver.isJoin(request)) { // 가입되어 있는 경우 
+				naver.login(request); // 로그인 
+			} else { // 미가입
 				// 회원 가입 페이지 이동
+				out.printf("<script>location.replace('%s');</script>", "../member/join");
 			}
 			
 		} catch (Exception e) {
