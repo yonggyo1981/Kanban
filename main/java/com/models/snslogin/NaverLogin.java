@@ -112,7 +112,7 @@ public class NaverLogin extends SocialLogin {
 	}
 	
 	@Override
-	public Member getProfile(String accessToken) {
+	public Member getProfile(HttpServletRequest request, String accessToken) {
 		/**
 		 * 접근 토큰(access token)을 전달하는 헤더
 		* 다음과 같은 형식으로 헤더 값에 접근 토큰(access token)을 포함합니다. 
@@ -144,7 +144,16 @@ public class NaverLogin extends SocialLogin {
 					"naver",
 					(String)res.get("id"),
 					null
-			);				
+			);	
+			
+			/**
+			 * 네이버 회원프로필 조회 API로 얻어온 회원 정보는 
+			 * 페이지가 이동하더라도 데이터 유지 할 필요
+			 * (회원가입, 회원 가입처리 ....)
+			 * 세션을 통해서 데이터 유지
+			 */
+			HttpSession session = request.getSession();
+			session.setAttribute("naver_member", member);
 		}
 		
 		return member;

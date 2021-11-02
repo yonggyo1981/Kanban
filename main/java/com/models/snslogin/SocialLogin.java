@@ -39,7 +39,7 @@ public abstract class SocialLogin {
 	 * @param accessToken
 	 * @return
 	 */
-	public abstract Member getProfile(String accessToken);
+	public abstract Member getProfile(HttpServletRequest request, String accessToken);
 	
 	/**
 	 * 원격 HTTP 요청...
