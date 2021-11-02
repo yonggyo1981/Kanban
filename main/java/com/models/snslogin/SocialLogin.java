@@ -48,6 +48,8 @@ public abstract class SocialLogin {
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("GET");
 			
+			InputStream in;
+			int code = conn.getResponseCode();
 			
 		} catch (Exception e) {
 			Logger.log(e);
