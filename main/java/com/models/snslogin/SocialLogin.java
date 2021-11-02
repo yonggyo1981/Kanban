@@ -2,6 +2,7 @@ package com.models.snslogin;
 
 import java.net.*;
 import java.io.*;
+import java.util.*;
 
 import javax.servlet.http.*;
 
@@ -45,7 +46,7 @@ public abstract class SocialLogin {
 	 * 
 	 * @param apiURL
 	 */
-	public JSONObject httpRequest(String apiURL) {
+	public JSONObject httpRequest(String apiURL, HashMap<String, String> headers) {
 		
 		JSONObject json = null;
 		try {
@@ -83,6 +84,10 @@ public abstract class SocialLogin {
 		}
 		
 		return json;
+	}
+	
+	public JSONObject httpRequest(String apiURL) {
+		return httpRequest(apiURL, null);
 	}
 }
 

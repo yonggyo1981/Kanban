@@ -307,7 +307,8 @@ public class MemberController extends HttpServlet {
 	private void naverLoginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NaverLogin naver = NaverLogin.getInstance();
 		try {
-			naver.getAccessToken(request);
+			String accessToken = naver.getAccessToken(request);
+			System.out.println(accessToken);
 		} catch (Exception e) {
 			Logger.log(e);
 			out.printf("<script>alert('%s');location.replace('../member/login');</script>", e.getMessage());
