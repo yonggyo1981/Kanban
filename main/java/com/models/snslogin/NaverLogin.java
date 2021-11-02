@@ -4,8 +4,7 @@ import java.util.*;
 import java.net.URLEncoder;
 import javax.servlet.http.*;
 
-import com.core.Config;
-import com.core.Logger;
+import com.core.*;
 import com.models.member.Member;
 
 import org.json.simple.*;
@@ -157,6 +156,29 @@ public class NaverLogin extends SocialLogin {
 		}
 		
 		return member;
+	}
+
+	@Override
+	public boolean isJoin(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("naver_member") == null) {
+			return false;
+		}
+		
+		Member naverMember = (Member)session.getAttribute("naver_member");
+		if (naverMember == null)
+			return false;
+		
+		
+		String sql = "SELECT * FROM member WHERE socialType='naver' AND socialId = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(DB.setBinding("String", naverMember.getSocialId()));
+		
+		Member member = DB.executeQueryOne(sql, bindings, new Member());
+		if (member != null) 
+			return true;
+		
+		return false;
 	}
 
 }
