@@ -8,13 +8,22 @@ if (request.getAttribute("member") != null) {
 }
 
 String action = (String)request.getAttribute("action");
+String socialType = (String)request.getAttribute("socialType");
+Member socialMember = null;
+if (request.getAttribute("socialMember") != null) {
+	socialMember = (Member)request.getAttribute("socialMember");
+}
 %>
 <c:set var="member" value="<%=member%>" />
 <c:set var="action" value="<%=action%>" />
+<c:set var="socialType" value="<%=socialType%>" />
+<c:set var="socialMember" value="<%=socialMember%>" />
 <main>
 	<div class='join_box login_box'>
 		<div class='tit'>
-		
+			<c:if test="${socialType != 'none'}">
+				
+			</c:if>
 			<c:choose>
 				<c:when test="${member == null}">
 				회원가입
