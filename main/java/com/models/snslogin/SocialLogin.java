@@ -8,6 +8,9 @@ import javax.servlet.http.*;
 import com.core.Logger;
 import com.models.member.*;
 
+import org.json.simple.*;
+import org.json.simple.parser.*;
+
 /**
  * 소셜 로그인 추상 클래스 
  *
@@ -42,7 +45,9 @@ public abstract class SocialLogin {
 	 * 
 	 * @param apiURL
 	 */
-	public void httpRequest(String apiURL) {
+	public JSONObject httpRequest(String apiURL) {
+		
+		JSONObject json = null;
 		try {
 			URL url = new URL(apiURL);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -68,11 +73,16 @@ public abstract class SocialLogin {
 				Logger.log(e);
 			}
 			
-			String json = sb.toString();
-			System.out.println(json);
+			String data = sb.toString();
+			if (data != null && !data.trim().equals("")) {
+				JSONParser parser = new JSONParser();
+				json = (JSONObject)parser.parse(data);
+			}
 		} catch (Exception e) {
 			Logger.log(e);
 		}
+		
+		return json;
 	}
 }
 
