@@ -183,7 +183,12 @@ public class NaverLogin extends SocialLogin {
 
 	@Override
 	public boolean login(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+		Member member = getMember(request);
+		if (member != null) {
+			request.getSession().setAttribute("memNo", member.getMemNo());
+			
+			return true;
+		}
 		return false;
 	}
 	
