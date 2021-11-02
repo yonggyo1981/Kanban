@@ -10,3 +10,9 @@ CREATE TABLE member (
     UNIQUE(memId),
     PRIMARY KEY(memNo)
 );
+
+ALTER TABLE member
+	ADD socialType ENUM('none', 'kakao', 'naver') DEFAULT 'none' AFTER cellPhone;
+	
+ALTER TABLE member
+	ADD socialId VARCHAR(65) AFTER socialType;

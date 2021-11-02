@@ -14,18 +14,21 @@ public class Member extends Dto<Member> {
 	private String memPwHint; // 비밀번호 찾기 힌트
 	private String memNm; // 회원명
 	private String cellPhone; // 휴대전화번호
+	private String socialType; // 소셜 로그인 가입 채널
+	private String socialId; // 소셜 로그인 채널별 회원 구분 ID
 	private String regDt; // 가입일시
 	
 	public Member() {}
 	
-	public Member(int memNo, String memId, String memPw, String memPwHint, String memNm, String cellPhone,
-			String regDt) {
+	public Member(int memNo, String memId, String memPw, String memPwHint, String memNm, String cellPhone, String socialType, String socialId, String regDt) {
 		this.memNo = memNo;
 		this.memId = memId;
 		this.memPw = memPw;
 		this.memPwHint = memPwHint;
 		this.memNm = memNm;
 		this.cellPhone = cellPhone;
+		this.socialType = (socialType == null)?"none":socialType;
+		this.socialId = socialId;
 		this.regDt = regDt;
 	}
 
@@ -89,6 +92,22 @@ public class Member extends Dto<Member> {
 		this.cellPhone = cellPhone;
 	}
 	
+	public String getSocialType() {
+		return socialType;
+	}
+
+	public void setSocialType(String socialType) {
+		this.socialType = socialType;
+	}
+
+	public String getSocialId() {
+		return socialId;
+	}
+
+	public void setSocialId(String socialId) {
+		this.socialId = socialId;
+	}
+
 	public String getRegDt() {
 		return regDt;
 	}

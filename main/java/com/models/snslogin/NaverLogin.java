@@ -119,12 +119,35 @@ public class NaverLogin extends SocialLogin {
 		* 토큰 타입은 "Bearer"로 값이 고정돼 있습니다. 
 		* Authorization: {토큰 타입] {접근 토큰]
 		*/
+		Member member = null;
+		
 		String apiURL = "https://openapi.naver.com/v1/nid/me";
 		HashMap<String, String> headers = new HashMap<>();
 		headers.put("Authorization", "Bearer " + accessToken);
 		JSONObject json = httpRequest(apiURL, headers);
-		System.out.println(json);
-		return null;
+		String resultcode = (String)json.get("resultcode");
+		if (resultcode.equals("00")) { // 요청 성공 
+			JSONObject res = (JSONObject)json.get("response");
+			String memId = null;
+			String email = (String)res.get("email");
+			if (email != null) {
+				memId = email.substring(0, email.lastIndexOf("@"));
+			}
+			
+			// public Member(int memNo, String memId, String memPw, String memPwHint, String memNm, String cellPhone, String regDt) {
+			member = new Member(
+					0, 
+					memId,
+					null,
+					null,
+					(String)res.get("name"),
+					null,
+					null
+			);
+					
+		}
+		
+		return member;
 	}
 
 }
