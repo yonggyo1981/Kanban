@@ -50,6 +50,14 @@ public abstract class SocialLogin {
 	public abstract boolean isJoin(HttpServletRequest request);
 	
 	/**
+	 * 소셜가입 회원 로그인 처리 
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public abstract boolean login(HttpServletRequest request);
+	
+	/**
 	 * 원격 HTTP 요청...
 	 * 
 	 * @param apiURL
