@@ -315,7 +315,12 @@ public class MemberController extends HttpServlet {
 			 *  가입이 안되어 있는 경우 -> 회원 가입 처리 
 			 */
 			if (naver.isJoin(request)) { // 가입되어 있는 경우 
-				naver.login(request); // 로그인 
+				boolean result = naver.login(request); // 로그인
+				if (!result) { // 로그인 실패 
+					throw new Exception("네이버 아이디 로그인 실패!");
+				}
+				// 로그인 성공시 작업 요약 
+				out.printf("<script>location.replace('%s');</script>", "../kanban/work");
 			} else { // 미가입
 				// 회원 가입 페이지 이동
 				out.printf("<script>location.replace('%s');</script>", "../member/join");
