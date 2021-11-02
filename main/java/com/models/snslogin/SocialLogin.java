@@ -42,6 +42,14 @@ public abstract class SocialLogin {
 	public abstract Member getProfile(HttpServletRequest request, String accessToken);
 	
 	/**
+	 * 소셜 회원 가입이 되어 있는지 여부 체크 
+	 * (가입 -> 로그인, 미가입 -> 회원가입) 
+	 * @param request
+	 * @return
+	 */
+	public abstract boolean isJoin(HttpServletRequest request);
+	
+	/**
 	 * 원격 HTTP 요청...
 	 * 
 	 * @param apiURL

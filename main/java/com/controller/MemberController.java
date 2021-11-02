@@ -308,7 +308,18 @@ public class MemberController extends HttpServlet {
 		NaverLogin naver = NaverLogin.getInstance();
 		try {
 			String accessToken = naver.getAccessToken(request);
-			Member member = naver.getProfile(request, accessToken);
+			naver.getProfile(request, accessToken);
+			
+			/**
+			 *  네이버 소셜 채널로 이미 가입이 완료된 경우 -> 로그인 처리 
+			 *  가입이 안되어 있는 경우 -> 회원 가입 처리 
+			 */
+			if (naver.isJoin(request)) {
+				// 로그인 처리 
+			} else {
+				// 회원 가입 페이지 이동
+			}
+			
 		} catch (Exception e) {
 			Logger.log(e);
 			out.printf("<script>alert('%s');location.replace('../member/login');</script>", e.getMessage());
