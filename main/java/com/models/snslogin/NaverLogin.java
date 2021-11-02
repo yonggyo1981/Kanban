@@ -196,6 +196,15 @@ public class NaverLogin extends SocialLogin {
 	public Member getMember(HttpServletRequest request) {
 		Member member = null;
 		HttpSession session = request.getSession();
+		if (session.getAttribute("naver_member") != null) {
+			Member naverMember = (Member)session.getAttribute("naver_member");
+			String socialId = naverMember.getSocialId();
+			
+	String sql = "SELECT * FROM member WHERE socialType='naver' AND socialId = ?";
+			
+			member = DB.executeQueryOne(sql, bindings, new Member());
+		}
+		 
 		
 		return member;
 	}
