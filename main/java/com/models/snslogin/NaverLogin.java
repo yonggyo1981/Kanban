@@ -200,12 +200,12 @@ public class NaverLogin extends SocialLogin {
 			Member naverMember = (Member)session.getAttribute("naver_member");
 			String socialId = naverMember.getSocialId();
 			
-	String sql = "SELECT * FROM member WHERE socialType='naver' AND socialId = ?";
-			
+			String sql = "SELECT * FROM member WHERE socialType='naver' AND socialId = ?";
+			ArrayList<DBField> bindings = new ArrayList<>();
+			bindings.add(DB.setBinding("String", socialId));
 			member = DB.executeQueryOne(sql, bindings, new Member());
 		}
 		 
-		
 		return member;
 	}
 
