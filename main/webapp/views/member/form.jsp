@@ -14,6 +14,7 @@ String action = (String)request.getAttribute("action");
 <main>
 	<div class='join_box login_box'>
 		<div class='tit'>
+		
 			<c:choose>
 				<c:when test="${member == null}">
 				회원가입

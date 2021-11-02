@@ -75,7 +75,24 @@ public class MemberController extends HttpServlet {
 	 */
 	private void joinController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) { // 양식 출력 
+			HttpSession session = request.getSession();
+			
 			request.setAttribute("action", "../member/join"); // 양식 처리 경로
+			String socialType = "none";
+			Member socialMember = null;
+			
+			String[] socialTypes = {"naver", "kakao"};
+			for (String type : socialTypes) {
+				if (session.getAttribute(type + "_member") != null) {
+					socialType = type;
+					socialMember = (Member)session.getAttribute(type + "_member");
+					break;
+				}
+			}
+			
+			request.setAttribute("socialType", socialType);
+			request.setAttribute("socialMember", socialMember);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
 			rd.include(request, response);
 		} else { // 양식 처리
