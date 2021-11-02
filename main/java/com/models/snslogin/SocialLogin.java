@@ -54,6 +54,16 @@ public abstract class SocialLogin {
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("GET");
 			
+			/** 요청 헤더 처리 */
+			if (headers != null) {
+				Iterator<String> ir = headers.keySet().iterator();
+				while(ir.hasNext()) {
+					String key = ir.next();
+					String value = headers.get(key);
+					conn.setRequestProperty(key, value);
+				}
+			}
+			
 			InputStream in;
 			int code = conn.getResponseCode(); // 200, HttpURLConnection.HTTP_OK
 			if (code == HttpURLConnection.HTTP_OK) {

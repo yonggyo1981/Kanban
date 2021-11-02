@@ -113,7 +113,17 @@ public class NaverLogin extends SocialLogin {
 	
 	@Override
 	public Member getProfile(String accessToken) {
-		// TODO Auto-generated method stub
+		/**
+		 * 접근 토큰(access token)을 전달하는 헤더
+		* 다음과 같은 형식으로 헤더 값에 접근 토큰(access token)을 포함합니다. 
+		* 토큰 타입은 "Bearer"로 값이 고정돼 있습니다. 
+		* Authorization: {토큰 타입] {접근 토큰]
+		*/
+		String apiURL = "https://openapi.naver.com/v1/nid/me";
+		HashMap<String, String> headers = new HashMap<>();
+		headers.put("Authorization", "Bearer " + accessToken);
+		JSONObject json = httpRequest(apiURL, headers);
+		System.out.println(json);
 		return null;
 	}
 
