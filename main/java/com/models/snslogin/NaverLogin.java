@@ -75,8 +75,7 @@ public class NaverLogin extends SocialLogin {
 		sb.append(state);
 		
 		String apiURL = sb.toString();
-		System.out.println(apiURL);		
-		//httpRequest(apiURL);
+		httpRequest(apiURL);
 		
 		
 		return null;

@@ -56,15 +56,20 @@ public abstract class SocialLogin {
 				in = conn.getErrorStream();
 			}
 			
+			StringBuilder sb = new StringBuilder();
 			try (in;
 				InputStreamReader isr = new InputStreamReader(in);
 				BufferedReader br = new BufferedReader(isr)) {
-				
+				String line = null;
+				while((line = br.readLine()) != null) {
+					sb.append(line);
+				}
 			} catch (IOException e) {
 				Logger.log(e);
 			}
 			
-			
+			String json = sb.toString();
+			System.out.println(json);
 		} catch (Exception e) {
 			Logger.log(e);
 		}
