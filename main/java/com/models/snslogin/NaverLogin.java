@@ -181,4 +181,15 @@ public class NaverLogin extends SocialLogin {
 		return false;
 	}
 
+	@Override
+	public boolean login(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public Member getMember(HttpServletRequest request) {
+		
+		return null;
+	}
+
 }
