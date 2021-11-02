@@ -8,6 +8,8 @@ import com.core.Config;
 import com.core.Logger;
 import com.models.member.Member;
 
+import org.json.simple.*;
+
 /**
  * 네이버 아이디 로그인 
  *
@@ -75,10 +77,17 @@ public class NaverLogin extends SocialLogin {
 		sb.append(state);
 		
 		String apiURL = sb.toString();
-		httpRequest(apiURL);
+		JSONObject json = httpRequest(apiURL);
+		String accessToken = null;
+		if (json != null) {
+			if (json.containsKey("access_token")) { // 액세스 토큰 정상 발급 
+				accessToken = (String)json.get("access_token");
+			} else { // 오류 발생시
+				throw new Exception((String)json.get("error_description"));
+			}
+		}
 		
-		
-		return null;
+		return accessToken;
 	}
 
 	@Override
