@@ -134,7 +134,6 @@ public class NaverLogin extends SocialLogin {
 				memId = email.substring(0, email.lastIndexOf("@"));
 			}
 			
-			// public Member(int memNo, String memId, String memPw, String memPwHint, String memNm, String cellPhone, String regDt) {
 			member = new Member(
 					0, 
 					memId,
@@ -142,6 +141,8 @@ public class NaverLogin extends SocialLogin {
 					null,
 					(String)res.get("name"),
 					null,
+					"naver",
+					(String)res.get("id"),
 					null
 			);
 					
