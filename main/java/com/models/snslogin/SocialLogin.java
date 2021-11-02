@@ -56,6 +56,14 @@ public abstract class SocialLogin {
 				in = conn.getErrorStream();
 			}
 			
+			try (in;
+				InputStreamReader isr = new InputStreamReader(in);
+				BufferedReader br = new BufferedReader(isr)) {
+				
+			} catch (IOException e) {
+				Logger.log(e);
+			}
+			
 			
 		} catch (Exception e) {
 			Logger.log(e);
