@@ -49,7 +49,13 @@ public abstract class SocialLogin {
 			conn.setRequestMethod("GET");
 			
 			InputStream in;
-			int code = conn.getResponseCode();
+			int code = conn.getResponseCode(); // 200, HttpURLConnection.HTTP_OK
+			if (code == HttpURLConnection.HTTP_OK) {
+				in = conn.getInputStream();
+			} else {
+				in = conn.getErrorStream();
+			}
+			
 			
 		} catch (Exception e) {
 			Logger.log(e);
