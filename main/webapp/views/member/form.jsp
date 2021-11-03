@@ -22,7 +22,15 @@ if (request.getAttribute("socialMember") != null) {
 	<div class='join_box login_box'>
 		<div class='tit'>
 			<c:if test="${socialType != 'none'}">
-				
+				<c:choose>
+					<c:when test="${socialType == 'naver'}">
+						네이버
+					</c:when>
+					<c:when test="${socialType == 'kakao' }">
+						카카오
+					</c:when>
+				</c:choose>
+				아이디로 
 			</c:if>
 			<c:choose>
 				<c:when test="${member == null}">
