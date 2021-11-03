@@ -11,6 +11,7 @@
 	"css": {
 	},
 	"js" : {
+		"/kanban" : "kanban"
 	},
 	"AddonHeader" : {
 		"*" : "common"
