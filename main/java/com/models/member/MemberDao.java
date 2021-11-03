@@ -92,9 +92,17 @@ public class MemberDao {
 		checkJoinData(request);
 		
 		ArrayList<DBField> bindings = new ArrayList<>();
-		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone, socialType, socialId) VALUES (?,?,?,?,?,?,?)";
 		String memPw = request.getParameter("memPw");
-		String hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
+		String hash = "";
+		String socialType = "none";
+		String socialId = "";
+		if (socialMember == null) { // 일반회원 -> 비밀번호 해시
+			hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
+		} else { // 소셜 회원 - socialType, socialId
+			socialType = socialMember.getSocialType();
+			socialId = socialMember.getSocialId();
+		}
 		
 		/** 휴대전화번호 형식 -> 숫자로만 구성 */
 		String cellPhone = request.getParameter("cellPhone");
@@ -105,6 +113,8 @@ public class MemberDao {
 		bindings.add(setBinding("String", request.getParameter("memPwHint")));
 		bindings.add(setBinding("String", request.getParameter("memNm")));
 		bindings.add(setBinding("String", cellPhone));
+		bindings.add(setBinding("String", socialType));
+		bindings.add(setBinding("String", socialId));
 		
 		int rs  = DB.executeUpdate(sql, bindings);
 		return (rs > 0)?true:false;
