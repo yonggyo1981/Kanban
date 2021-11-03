@@ -79,6 +79,29 @@ public abstract class SocialLogin {
 	}
 	
 	/**
+	 * 세션에 있는 프로필 정보로 각 소셜 채널에 맞는 인스턴스 반환 
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static SocialLogin getSocialInstance(HttpServletRequest request) {
+		Member member = getSocialMember(request);
+		String type = "none";
+		SocialLogin instance = null;
+		if (member != null) {
+			type = member.getSocialType();
+			switch(type) {
+				case "naver" :
+					instance = NaverLogin.getInstance();
+					break;
+				case "kakao" :
+					break;
+			}
+		}
+		return instance;
+	}
+	
+	/**
 	 * 원격 HTTP 요청...
 	 * 
 	 * @param apiURL
