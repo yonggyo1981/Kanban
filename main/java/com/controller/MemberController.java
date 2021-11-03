@@ -79,15 +79,9 @@ public class MemberController extends HttpServlet {
 			
 			request.setAttribute("action", "../member/join"); // 양식 처리 경로
 			String socialType = "none";
-			Member socialMember = null;
-			
-			String[] socialTypes = {"naver", "kakao"};
-			for (String type : socialTypes) {
-				if (session.getAttribute(type + "_member") != null) {
-					socialType = type;
-					socialMember = (Member)session.getAttribute(type + "_member");
-					break;
-				}
+			Member socialMember = SocialLogin.getSocialMember(request);
+			if (socialMember != null) {
+				socialType = socialMember.getSocialType();
 			}
 			
 			request.setAttribute("socialType", socialType);
