@@ -119,10 +119,11 @@ public class MemberDao {
 		bindings.add(setBinding("String", socialId));
 		
 		int rs  = DB.executeUpdate(sql, bindings);
-		if (rs > 0 && socialMember != null) { // 소셜 로그인 성공 -> 로그인 처리 	
+		if (rs > 0 && socialMember != null) { // 소셜 로그인 성공 -> 로그인 처리 
 			SocialLogin sociallogin = SocialLogin.getSocialInstance(request);
 			sociallogin.login(request);
 		}
+		
 		return (rs > 0)?true:false;
 	}
 	
