@@ -57,6 +57,27 @@ public abstract class SocialLogin {
 	 */
 	public abstract boolean login(HttpServletRequest request);
 	
+	
+	/**
+	 * 현재 세션에 담겨 있는 소셜 프로필 정보 Member 인스턴스로 반환
+	 *    socialType - naver - 네이버 프로필, kakao - 카카오 프로필
+	 * @param request
+	 * @return
+	 */
+	public static Member getSocialMember(HttpServletRequest request) {
+		Member socialMember = null;
+		HttpSession session = request.getSession();
+		
+		String[] socialTypes = {"naver", "kakao"};
+		for (String type : socialTypes) {
+			if (session.getAttribute(type + "_member") != null) {
+				socialMember = (Member)session.getAttribute(type + "_member");
+				break;
+			}
+		}
+		return socialMember;
+	}
+	
 	/**
 	 * 원격 HTTP 요청...
 	 * 
