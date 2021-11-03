@@ -47,7 +47,7 @@ if (request.getAttribute("socialMember") != null) {
 				<dd>
 					<c:choose>
 						<c:when test="${member == null}">
-							<input type="text" name="memId">
+							<input type="text" name="memId" value="${socialMember.memId}">
 						</c:when>
 						<c:otherwise>
 							<c:out value="${member.memId}" />
@@ -55,6 +55,7 @@ if (request.getAttribute("socialMember") != null) {
 					</c:choose>
 				</dd>
 			</dl>
+			<c:if test="${socialType == 'none'}">
 			<dl>
 				<dt>비밀번호</dt>
 				<dd>
@@ -73,6 +74,7 @@ if (request.getAttribute("socialMember") != null) {
 					<input type="text" name="memPwHint" value="${member.memPwHint}">
 				</dd>
 			</dl>
+			</c:if>
 			<dl>
 				<dt>회원명</dt>
 				<dd>
