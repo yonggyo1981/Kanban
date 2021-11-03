@@ -138,6 +138,9 @@ public class MemberController extends HttpServlet {
 		}
 		
 		if (httpMethod.equals("GET")) { // 수정 양식
+			String socialType = member.getSocialType();
+			
+			request.setAttribute("socialType", socialType);
 			request.setAttribute("action", "../member/info");
 			RequestDispatcher rd = request.getRequestDispatcher("/views/member/form.jsp");
 			rd.include(request, response);
