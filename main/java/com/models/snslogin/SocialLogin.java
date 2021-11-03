@@ -17,6 +17,9 @@ import org.json.simple.parser.*;
  *
  */
 public abstract class SocialLogin {
+	
+	private static String[] socialTypes = {"naver", "kakao"};
+	
 	/** 
 	 * Access Token을 발급 받기위한 인증 code 발급 URL 생성 
 	 * @return
@@ -68,7 +71,6 @@ public abstract class SocialLogin {
 		Member socialMember = null;
 		HttpSession session = request.getSession();
 		
-		String[] socialTypes = {"naver", "kakao"};
 		for (String type : socialTypes) {
 			if (session.getAttribute(type + "_member") != null) {
 				socialMember = (Member)session.getAttribute(type + "_member");
@@ -99,6 +101,18 @@ public abstract class SocialLogin {
 			}
 		}
 		return instance;
+	}
+	
+	/**
+	 * 소셜 프로필 세션 정보 모두 비우기
+	 * 
+	 * @param request
+	 */
+	public static void clear(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		for (String type : socialTypes) {
+			session.removeAttribute(type + "_member");
+		}
 	}
 	
 	/**

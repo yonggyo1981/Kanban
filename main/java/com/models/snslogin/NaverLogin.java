@@ -189,6 +189,10 @@ public class NaverLogin extends SocialLogin {
 			
 			return true;
 		}
+		
+		// 프로필 정보 세션 비우기
+		SocialLogin.clear(request);
+		
 		return false;
 	}
 	

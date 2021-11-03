@@ -158,6 +158,8 @@ public class MemberController extends HttpServlet {
 	 */
 	private void loginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) {
+			SocialLogin.clear(request);
+			
 			String naverCodeURL = NaverLogin.getInstance().getCodeURL(request);
 			request.setAttribute("naverCodeURL", naverCodeURL);
 			
