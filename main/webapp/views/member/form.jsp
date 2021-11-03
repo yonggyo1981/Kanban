@@ -78,7 +78,14 @@ if (request.getAttribute("socialMember") != null) {
 			<dl>
 				<dt>회원명</dt>
 				<dd>
-					<input type="text" name="memNm" value="${member.memNm}">
+					<c:choose>
+						<c:when test="${member == null }">
+							<input type="text" name="memNm" value="${socialMember.memNm}">
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="memNm" value="${member.memNm}">
+						</c:otherwise>
+					</c:choose>
 				</dd>
 			</dl>
 			<dl>
