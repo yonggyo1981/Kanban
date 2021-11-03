@@ -145,6 +145,9 @@ public class MemberDao {
 		
 		Member member = (Member)request.getAttribute("member");
 		String memPwHint = request.getParameter("memPwHint");
+		if (memPwHint == null) {
+			memPwHint = "";
+		}
 		String memNm = request.getParameter("memNm");
 		String cellPhone = request.getParameter("cellPhone");
 		if (cellPhone != null) {
