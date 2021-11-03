@@ -95,10 +95,12 @@ public class MemberDao {
 		String sql = "INSERT INTO member (memId, memPw, memPwHint, memNm, cellPhone, socialType, socialId) VALUES (?,?,?,?,?,?,?)";
 		String memPw = request.getParameter("memPw");
 		String hash = "";
+		String memPwHint = "";
 		String socialType = "none";
 		String socialId = "";
 		if (socialMember == null) { // 일반회원 -> 비밀번호 해시
 			hash = BCrypt.hashpw(memPw, BCrypt.gensalt(10));
+			memPwHint = request.getParameter("memPwHint");
 		} else { // 소셜 회원 - socialType, socialId
 			socialType = socialMember.getSocialType();
 			socialId = socialMember.getSocialId();
@@ -110,7 +112,7 @@ public class MemberDao {
 		
 		bindings.add(setBinding("String", request.getParameter("memId")));
 		bindings.add(setBinding("String", hash));
-		bindings.add(setBinding("String", request.getParameter("memPwHint")));
+		bindings.add(setBinding("String", memPwHint));
 		bindings.add(setBinding("String", request.getParameter("memNm")));
 		bindings.add(setBinding("String", cellPhone));
 		bindings.add(setBinding("String", socialType));
@@ -194,13 +196,21 @@ public class MemberDao {
 		 * 			- 휴대전화번호가 들어오면 - 휴대전화번호 형식에 맞는지 체크 
 		 */
 		/** 필수 항목 체크 S */
-		String[] required = {
-			"memId//아이디를 입력해 주세요.",
-			"memPw//비밀번호를 입력해 주세요.",
-			"memPwRe//비밀번호를 확인해 주세요.",
-			"memPwHint//비밀번호 힌트를 입력해 주세요.",
-			"memNm//회원명을 입력해 주세요."
-		};
+		String[] required = null;
+		if (socialMember == null) {// 일반회원
+			required = new String[] {
+				"memId//아이디를 입력해 주세요.",
+				"memPw//비밀번호를 입력해 주세요.",
+				"memPwRe//비밀번호를 확인해 주세요.",
+				"memPwHint//비밀번호 힌트를 입력해 주세요.",
+				"memNm//회원명을 입력해 주세요."
+			};
+		} else { // 소셜 회원 
+			required = new String[] {
+				"memId//아이디를 입력해 주세요.",
+				"memNm//회원명을 입력해 주세요."
+			};
+		}
 		
 		for(String re : required) {
 			String[] params = re.split("//");
