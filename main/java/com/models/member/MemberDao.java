@@ -10,6 +10,7 @@ import org.mindrot.jbcrypt.*;
 import com.core.DB;
 import com.core.DBField;
 import com.core.Logger;
+import com.models.snslogin.*;
 
 /**
  * MemberDao 클래스 
@@ -17,12 +18,15 @@ import com.core.Logger;
  */
 public class MemberDao {
 	private static MemberDao instance = new MemberDao();
+	private static Member socialMember;
+	
 	private MemberDao() {};  // 기본 생성자 private -> 외부 생성 X, 내부에서만 생성 O
 	
 	public static MemberDao getInstance() {
 		if (instance != null) {
 			instance = new MemberDao();
 		}
+			
 		return instance;
 	}
 	
@@ -50,6 +54,12 @@ public class MemberDao {
 				isLogin = true;
 			} // endif 
 			request.setAttribute("isLogin", isLogin);
+			
+			/** 소셜 프로필 유지 처리 */
+			if (socialMember == null) {
+				socialMember = SocialLogin.getSocialMember(req);
+			}
+			
 		} // endif 
 	}
 	
@@ -214,9 +224,11 @@ public class MemberDao {
 		/** 아이디 체크 E */
 		
 		/** 비밀번호 체크 S */
-		String memPw = request.getParameter("memPw");
-		String memPwRe = request.getParameter("memPwRe");
-		checkPassword(memPw, memPwRe);
+		if (socialMember == null) { // 소셜 회원가입은 비밀번호 불필요 
+			String memPw = request.getParameter("memPw");
+			String memPwRe = request.getParameter("memPwRe");
+			checkPassword(memPw, memPwRe);
+		}
 		/** 비밀번호 체크 E */
 		
 		/** 휴대전화 번호 체크 S */
