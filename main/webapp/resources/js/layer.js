@@ -19,6 +19,15 @@ const layer = {
 			document.body.appendChild(div);	
 		}
 		
+		/** 레이어 팝업 영역 */
+		if (!document.querySelector("#layer_popup")) {
+			const div = document.createElement("div");
+			div.id = "layer_popup";
+			const xpos = Math.round((window.innerWidth - width) / 2);
+			div.style=`position:fixed;z-index:101;width:${width}px;height:${height}px;background:#ffffff;border-radius:20px; padding: 20px;`;
+			
+			document.body.appendChild(div);
+		}
 	},
 	/**
 		팝업 닫기 
