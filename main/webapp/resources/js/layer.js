@@ -24,7 +24,9 @@ const layer = {
 			const div = document.createElement("div");
 			div.id = "layer_popup";
 			const xpos = Math.round((window.innerWidth - width) / 2);
-			div.style=`position:fixed;z-index:101;width:${width}px;height:${height}px;background:#ffffff;border-radius:20px; padding: 20px;`;
+			const ypos = Math.round((width.innerHeight - height) / 2);
+			
+			div.style=`position:fixed;z-index:101;width:${width}px;height:${height}px;background:#ffffff;border-radius:20px; padding: 20px;left:${xpos}px; top:${ypos}px`;
 			
 			document.body.appendChild(div);
 		}
