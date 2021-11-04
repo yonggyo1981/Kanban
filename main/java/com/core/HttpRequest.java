@@ -34,10 +34,17 @@ public class HttpRequest {
 			
 			
 				StringBuilder params = new StringBuilder();
+				boolean isFirst = true;
 				for (Map.Entry<String, String> map : postData.entrySet()) {
 					String key = URLEncoder.encode(map.getKey(), "UTF-8");
 					String value = URLEncoder.encode(map.getValue(), "UTF-8");
+					if (!isFirst) {
+						params.append("&");
+					}
 					params.append(key);
+					params.append("=");
+					params.append(value);
+					isFirst = false;
 				}
 			}
 			
