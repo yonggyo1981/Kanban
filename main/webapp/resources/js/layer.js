@@ -17,6 +17,11 @@ const layer = {
 			div.id="layer_dim";
 			div.style = "position:fixed;width:100%;height:100%;top:0;left:0;background:rgba(0,0,0,0.6);z-index:100";
 			document.body.appendChild(div);	
+			
+			/** 백그라운드 클릭시 닫기 처리 */
+			div.addEventListener("click", function() {
+				layer.close();
+			}, false);
 		}
 		
 		/** 레이어 팝업 영역 */
@@ -24,10 +29,25 @@ const layer = {
 			const div = document.createElement("div");
 			div.id = "layer_popup";
 			const xpos = Math.round((window.innerWidth - width) / 2);
-			const ypos = Math.round((width.innerHeight - height) / 2);
+			const ypos = Math.round((window.innerHeight - height) / 2);
 			
 			div.style=`position:fixed;z-index:101;width:${width}px;height:${height}px;background:#ffffff;border-radius:20px; padding: 20px;left:${xpos}px; top:${ypos}px`;
 			
+			const innerDiv = document.createElement("div");
+			innerDiv.id = "inner_html";
+			
+			axios({
+				method : "GET",
+				url : url + "?outline=none",
+			})
+			.then((res) => {
+				innerDiv.innerHTML = res.data;
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+			
+			div.appendChild(innerDiv);	
 			document.body.appendChild(div);
 		}
 	},
@@ -35,7 +55,16 @@ const layer = {
 		팝업 닫기 
 	 */
 	close() {
+		const layerDim = document.querySelector("#layer_dim");
+		const layerPopup = document.querySelector("#layer_popup");
 		
+		if (layerDim) {
+			document.body.removeChild(layerDim);
+		}
+		
+		if (layerPopup) {
+			document.body.removeChild(layerPopup);
+		}
 	}	
 };
 
