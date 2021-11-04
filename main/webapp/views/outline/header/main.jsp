@@ -32,7 +32,7 @@
 		<script type="text/babel" src="${rootURL}/resources/js/layer.js${version}"></script>
 		<script type="text/babel" src="${rootURL}/resources/js/common.js${version}"></script>
 		<c:forEach var="script" items="${addScripts}">
-		<script type="text/babel" src="${rootURL}/resources/js/${script}.js${version}"></script>
+		<script type="text/javascript" src="${rootURL}/resources/js/${script}.js${version}"></script>
 		</c:forEach>
 		<title><c:out value="${pageTitle}" /></title>
 	</head>
