@@ -22,8 +22,24 @@ public class HttpRequest {
 		try {
 			URL url = new URL(apiURL);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-			method = (method == null)?"GET":method; 
+			method = (method == null)?"GET":method.toUpperCase(); 
 			conn.setRequestMethod(method);
+			
+			/** method가 POST(DELETE, PUT, PATCH .... )일때 추가 헤더 처리 */
+			if (!method.equals("GET")) {
+				if (headers == null) {
+					headers = new HashMap<String, String>();
+				}
+				headers.put("Content-Type", "application/x-www-form-urlencoded");
+			
+			
+				StringBuilder params = new StringBuilder();
+				for (Map.Entry<String, String> map : postData.entrySet()) {
+					String key = URLEncoder.encode(map.getKey(), "UTF-8");
+					String value = URLEncoder.encode(map.getValue(), "UTF-8");
+					params.append(key);
+				}
+			}
 			
 			/** 요청 헤더 처리 */
 			if (headers != null) {
