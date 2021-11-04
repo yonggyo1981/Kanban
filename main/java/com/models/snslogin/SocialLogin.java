@@ -113,6 +113,8 @@ public abstract class SocialLogin {
 		for (String type : socialTypes) {
 			session.removeAttribute(type + "_member");
 		}
+		
+		MemberDao.setSocialMember(null);
 	}
 	
 	/**

@@ -78,6 +78,10 @@ public class MemberDao {
 		return isLogin;
 	}
 	
+	public static void setSocialMember(Member member) {
+		socialMember = member;
+	}
+	
 	/**
 	 * 회원 가입 처리 
 	 * 
