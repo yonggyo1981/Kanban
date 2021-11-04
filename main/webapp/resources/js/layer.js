@@ -35,7 +35,7 @@ const layer = {
 			/** 닫기 버튼 추가 S  */
 			const closeBtn = document.createElement("i"); 
 			closeBtn.classList.add("xi-close");
-			closeBtn.style="position: fixed; top: 10px; right: 10px; z-index:102; cursor: pointer; font-size: 22px;";
+			closeBtn.style="position: absolute; top: 10px; right: 10px; z-index:102; cursor: pointer; font-size: 22px;";
 			closeBtn.addEventListener("click", function() {
 				layer.close();	
 			}, false);
@@ -46,9 +46,15 @@ const layer = {
 			const innerDiv = document.createElement("div");
 			innerDiv.id = "inner_html";
 			
+			if (url.indexOf("?") == -1) {
+				url += "?";
+			} else {
+				url += "&";
+			}
+			url += "outline=none";
 			axios({
 				method : "GET",
-				url : url + "?outline=none",
+				url : url,
 			})
 			.then((res) => {
 				innerDiv.innerHTML = res.data;
