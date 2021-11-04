@@ -32,6 +32,16 @@ const layer = {
 			const ypos = Math.round((window.innerHeight - height) / 2);
 			
 			div.style=`position:fixed;z-index:101;width:${width}px;height:${height}px;background:#ffffff;border-radius:20px; padding: 20px;left:${xpos}px; top:${ypos}px`;
+			/** 닫기 버튼 추가 S  */
+			const closeBtn = document.createElement("i"); 
+			closeBtn.classList.add("xi-close");
+			closeBtn.style="position: fixed; top: 10px; right: 10px; z-index:102; cursor: pointer; font-size: 22px;";
+			closeBtn.addEventListener("click", function() {
+				layer.close();	
+			}, false);
+			
+			div.appendChild(closeBtn);
+			/** 닫기 버늩 추가 E */
 			
 			const innerDiv = document.createElement("div");
 			innerDiv.id = "inner_html";
