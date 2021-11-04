@@ -9,17 +9,21 @@ import org.json.simple.parser.*;
 
 public class HttpRequest {
 	/**
-	 * 
-	 * @param apiURL
-	 * @param headers
-	 * @return
+	 * 원격 HTTP 요청 
+	 *  
+	 * @param apiURL - 요청 URL
+	 * @param headers - 요청 헤더
+	 * @param method - 요청 방식, GET, POST, ....
+	 * @param postData - POST(DELETE, PATCH, PUT ...) 전송 데이터 
+	 * @return JSONObject
 	 */
 	public static JSONObject request(String apiURL, HashMap<String, String> headers, String method, HashMap<String, String> postData) {
 		JSONObject json = null;
 		try {
 			URL url = new URL(apiURL);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-			conn.setRequestMethod("GET");
+			method = (method == null)?"GET":method; 
+			conn.setRequestMethod(method);
 			
 			/** 요청 헤더 처리 */
 			if (headers != null) {
