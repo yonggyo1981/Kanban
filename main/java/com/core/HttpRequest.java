@@ -26,6 +26,7 @@ public class HttpRequest {
 			conn.setRequestMethod(method);
 			
 			/** method가 POST(DELETE, PUT, PATCH .... )일때 추가 헤더 처리 */
+			byte[] sendParams = null;
 			if (!method.equals("GET")) {
 				if (headers == null) {
 					headers = new HashMap<String, String>();
@@ -46,6 +47,9 @@ public class HttpRequest {
 					params.append(value);
 					isFirst = false;
 				}
+				
+				sendParams = params.toString().getBytes("UTF-8");
+				headers.put("Content-Length", String.valueOf(sendParams.length));
 			}
 			
 			/** 요청 헤더 처리 */
@@ -55,6 +59,16 @@ public class HttpRequest {
 					String key = ir.next();
 					String value = headers.get(key);
 					conn.setRequestProperty(key, value);
+				}
+			}
+			
+			/** POST 데이터 전송 처리 */
+			if (!method.equals("GET") && sendParams.length > 0) {
+				conn.setDoOutput(true);
+				try(OutputStream out = conn.getOutputStream()) {
+					out.write(sendParams);
+				} catch (IOException e) {
+					Logger.log(e);
 				}
 			}
 			
