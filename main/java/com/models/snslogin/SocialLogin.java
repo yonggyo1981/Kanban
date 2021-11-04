@@ -6,7 +6,7 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
-import com.core.Logger;
+import com.core.*;
 import com.models.member.*;
 
 import org.json.simple.*;
@@ -121,53 +121,7 @@ public abstract class SocialLogin {
 	 * @param apiURL
 	 */
 	public JSONObject httpRequest(String apiURL, HashMap<String, String> headers) {
-		
-		JSONObject json = null;
-		try {
-			URL url = new URL(apiURL);
-			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-			conn.setRequestMethod("GET");
-			
-			/** 요청 헤더 처리 */
-			if (headers != null) {
-				Iterator<String> ir = headers.keySet().iterator();
-				while(ir.hasNext()) {
-					String key = ir.next();
-					String value = headers.get(key);
-					conn.setRequestProperty(key, value);
-				}
-			}
-			
-			InputStream in;
-			int code = conn.getResponseCode(); // 200, HttpURLConnection.HTTP_OK
-			if (code == HttpURLConnection.HTTP_OK) {
-				in = conn.getInputStream();
-			} else {
-				in = conn.getErrorStream();
-			}
-			
-			StringBuilder sb = new StringBuilder();
-			try (in;
-				InputStreamReader isr = new InputStreamReader(in);
-				BufferedReader br = new BufferedReader(isr)) {
-				String line = null;
-				while((line = br.readLine()) != null) {
-					sb.append(line);
-				}
-			} catch (IOException e) {
-				Logger.log(e);
-			}
-			
-			String data = sb.toString();
-			if (data != null && !data.trim().equals("")) {
-				JSONParser parser = new JSONParser();
-				json = (JSONObject)parser.parse(data);
-			}
-		} catch (Exception e) {
-			Logger.log(e);
-		}
-		
-		return json;
+		return HttpRequest.request(apiURL, headers);
 	}
 	
 	public JSONObject httpRequest(String apiURL) {
