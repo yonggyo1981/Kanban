@@ -104,7 +104,19 @@ public class HttpRequest {
 		return json;
 	}
 	
+	public static JSONObject request(String apiURL) {
+		return request(apiURL, null, "GET", null);
+	}
+	
 	public static JSONObject request(String apiURL, HashMap<String, String> headers) {
 		return request(apiURL, headers, "GET", null);
+	}
+	
+	public static JSONObject request(String apiURL, String method) {
+		return request(apiURL, null, method, null);
+	}
+	
+	public static JSONObject request(String apiURL, String method, HashMap<String, String> postData) {
+		return request(apiURL, null, method, postData);
 	}
 }
