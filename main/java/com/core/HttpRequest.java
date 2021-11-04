@@ -14,7 +14,7 @@ public class HttpRequest {
 	 * @param headers
 	 * @return
 	 */
-	public static JSONObject request(String apiURL, HashMap<String, String> headers) {
+	public static JSONObject request(String apiURL, HashMap<String, String> headers, String method, HashMap<String, String> postData) {
 		JSONObject json = null;
 		try {
 			URL url = new URL(apiURL);
@@ -61,5 +61,9 @@ public class HttpRequest {
 		}
 		
 		return json;
+	}
+	
+	public static JSONObject request(String apiURL, HashMap<String, String> headers) {
+		return request(apiURL, headers, "GET", null);
 	}
 }
