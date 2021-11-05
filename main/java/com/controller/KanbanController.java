@@ -4,6 +4,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+import com.core.*;
+
 /**
  *   /kanban 컨트롤러
  *
@@ -58,7 +60,7 @@ public class KanbanController extends HttpServlet {
 	/** 작업 등록 */
 	private void addController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("POST")) { // 등록 처리 
-			
+			FileUpload.getInstance().upload(request);
 			
 			
 		} else { // 등록 양식

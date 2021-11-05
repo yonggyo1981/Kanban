@@ -40,6 +40,10 @@ public class FileUpload {
 	 */
 	public FileUpload upload(HttpServletRequest request) {
 		try {
+			
+			String uploadPath = request.getServletContext().getRealPath(".");
+			System.out.println(uploadPath);
+			
 			ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 			List<FileItem> items = upload.parseRequest(request);
 			upload.setHeaderEncoding("UTF-8"); // 한글 파일명 깨짐 방지
