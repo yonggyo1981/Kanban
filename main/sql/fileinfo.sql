@@ -1,0 +1,8 @@
+CREATE TABLE fileinfo (
+	idx INT NOT NULL AUTO_INCREMENT,
+    gid BIGINT NOT NULL,
+    originalName VARCHAR(60) NOT NULL,
+    mimeType VARCHAR(60) NOT NULL,
+    regDt DATETIME DEFAULT NOW(),
+    PRIMARY KEY(idx)
+);

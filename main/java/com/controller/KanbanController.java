@@ -59,6 +59,8 @@ public class KanbanController extends HttpServlet {
 	private void addController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("POST")) { // 등록 처리 
 			
+			
+			
 		} else { // 등록 양식
 			RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/form.jsp");
 			rd.include(request, response);
