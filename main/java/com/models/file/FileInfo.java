@@ -1,6 +1,7 @@
 package com.models.file;
 
 import java.sql.*;
+import java.io.*;
 import com.models.*;
 import javax.servlet.*;
 
@@ -27,6 +28,22 @@ public class FileInfo extends Dto {
 		this.regDt = regDt;
 		
 		isImage = (mimeType.indexOf("image") != -1)?true:false; 
+		
+		String rootURL = (String)request.getAttribute("rootURL");
+		String rootPath = (String)request.getAttribute("rootPath");
+		int folder = idx % 10;
+		StringBuilder path = new StringBuilder();
+		path.append(rootPath);
+		path.append(File.separator);
+		path.append("resources");
+		path.append(File.separator);
+		path.append("upload");
+		path.append(File.separator);
+		path.append(folder);
+		path.append(File.separator);
+		path.append(idx);
+		uploadedPath = path.toString(); 
+		uploadedUrl = rootURL + "/resources/upload/" + folder + "/" + idx;
 	}
 	
 	public FileInfo(ResultSet rs) throws SQLException {
