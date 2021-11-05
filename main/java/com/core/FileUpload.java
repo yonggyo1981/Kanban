@@ -48,13 +48,34 @@ public class FileUpload {
 			upload.setHeaderEncoding("UTF-8"); // 한글 파일명 깨짐 방지
 			upload.setSizeMax(maxFileSize);
 			
+			/** 일반 양식데이터 */
 			for(FileItem item : items) {
-				String fieldName = item.getFieldName(); // input -> name
-				if (item.isFormField()) { // 일반 양식 데이터 -> HashMap<String, String> params
+				if (item.isFormField()) {
+					String fieldName = item.getFieldName();
 					String value = item.getString("UTF-8");
 					params.put(fieldName, value);
-				} else { // 파일 데이터 
+				}
+			}
+			
+			/** 파일데이터 처리 */
+			for(FileItem item : items) {
+				if (!item.isFormField()) {
+					String fileName = item.getName(); // 경로포함 파일 명 C:\폴더1\폴더\파일명.확장자
+					fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+					String mimeType = item.getContentType();
+					/** 
+					 * 1. 파일 정보를 DB에 기록
+					 * 2. 추가된 증감번호 -> idx 
+					 * 3. 서버에 업로드될 경로 생성
+					 * 	 증감번호 -> 10진수  (나머지 연산자 -> 균등하게 10개 폴더에 저장)
+					 *   0번, 1번, 2번, 3번, 4번 ... 9번
+					 *  4. 파일 업로드 FileItem.write(File 인스턴스)
+					 *  		- 실제 서버에 올라갈 파일 경로
+					 *  		uploadPath + "/" + (idx % 10) + "/" + idx;   
+					 */
 					
+					   // DB에 파일 정보 기록 
+					   
 				}
 			}
 			

@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -60,10 +61,12 @@ public class KanbanController extends HttpServlet {
 	/** 작업 등록 */
 	private void addController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("POST")) { // 등록 처리 
-			FileUpload.getInstance().upload(request);
-			
+			HashMap<String, String> params = FileUpload.getInstance().upload(request).get();
+			System.out.println(params);
 			
 		} else { // 등록 양식
+			request.setAttribute("gid", System.currentTimeMillis());
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/form.jsp");
 			rd.include(request, response);
 		}
