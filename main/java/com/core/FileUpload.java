@@ -75,7 +75,17 @@ public class FileUpload {
 					 */
 					
 					   // DB에 파일 정보 기록 
-					   
+					 long gid = System.currentTimeMillis();
+					 if (params.get("gid") != null) {
+						gid = Long.valueOf(params.get("gid"));
+					 }
+					 String sql = "INSERT INTO fileinfo (gid, originalName, mimeType) VALUES (?, ?, ?)";  
+					ArrayList<DBField> bindings = new ArrayList<>();
+					bindings.add(DB.setBinding("Long", String.valueOf(gid)));
+					bindings.add(DB.setBinding("String", fileName));
+					bindings.add(DB.setBinding("String", mimeType));
+					
+					int idx = DB.executeUpdate(sql, bindings, true);
 				}
 			}
 			
