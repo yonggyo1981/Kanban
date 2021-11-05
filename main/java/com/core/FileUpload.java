@@ -64,8 +64,8 @@ public class FileUpload {
 					fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
 					String mimeType = item.getContentType();
 					/** 
-					 * 1. 파일 정보를 DB에 기록
-					 * 2. 추가된 증감번호 -> idx 
+					 * 1. 파일 정보를 DB에 기록(O)
+					 * 2. 추가된 증감번호 -> idx (O)
 					 * 3. 서버에 업로드될 경로 생성
 					 * 	 증감번호 -> 10진수  (나머지 연산자 -> 균등하게 10개 폴더에 저장)
 					 *   0번, 1번, 2번, 3번, 4번 ... 9번
@@ -86,6 +86,18 @@ public class FileUpload {
 					bindings.add(DB.setBinding("String", mimeType));
 					
 					int idx = DB.executeUpdate(sql, bindings, true);
+					if (idx < 1) continue; // 파일 정보 기록 실패시 -> 업로드 처리 X
+					
+					// 업로드될 경로
+					String folder = String.valueOf(idx % 10);
+					String folderPath = uploadPath + File.separator + folder;
+					File dir = new File(folderPath);
+					if (!dir.exists()) { // 폴더가 존재 X -> 생성 
+						dir.mkdir();
+					}
+					
+					File file = new File(folderPath + File.separator + idx);
+					item.write(file);
 				}
 			}
 			
