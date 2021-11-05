@@ -61,7 +61,13 @@ public class FileUpload {
 			for(FileItem item : items) {
 				if (!item.isFormField()) {
 					String fileName = item.getName(); // 경로포함 파일 명 C:\폴더1\폴더\파일명.확장자
+					
+					
 					fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+					if (fileName == null || fileName.equals("")) {
+						continue;
+					}
+					
 					String mimeType = item.getContentType();
 					/** 
 					 * 1. 파일 정보를 DB에 기록(O)

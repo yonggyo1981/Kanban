@@ -152,6 +152,7 @@ public class CommonFilter implements Filter {
 			/** 요청 메서드 GET 방식이 아닌 경우 제외 */
 			String method = req.getMethod().toUpperCase();
 			if (!method.equals("GET") && (outline != null && !outline.equals("print"))) {
+				System.out.println("테스트");
 				return false;
 			}
 			
