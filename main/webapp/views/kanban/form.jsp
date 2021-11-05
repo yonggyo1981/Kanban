@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<form name="frmAdd" id="frmAdd" method="post" action="../kanban/add" target="ifrmHidden" autocomplete="off">
+<form name="frmAdd" id="frmAdd" method="post" action="../kanban/add" target="ifrmHidden" autocomplete="off" enctype="multipart/form-data">
 	<dl>
 		<dt>작업구분</dt>
 		<dd>
@@ -11,5 +11,28 @@
 			<label for="status_done">완료</label>
 		</dd>
 	</dl>
-	
+	<dl>
+		<dt>제목</dt>
+		<dd>
+			<input type="text" name="subject">
+		</dd>
+	</dl>
+	<dl>
+		<dt>작업내용</dt>
+		<dd>
+			<textarea name="content"></textarea>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			파일첨부
+			
+		</dt>
+		<dd>
+			<input type="file" name="file1">
+		</dd>
+	</dl>	
 </form>
+
+
+
