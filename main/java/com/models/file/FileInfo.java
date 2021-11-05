@@ -100,6 +100,30 @@ public class FileInfo extends Dto {
 		this.regDt = regDt;
 	}
 
+	public String getUploadedPath() {
+		return uploadedPath;
+	}
+
+	public void setUploadedPath(String uploadedPath) {
+		this.uploadedPath = uploadedPath;
+	}
+
+	public String getUploadedUrl() {
+		return uploadedUrl;
+	}
+
+	public void setUploadedUrl(String uploadedUrl) {
+		this.uploadedUrl = uploadedUrl;
+	}
+
+	public boolean isImage() {
+		return isImage;
+	}
+
+	public void setImage(boolean isImage) {
+		this.isImage = isImage;
+	}
+
 	@Override
 	public FileInfo setResultSet(ResultSet rs) throws SQLException {
 		return new FileInfo(rs);

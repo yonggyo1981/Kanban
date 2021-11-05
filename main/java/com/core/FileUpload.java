@@ -144,7 +144,25 @@ public class FileUpload {
 		String sql = "SELECT * FROM fileinfo WHERE gid = ?";
 		ArrayList<DBField> bindings = new ArrayList<>();
 		bindings.add(DB.setBinding("Long", String.valueOf(gid)));
-		return null;
+		
+		ArrayList<FileInfo> list = DB.executeQuery(sql, bindings, new FileInfo());
+		
+		return list;
+	}
+	
+	/**
+	 * 파일 등록번호(idx)로 파일 정보 조회 
+	 * 
+	 * @param idx
+	 * @return
+	 */
+	public FileInfo getFile(int idx) {
+		String sql = "SELECT * FROM fileinfo WHERE idx = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(DB.setBinding("Integer", String.valueOf(idx)));
+		FileInfo file = DB.executeQueryOne(sql, bindings, new FileInfo());
+		
+		return file;
 	}
 }	
 
