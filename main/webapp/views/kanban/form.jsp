@@ -1,8 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%
-	String rootURL = (String)request.getAttribute("rootURL");
-%>
-<script type="text/javascript" src="<%=rootURL%>/resources/js/form.js"></script>
+<script type="text/javascript" src="${rootURL}/resources/js/form.js"></script>
 <form name="frmAdd" id="frmAdd" method="post" action="../kanban/add" target="ifrmHidden" autocomplete="off" enctype="multipart/form-data">
 	<dl>
 		<dt>작업구분</dt>
@@ -38,6 +35,7 @@
 			<div class='rows'><input type="file" name="file3"></div>
 		</dd>
 	</dl>	
+	<input type="submit" value="작업등록">
 </form>
 
 
