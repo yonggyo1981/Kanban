@@ -41,13 +41,23 @@ public class FileUpload {
 	public FileUpload upload(HttpServletRequest request) {
 		try {
 			
-			String uploadPath = request.getServletContext().getRealPath(".");
-			System.out.println(uploadPath);
+			String uploadPath = request.getServletContext().getRealPath(File.separator + "resources" + File.separator + "upload");
 			
 			ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 			List<FileItem> items = upload.parseRequest(request);
 			upload.setHeaderEncoding("UTF-8"); // 한글 파일명 깨짐 방지
 			upload.setSizeMax(maxFileSize);
+			
+			for(FileItem item : items) {
+				String fieldName = item.getFieldName(); // input -> name
+				if (item.isFormField()) { // 일반 양식 데이터 -> HashMap<String, String> params
+					String value = item.getString("UTF-8");
+					params.put(fieldName, value);
+				} else { // 파일 데이터 
+					
+				}
+			}
+			
 			
 		} catch (Exception e) {
 			Logger.log(e);
