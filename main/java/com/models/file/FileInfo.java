@@ -2,6 +2,7 @@ package com.models.file;
 
 import java.sql.*;
 import com.models.*;
+import javax.servlet.*;
 
 public class FileInfo extends Dto {
 	
@@ -10,6 +11,11 @@ public class FileInfo extends Dto {
 	private String originalName; // 원 파일명
 	private String mimeType; // 파일 형식 
 	private String regDt; // 파일 업로드 일시
+	private String uploadedPath; // 실제 업로드된 파일 경로
+	private String uploadedUrl; // 업로드된 파일 접속 URL
+	private boolean isImage = false; // 이미지 여부
+	
+	private static ServletRequest request;
 	
 	public FileInfo() {}
 	
@@ -19,6 +25,8 @@ public class FileInfo extends Dto {
 		this.originalName = originalName;
 		this.mimeType = mimeType;
 		this.regDt = regDt;
+		
+		isImage = (mimeType.indexOf("image") != -1)?true:false; 
 	}
 	
 	public FileInfo(ResultSet rs) throws SQLException {
@@ -29,6 +37,10 @@ public class FileInfo extends Dto {
 			rs.getString("mimeType"),
 			rs.getString("regDt")
 		);	
+	}
+	
+	public static void init(ServletRequest request) {
+		FileInfo.request = request;
 	}
 	
 	public int getIdx() {

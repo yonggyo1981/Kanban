@@ -8,6 +8,8 @@ import org.apache.commons.fileupload.*; // FileItem
 import org.apache.commons.fileupload.servlet.*; // SerlvetFileUpload
 import org.apache.commons.fileupload.disk.*; // DiskFileItemFactory
 
+import com.models.file.*;
+
 /**
  * 파일관련 클래스 
  *   - 1. 업로드 
@@ -130,6 +132,19 @@ public class FileUpload {
 	 */
 	public void setMaxFileSize(long size) {
 		maxFileSize = size;
+	}
+	
+	/**
+	 * 그룹 ID(gid)로 파일 목록 
+	 * 
+	 * @param gid
+	 * @return
+	 */
+	public ArrayList<FileInfo> getFiles(long gid) {
+		String sql = "SELECT * FROM fileinfo WHERE gid = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(DB.setBinding("Long", String.valueOf(gid)));
+		return null;
 	}
 }	
 
