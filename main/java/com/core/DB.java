@@ -216,6 +216,9 @@ public class DB {
 				case "Integer" : 
 					pstmt.setInt(no, Integer.valueOf(value));
 					break;
+				case "Long" :
+					pstmt.setLong(no, Long.valueOf(value));
+					break;
 				case "Double" :
 					pstmt.setDouble(no, Double.valueOf(value));
 					break;
