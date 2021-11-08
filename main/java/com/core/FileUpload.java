@@ -134,8 +134,11 @@ public class FileUpload {
 		try (FileInputStream fis = new FileInputStream(filePath);
 			 BufferedInputStream bis = new BufferedInputStream(fis);
 			OutputStream out = response.getOutputStream()) {
-			
-			 
+			int i;
+			while((i = bis.read()) != -1) {
+				out.write(i);
+			}
+			out.flush();
 		} catch (IOException e) {
 			Logger.log(e);
 		}
