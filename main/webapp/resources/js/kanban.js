@@ -41,5 +41,9 @@ function addFileForm() {
 
 /** 파일 첨부 삭제 */
 function delFileForm() {
-	
+	const fileUpload = document.getElementById("file_upload");
+	if (fileUpload) {
+		const lastRows = fileUpload.lastElementChild;
+		fileUpload.removeChild(lastRows);
+	}
 }
