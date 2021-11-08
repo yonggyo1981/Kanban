@@ -3,6 +3,7 @@ package com.core;
 import java.util.*;
 import java.io.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.*; // FileItem
 import org.apache.commons.fileupload.servlet.*; // SerlvetFileUpload
@@ -114,6 +115,19 @@ public class FileUpload {
 			Logger.log(e);
 		}
 		return this;
+	}
+	
+	/**
+	 * 파일 다운로드 처리 
+	 * 
+	 * @param response
+	 * @param idx
+	 */
+	public void download(HttpServletResponse response, int idx) throws IOException {
+		FileInfo file = getFile(idx);
+		response.setHeader("Content-Disposition", "attachment; filename=test.txt");
+		PrintWriter out = response.getWriter();
+		out.print("ABCDEFG");
 	}
 	
 	/**

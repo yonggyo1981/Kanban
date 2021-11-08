@@ -2,8 +2,11 @@ package com.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+
 import java.io.*;
-import java.util.*;
+
+import com.core.*;
+import com.models.file.*;
 
 /**
  *  파일 다운로드 /file/download/파일 등록번호
@@ -52,7 +55,7 @@ public class FileController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void downloadController(HttpServletRequest request, HttpServletResponse response, int idx) throws ServletException, IOException {
-		
+		FileUpload.getInstance().download(response, idx);
 	}
 	
 	/**
