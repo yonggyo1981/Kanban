@@ -37,7 +37,10 @@ public class KanbanDao {
 		};
 		for (String s : required) {
 			String[] param = s.split("//");
-			System.out.println("param : " + param);
+			String value = params.get(param[0]);
+			if (value == null || value.trim().equals("")) {
+				throw new Exception(param[1]);
+			}
 		}
 		/** 유혀성 검사 E */
 		

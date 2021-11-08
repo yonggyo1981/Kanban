@@ -23,14 +23,14 @@ public class KanbanController extends HttpServlet {
 		String mode = URI.substring(URI.lastIndexOf("/") + 1);
 		
 		httpMethod = request.getMethod().toUpperCase(); // GET, POST, DELETE
-		out = response.getWriter();
 		
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		if (httpMethod.equals("GET")) {
 			response.setContentType("text/html; charset=utf-8");
-		} else { 
-			request.setCharacterEncoding("UTF-8");
 		}
 		
+		out = response.getWriter();
 		switch(mode) {
 			case "work" : // 작업목록
 				workController(request, response);
