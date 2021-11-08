@@ -63,4 +63,18 @@ public class KanbanDao {
 		return (rs  > 0)?true:false;
 	}
 	
+	/**
+	 * 작업 목록 조회 
+	 * 
+	 * @param status
+	 * @return
+	 */
+	public ArrayList<Kanban> getList(String status) {
+		
+		return null;
+	}
+	
+	public ArrayList<Kanban> getList() {
+		return getList(null);
+	}
 }
