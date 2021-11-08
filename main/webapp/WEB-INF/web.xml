@@ -41,6 +41,16 @@
 		<url-pattern>/member/*</url-pattern>
 	</servlet-mapping>
 	<!-- /member E -->
+	<!-- /file S -->
+	<servlet>
+		<servlet-name>File</servlet-name>
+		<servlet-class>com.controller.FileController</servlet-class>	
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>File</servlet-name>
+		<url-pattern>/file/*</url-pattern>
+	</servlet-mapping>
+	<!--  /file E -->
 	<!-- 서블릿 E  -->
 	<!--  에러 페이지 S  -->
 	<error-page>

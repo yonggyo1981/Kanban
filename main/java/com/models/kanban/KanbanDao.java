@@ -58,8 +58,8 @@ public class KanbanDao {
 		bindings.add(DB.setBinding("String", params.get("subject")));
 		bindings.add(DB.setBinding("String", params.get("content")));
 		
-		//int rs = DB.executeUpdate(sql, bindings);
-		int rs = 0;
+		int rs = DB.executeUpdate(sql, bindings);
+		
 		return (rs  > 0)?true:false;
 	}
 	
