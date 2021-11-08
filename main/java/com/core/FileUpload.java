@@ -2,6 +2,7 @@ package com.core;
 
 import java.util.*;
 import java.io.*;
+import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -130,7 +131,12 @@ public class FileUpload {
 		 * ServletOutputStream - getOutStream() -> 화면에 출력
 		 */
 		String filePath = file.getUploadedPath();
-		response.setHeader("Content-Disposition", "attachment; filename=test.pdf");
+		String fileName = file.getOriginalName();
+		fileName = URLEncoder.encode(fileName, "UTF-8");
+
+		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+		response.setHeader("Cache-Control", "must-revalidate");
+		// EUC-KR - ISO8850_1
 		try (FileInputStream fis = new FileInputStream(filePath);
 			 BufferedInputStream bis = new BufferedInputStream(fis);
 			OutputStream out = response.getOutputStream()) {
