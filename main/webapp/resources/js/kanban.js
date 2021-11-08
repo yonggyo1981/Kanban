@@ -31,8 +31,11 @@ function addFileForm() {
 	const fileUpload = document.getElementById("file_upload");
 	if (fileUpload) {
 		const file = fileUpload.firstElementChild;
-		const addRows = file.cloneNode();
-		console.log(addRows);
+		const addRows = file.cloneNode(true);
+		const cnt = fileUpload.childElementCount + 1;
+		addRows.firstElementChild.name = "file" + cnt;
+		
+		fileUpload.appendChild(addRows);
 	}
 }
 
