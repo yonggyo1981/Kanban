@@ -68,7 +68,7 @@ public class FileController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void deleteController(HttpServletRequest request, HttpServletResponse response, int idx) throws ServletException, IOException {
-		
+		FileUpload.getInstance().delete(idx);
 	}
 }
 

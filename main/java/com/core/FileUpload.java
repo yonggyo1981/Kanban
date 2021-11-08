@@ -126,6 +126,10 @@ public class FileUpload {
 	 */
 	public void download(HttpServletResponse response, int idx) throws IOException {
 		FileInfo file = getFile(idx);
+		if (file == null) {
+			return;
+		}
+		
 		/**
 		 * FileInputStream  + BufferedInputSream - 읽고 
 		 * ServletOutputStream - getOutStream() -> 화면에 출력
@@ -133,8 +137,13 @@ public class FileUpload {
 		String filePath = file.getUploadedPath();
 		String fileName = file.getOriginalName();
 		fileName = URLEncoder.encode(fileName, "UTF-8");
+		File fileInfo = new File(filePath);
+		// 파일이 존재하는지 여부 체크 
+		if (!fileInfo.exists()) {
+			return;
+		}
 		
-		long fileSize = new File(filePath).length();
+		long fileSize = fileInfo.length();
 		
 		response.setHeader("Content-Type", "application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
@@ -152,6 +161,21 @@ public class FileUpload {
 		} catch (IOException e) {
 			Logger.log(e);
 		}
+	}
+	
+	/**
+	 * 파일 삭제 
+	 * 
+	 * @param idx
+	 * @return
+	 */
+	public boolean delete(int idx) {
+		/**
+		 * 1. 파일 정보를 idx로 조회
+		 * 2. 파일 삭제 
+		 * 3. 파일 정보 DB 삭제 
+		 */
+		return false;
 	}
 	
 	/**
