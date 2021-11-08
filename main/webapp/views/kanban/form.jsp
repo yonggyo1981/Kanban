@@ -27,12 +27,11 @@
 	<dl>
 		<dt>
 			파일첨부
+			<span class="del_file"><i class='xi-minus'></i>삭제</span>
 			<span class='add_file'><i class='xi-plus'></i> 추가</span>
 		</dt>
 		<dd id='file_upload'>
 			<div class='rows'><input type="file" name="file1"></div>
-			<div class='rows'><input type="file" name="file2"></div>
-			<div class='rows'><input type="file" name="file3"></div>
 		</dd>
 	</dl>	
 	<input type="submit" value="작업등록">
