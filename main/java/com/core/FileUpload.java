@@ -125,9 +125,20 @@ public class FileUpload {
 	 */
 	public void download(HttpServletResponse response, int idx) throws IOException {
 		FileInfo file = getFile(idx);
-		response.setHeader("Content-Disposition", "attachment; filename=test.txt");
-		PrintWriter out = response.getWriter();
-		out.print("ABCDEFG");
+		/**
+		 * FileInputStream  + BufferedInputSream - 읽고 
+		 * ServletOutputStream - getOutStream() -> 화면에 출력
+		 */
+		String filePath = file.getUploadedPath();
+		response.setHeader("Content-Disposition", "attachment; filename=test.pdf");
+		try (FileInputStream fis = new FileInputStream(filePath);
+			 BufferedInputStream bis = new BufferedInputStream(fis);
+			OutputStream out = response.getOutputStream()) {
+			
+			 
+		} catch (IOException e) {
+			Logger.log(e);
+		}
 	}
 	
 	/**
