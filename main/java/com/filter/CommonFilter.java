@@ -19,7 +19,7 @@ public class CommonFilter implements Filter {
 	 * 정적 디렉토리(헤더, 푸터가 적용되지 않는 경로)
 	 *    - css, js, image ... 
 	 */
-	private String[] staticDirs = {"resources"};
+	private String[] staticDirs = {"resources", "file"};
 	
 	public void init(FilterConfig config) throws ServletException {
 		
