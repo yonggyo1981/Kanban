@@ -5,7 +5,7 @@ import java.io.*;
 import com.models.*;
 import javax.servlet.*;
 
-public class FileInfo extends Dto {
+public class FileInfo extends Dto<FileInfo> {
 	
 	private int idx; // 파일 등록번호
 	private long gid; // 파일 그룹 ID 

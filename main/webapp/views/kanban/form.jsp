@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<script type="text/javascript" src="${rootURL}/resources/js/form.js"></script>
 <form name="frmAdd" id="frmAdd" method="post" action="../kanban/add" target="ifrmHidden" autocomplete="off" enctype="multipart/form-data">
 	<input type="hidden" name="gid" value="${gid}" />
 	<dl>
