@@ -133,10 +133,14 @@ public class FileUpload {
 		String filePath = file.getUploadedPath();
 		String fileName = file.getOriginalName();
 		fileName = URLEncoder.encode(fileName, "UTF-8");
-
+		
+		long fileSize = new File(filePath).length();
+		
+		response.setHeader("Content-Type", "application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 		response.setHeader("Cache-Control", "must-revalidate");
-		// EUC-KR - ISO8850_1
+		response.setHeader("Content-Length", String.valueOf(fileSize));
+		
 		try (FileInputStream fis = new FileInputStream(filePath);
 			 BufferedInputStream bis = new BufferedInputStream(fis);
 			OutputStream out = response.getOutputStream()) {
