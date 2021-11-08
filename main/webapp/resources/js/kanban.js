@@ -43,7 +43,9 @@ function addFileForm() {
 function delFileForm() {
 	const fileUpload = document.getElementById("file_upload");
 	if (fileUpload) {
-		const lastRows = fileUpload.lastElementChild;
-		fileUpload.removeChild(lastRows);
+		if (fileUpload.childElementCount > 1) {
+			const lastRows = fileUpload.lastElementChild;
+			fileUpload.removeChild(lastRows);
+		}
 	}
 }
