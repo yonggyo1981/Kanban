@@ -175,7 +175,22 @@ public class FileUpload {
 		 * 2. 파일 삭제 
 		 * 3. 파일 정보 DB 삭제 
 		 */
-		return false;
+		FileInfo fileInfo = getFile(idx);
+		if (fileInfo == null) {
+			return false;
+		}
+		
+		File file = new File(fileInfo.getUploadedPath());
+		if (file.exists()) {
+			file.delete();
+		}
+		
+		String sql = "DELETE FROM fileInfo WHERE idx = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(DB.setBinding("Integer", String.valueOf(idx)));
+		int rs = DB.executeUpdate(sql, bindings);
+		
+		return (rs > 0)?true:false;
 	}
 	
 	/**
