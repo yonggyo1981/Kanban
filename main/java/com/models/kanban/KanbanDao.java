@@ -70,8 +70,18 @@ public class KanbanDao {
 	 * @return
 	 */
 	public ArrayList<Kanban> getList(String status) {
+		ArrayList<DBField> bindings = new ArrayList<>();
+		String sql = "SELECT a.*, b.memId, b.memNm FROM worklist a LEFT JOIN member b ON a.memNo = b.memNo";
+		if (status != null) {
+			sql += " WHERE a.status = ?";
+			bindings.add(DB.setBinding("String", status));
+		}
 		
-		return null;
+		sql += " ORDER BY a.regDt DESC";
+		
+		ArrayList<Kanban> list = DB.executeQuery(sql, bindings, new Kanban());
+		
+		return list;
 	}
 	
 	public ArrayList<Kanban> getList() {
