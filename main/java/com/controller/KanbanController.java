@@ -105,6 +105,8 @@ public class KanbanController extends HttpServlet {
 
 	/** 작업 삭제 */
 	private void removeController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		KanbanDao dao = KanbanDao.getInstance();
+		dao.delete(request);
 		
 	}
 	

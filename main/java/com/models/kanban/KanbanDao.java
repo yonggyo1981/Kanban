@@ -129,6 +129,40 @@ public class KanbanDao {
 	public ArrayList<FileInfo> getAttachFiles() {
 		return attachFiles;
 	}
+	
+	/**
+	 * 작업 삭제 
+	 * 
+	 * @param idx 작업 등록번호
+	 * @return
+	 */
+	public boolean delete(int idx) {
+		
+		/**
+		 * 0. 작업 정보
+		 * 1. 첨부 파일 삭제  
+		 * 2. 작업 내용 삭제
+		 */
+		Kanban data = get(idx);
+		if (data == null)
+			return false;
+		
+		FileUpload fileUpload = FileUpload.getInstance();
+		ArrayList<FileInfo> list = getAttachFiles();
+		for (FileInfo file : list) {
+			fileUpload.delete(file.getIdx());
+		}
+		
+		return false;
+	}
+	
+	public boolean delete(HttpServletRequest request) {
+		int idx = 0;
+		if (request.getParameter("idx") != null) {
+			idx = Integer.valueOf(request.getParameter("idx"));
+		}
+		return delete(idx);
+	}
 }
 
 
