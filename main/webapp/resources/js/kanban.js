@@ -74,7 +74,18 @@ function callbackWorkView() {
 		el.addEventListener("click", function(e) {
 			const target = e.target.parentElement;
 			const idx = target.dataset.idx;
-			
+			axios({
+				url : "../file/delete/" + idx,
+				method : "GET",
+			}).then(function(res) {
+				if (res.data.trim() == "1") { // 삭제 성공 
+					target.parentElement.removeChild(target);
+				} else { // 삭제 실패
+					alert("파일 삭제 실패하였습니다.");
+				}
+			}).catch(function(err) {
+				console.error(err);
+			});
 		}, false);
 	});
 }
