@@ -46,7 +46,7 @@
 	</dl>	
 	</c:if>
 	<div class='btns'>
-		<a href='../kanban/remove?idx=${data.idx}' class='btn' onclick="return('정말 삭제하시겠습니까?');" target='ifrmHidden'>삭제</a>
+		<a href='../kanban/remove?idx=${data.idx}' class='btn' onclick="return confirm('정말 삭제하시겠습니까?');" target='ifrmHidden'>삭제</a>
 		<span class='btn update_work' data-idx='${data.idx}'>수정</span>
 	</div>
 </div>

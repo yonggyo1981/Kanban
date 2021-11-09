@@ -92,6 +92,15 @@ function callbackWorkView() {
 			});
 		}, false);
 	});
+	
+	/** 작업 수정 */
+	const updateWork = document.querySelector(".update_work");
+	if (updateWork) {
+		updateWork.addEventListener("click", function() {
+			
+		}, false);
+	}	
 }
+
 
 
