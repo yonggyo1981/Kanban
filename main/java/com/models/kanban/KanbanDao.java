@@ -5,10 +5,13 @@ import javax.servlet.http.*;
 
 import com.core.*;
 import com.models.member.*;
+import com.models.file.*;
 
 public class KanbanDao {
 	
 	private static KanbanDao instance = new KanbanDao();
+	private ArrayList<FileInfo> attachFiles = null; // 첨부파일 목록
+	
 	private KanbanDao() {};
 	
 	public static KanbanDao getInstance() {
@@ -102,7 +105,10 @@ public class KanbanDao {
 		Kanban data = DB.executeQueryOne(sql, bindings, new Kanban());
 		
 		/** 첨부파일 S */
-		
+		if (data != null) {
+			long gid = data.getGid();
+			attachFiles = FileUpload.getInstance().getFiles(gid);
+		}
 		/** 첨부파일 E */
 		return data;
 	}
@@ -113,6 +119,15 @@ public class KanbanDao {
 			idx = Integer.valueOf(request.getParameter("idx"));
 		}
 		return get(idx);
+	}
+	
+	/**
+	 * 작업 상세 첨부파일 목록 
+	 * 
+	 * @return
+	 */
+	public ArrayList<FileInfo> getAttachFiles() {
+		return attachFiles;
 	}
 }
 
