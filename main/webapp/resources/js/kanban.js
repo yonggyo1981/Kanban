@@ -72,13 +72,17 @@ function callbackWorkView() {
 	const deleteFiles = document.querySelectorAll(".attach_files .delete_file");
 	deleteFiles.forEach(function(el) {
 		el.addEventListener("click", function(e) {
+			if (!confirm('정말 삭제하시겠습니까?')) {
+				return;
+			}
+			
 			const target = e.target.parentElement;
 			const idx = target.dataset.idx;
 			axios({
 				url : "../file/delete/" + idx,
 				method : "GET",
 			}).then(function(res) {
-				if (res.data.trim() == "1") { // 삭제 성공 
+				if (res.data == "1") { // 삭제 성공 
 					target.parentElement.removeChild(target);
 				} else { // 삭제 실패
 					alert("파일 삭제 실패하였습니다.");
