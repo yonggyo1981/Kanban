@@ -44,6 +44,9 @@ public class KanbanController extends HttpServlet {
 			case "remove" : // 작업 제거
 				removeController(request, response);
 				break;
+			case "view" : // 작업 상세보기
+				viewController(request, response);
+				break;
 			default : // 없는 페이지 
 				RequestDispatcher rd = request.getRequestDispatcher("/views/error/404.jsp");
 				rd.forward(request, response);
@@ -102,6 +105,12 @@ public class KanbanController extends HttpServlet {
 	/** 작업 삭제 */
 	private void removeController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	}
+	
+	/** 작업 상세보기 */
+	private void viewController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/view.jsp");
+		rd.include(request, response);
 	}
 }
 
