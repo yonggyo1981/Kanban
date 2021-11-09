@@ -3,12 +3,23 @@
 *
 */
 window.addEventListener("DOMContentLoaded", function() {
+	/** 작업 등록 */
 	const addWork = document.querySelector(".add_work");
 	if (addWork) {
 		addWork.addEventListener("click", function() {
 			layer.popup("../kanban/add", 500, 600, callbackAddPopup);
 		}, false);
 	}
+	
+	/** 작업 상세 보기 */
+	const showWork = document.querySelector(".show_work");
+	if (showWork) {
+		showWork.addEventListener("click", function(e) {
+			const el = e.target;
+			console.log(el);
+		}, false);
+	}
+	
 }, false);
 
 function callbackAddPopup()
