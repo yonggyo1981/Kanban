@@ -21,20 +21,28 @@
 	</dl>
 	<dl>
 		<dt>제목</dt>
-		<dd>
-			
-		</dd>
+		<dd>${data.subject}</dd>
 	</dl>
 	<dl>
 		<dt>작업내용</dt>
 		<dd>
-			
+			${fn:replace(data.content,'\\n', '<br>')}
 		</dd>
 	</dl>
+	<c:if test='${attachFiles != null}'>
 	<dl>
 		<dt>첨부파일</dt>
-		<dd >
-			
+		<dd>
+			<ul>
+			<c:forEach var="item" items="${attachFiles}" varStatus="status">
+				<li class='attach_file' data-idx='${item.idx}'>
+					${status.count}.
+					<a href='../file/download/${item.idx}'>${item.orignalName}</a>
+					<i class='xi-trash delete_file'></i>
+				</li>
+			</c:forEach>
+			</ul>
 		</dd>
 	</dl>	
+	</c:if>
 </div>
