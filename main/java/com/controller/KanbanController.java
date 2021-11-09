@@ -72,7 +72,11 @@ public class KanbanController extends HttpServlet {
 		if (httpMethod.equals("POST")) { // 등록 처리 
 			try {
 				KanbanDao dao = KanbanDao.getInstance();
-				dao.add(request);
+				boolean result = dao.add(request);
+				if (!result) {
+					throw new Exception("작업등록 실패하였습니다.");
+				}
+				
 			} catch (Exception e) {
 				out.printf("<script>alert('%s');</script>", e.getMessage());
 			}
