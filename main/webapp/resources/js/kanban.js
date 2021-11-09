@@ -73,7 +73,8 @@ function callbackWorkView() {
 	deleteFiles.forEach(function(el) {
 		el.addEventListener("click", function(e) {
 			const target = e.target.parentElement;
-			console.log(target);
+			const idx = target.dataset.idx;
+			
 		}, false);
 	});
 }
