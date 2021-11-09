@@ -25,10 +25,10 @@ li { margin: 0; }
 
 /** 팝업 공통 */
 .popup_tit {
-	font-size: 15px;
+	font-size: 17px;
 	font-weight: bold;
-	padding-bottom: 15px;
-	border: 2px solid #212121;
+	padding: 10px 10px 15px ;
+	border-bottom: 2px solid #212121;
 	margin-bottom: 20px;
 }
 

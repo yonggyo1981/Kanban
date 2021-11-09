@@ -60,3 +60,19 @@
 	display: table-cell;
 }
 
+#frmAdd .btn { 
+	display: inline-block;
+	padding: 5px 10px; 
+	border: 1px solid #d5d5d5;
+	cursor: pointer;
+	font-size: 11px;
+	border-radius: 2px;
+}
+
+#frmAdd .btn:hover {
+	background: #212121;
+	border-color: #212121;
+	color: #ffffff;
+}
+
+
