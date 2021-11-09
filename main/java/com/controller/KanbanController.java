@@ -7,6 +7,7 @@ import java.io.*;
 
 import com.core.*;
 import com.models.kanban.*;
+import com.models.file.*;
 
 /**
  *   /kanban 컨트롤러
@@ -119,6 +120,12 @@ public class KanbanController extends HttpServlet {
 			if (data == null) {
 				throw new Exception("작업내용이 없습니다.");
 			}
+			// 첨부파일 
+			ArrayList<FileInfo> attachFiles = dao.getAttachFiles();
+			
+			request.setAttribute("data", data);
+			request.setAttribute("attachFiles", attachFiles);
+			
 		} catch (Exception e) {
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 			return;
