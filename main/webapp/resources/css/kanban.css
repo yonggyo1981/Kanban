@@ -1,0 +1,32 @@
+.body-kanban h1 {
+	text-align: center;	
+}
+
+.work_list .box { 
+	width: calc(100% / 3); 
+	float: left; 
+	padding: 10px;
+}
+
+.work_list:after {
+	clear: left;
+	content: '';
+	display: block;
+}
+
+.work_list li {
+	border: 1px solid #d5d5d5;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+.work_list h2 {
+	text-align: center;
+}
+
+.body-kanban .top_btn { 
+	text-align: right;
+	margin-top: 15px;
+}

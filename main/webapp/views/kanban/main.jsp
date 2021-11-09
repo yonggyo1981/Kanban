@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <main class='layout_width'>
-	<button type="button" class='btn1 add_work'>작업등록</button>
+	<div class='top_btn'>
+		<button type="button" class='btn1 add_work'>작업등록</button>
+	</div>
 	
 	<h1>작업 요약</h1>
 	
