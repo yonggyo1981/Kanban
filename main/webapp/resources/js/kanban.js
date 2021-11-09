@@ -96,8 +96,10 @@ function callbackWorkView() {
 	/** 작업 수정 */
 	const updateWork = document.querySelector(".update_work");
 	if (updateWork) {
-		updateWork.addEventListener("click", function() {
-			
+		updateWork.addEventListener("click", function(e) {
+			const idx = e.target.dataset.idx;
+			const url = "../kanban/edit?idx=" + idx;
+			layer.popup(url, 500, 600, callbackAddPopup);
 		}, false);
 	}	
 }
