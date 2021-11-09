@@ -88,6 +88,22 @@
 	border: 0; 
 	cursor: pointer;
 	margin-top: 25px;
+	color: #ffffff;
+	border-radius: 5px;
 }
+
+#frmAdd .status_type input[type='radio']+label {
+	display: inline-block;
+	padding: 10px 20px;
+	background: #f8f8f8;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+#frmAdd .status_type input[type='radio']:checked+label {
+	background: #212121;
+	color: #ffffff;
+} 
+
 
 
