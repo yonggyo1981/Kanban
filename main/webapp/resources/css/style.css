@@ -23,6 +23,15 @@ li { margin: 0; }
 	border-bottom: 1px solid #212121;
 }
 
+/** 팝업 공통 */
+.popup_tit {
+	font-size: 15px;
+	font-weight: bold;
+	padding-bottom: 15px;
+	border: 2px solid #212121;
+	margin-bottom: 20px;
+}
+
 /** header/inc/common.jsp */
 header .main_top  { 
 	background-color: #f8f8f8; 

@@ -30,3 +30,33 @@
 	text-align: right;
 	margin-top: 15px;
 }
+
+#frmAdd input[type='text'] {
+	width: 100%;
+	height: 45px; 
+	padding: 0 10px;
+	border: 1px solid #d5d5d5;	
+}
+
+#frmAdd textarea {
+	width: 100%; 
+	height: 180px;
+	padding: 10px;
+	border: 1px solid #d5d5d5;
+	resize: none;	
+}
+
+#frmAdd dl { 
+	display: table;
+	width: 100%;
+}
+
+#frmAdd dt { 
+	display: table-cell;
+	width: 100px;
+}
+
+#frmAdd dd {
+	display: table-cell;
+}
+

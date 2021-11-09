@@ -3,7 +3,7 @@
 	<input type="hidden" name="gid" value="${gid}" />
 	<dl>
 		<dt>작업구분</dt>
-		<dd>
+		<dd class='status_type'>
 			<input type="radio" name="status" value="ready" id="status_ready" checked>
 			<label for="status_ready">준비중</label>
 			<input type="radio" name="status" value="progress" id="status_progress">

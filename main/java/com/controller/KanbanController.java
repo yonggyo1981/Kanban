@@ -76,7 +76,7 @@ public class KanbanController extends HttpServlet {
 				if (!result) {
 					throw new Exception("작업등록 실패하였습니다.");
 				}
-				
+				out.print("<script>parent.location.reload();</script>");
 			} catch (Exception e) {
 				out.printf("<script>alert('%s');</script>", e.getMessage());
 			}
