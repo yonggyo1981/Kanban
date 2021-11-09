@@ -7,10 +7,10 @@
 		<dt>작업구분</dt>
 		<dd class='status_type'>
 			<c:choose>
-				<c:when test="${status == 'progress'}">
+				<c:when test="${data.status == 'progress'}">
 					진행중
 				</c:when>
-				<c:when test="${status == 'done'}">
+				<c:when test="${data.status == 'done'}">
 					완료
 				</c:when>
 				<c:otherwise>
@@ -33,11 +33,11 @@
 	<dl>
 		<dt>첨부파일</dt>
 		<dd>
-			<ul>
+			<ul class='attach_files'>
 			<c:forEach var="item" items="${attachFiles}" varStatus="status">
-				<li class='attach_file' data-idx='${item.idx}'>
+				<li class='file' data-idx='${item.idx}'>
 					${status.count}.
-					<a href='../file/download/${item.idx}'>${item.orignalName}</a>
+					<a href='../file/download/${item.idx}'>${item.originalName}</a>
 					<i class='xi-trash delete_file'></i>
 				</li>
 			</c:forEach>

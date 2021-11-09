@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", function() {
 				const el = e.target;
 				const idx = el.dataset.idx;
 				const url = "../kanban/view?idx=" + idx;
-				layer.popup(url, 500, 600);
+				layer.popup(url, 500, 600, callbackWorkView);
 			});
 		});
 	}
@@ -66,3 +66,16 @@ function delFileForm() {
 		}
 	}
 }
+
+/** 작업상세 콜백 */
+function callbackWorkView() {
+	const deleteFiles = document.querySelectorAll(".attach_files .delete_file");
+	deleteFiles.forEach(function(el) {
+		el.addEventListener("click", function(e) {
+			const target = e.target.parentElement;
+			console.log(target);
+		}, false);
+	});
+}
+
+
