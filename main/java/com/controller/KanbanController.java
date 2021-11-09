@@ -105,9 +105,20 @@ public class KanbanController extends HttpServlet {
 
 	/** 작업 삭제 */
 	private void removeController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		KanbanDao dao = KanbanDao.getInstance();
-		dao.delete(request);
-		
+		try {
+			if (request.getParameter("idx") == null) {
+				throw new Exception("잘못된 접근입니다.");
+			}
+			KanbanDao dao = KanbanDao.getInstance();
+			boolean result = dao.delete(request);
+			if (!result) {
+				throw new Exception("삭제 실패하였습니다.");
+			}
+			
+			out.print("<script>parent.location.reload();</script>");
+		} catch (Exception e) {
+			out.printf("<script>alert('%s');</script>", e.getMessage());
+		}
 	}
 	
 	/** 작업 상세보기 */
