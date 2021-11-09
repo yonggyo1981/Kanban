@@ -139,8 +139,8 @@ public class KanbanDao {
 	public boolean delete(int idx) {
 		
 		/**
-		 * 0. 작업 정보
-		 * 1. 첨부 파일 삭제  
+		 * 0. 작업 정보 - O
+		 * 1. 첨부 파일 삭제 - O
 		 * 2. 작업 내용 삭제
 		 */
 		Kanban data = get(idx);
@@ -153,7 +153,12 @@ public class KanbanDao {
 			fileUpload.delete(file.getIdx());
 		}
 		
-		return false;
+		String sql = "DELETE FROM worklist WHERE idx = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(DB.setBinding("Integer", String.valueOf(idx)));
+		int rs = DB.executeUpdate(sql, bindings);
+		
+		return (rs > 0)?true:false;
 	}
 	
 	public boolean delete(HttpServletRequest request) {
