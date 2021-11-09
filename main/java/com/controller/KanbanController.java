@@ -109,10 +109,20 @@ public class KanbanController extends HttpServlet {
 	
 	/** 작업 상세보기 */
 	private void viewController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		KanbanDao dao = KanbanDao.getInstance();
-		
-		dao.get(request);
-		
+		try {
+			if (request.getParameter("idx") == null) {
+				throw new Exception("잘못된 접근입니다.");
+			}
+			
+			KanbanDao dao = KanbanDao.getInstance();
+			Kanban data = dao.get(request);
+			if (data == null) {
+				throw new Exception("작업내용이 없습니다.");
+			}
+		} catch (Exception e) {
+			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
+			return;
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/view.jsp");
 		rd.include(request, response);
 	}
