@@ -12,12 +12,16 @@ window.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	/** 작업 상세 보기 */
-	const showWork = document.querySelector(".show_work");
-	if (showWork) {
-		showWork.addEventListener("click", function(e) {
-			const el = e.target;
-			console.log(el);
-		}, false);
+	const showWorkList = document.querySelectorAll(".show_work");
+	if (showWorkList.length > 0) {
+		showWorkList.forEach(function(showWork) {
+			showWork.addEventListener("click", function(e) {
+				const el = e.target;
+				const idx = el.dataset.idx;
+				const url = "../kanban/view?idx=" + idx;
+				layer.popup(url, 500, 600);
+			});
+		});
 	}
 	
 }, false);
