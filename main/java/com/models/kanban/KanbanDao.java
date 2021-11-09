@@ -87,4 +87,25 @@ public class KanbanDao {
 	public ArrayList<Kanban> getList() {
 		return getList(null);
 	}
+	
+	/**
+	 * 작업 상세 
+	 * 
+	 * @param idx 작업 등록번호
+	 * @return
+	 */
+	public Kanban get(int idx) {
+		
+		return null;
+	}
+	
+	public Kanban get(HttpServletRequest request) {
+		int idx = 0;
+		if (request.getParameter("idx") != null) {
+			idx = Integer.valueOf(request.getParameter("idx"));
+		}
+		return get(idx);
+	}
 }
+
+

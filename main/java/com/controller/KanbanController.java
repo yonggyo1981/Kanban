@@ -109,6 +109,10 @@ public class KanbanController extends HttpServlet {
 	
 	/** 작업 상세보기 */
 	private void viewController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		KanbanDao dao = KanbanDao.getInstance();
+		
+		dao.get(request);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/view.jsp");
 		rd.include(request, response);
 	}
