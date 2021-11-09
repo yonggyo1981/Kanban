@@ -96,7 +96,15 @@ public class KanbanDao {
 	 */
 	public Kanban get(int idx) {
 		
-		return null;
+		String sql = "SELECT a.*, b.memId, b.memNm FROM worklist a LEFT JOIN member b ON a.memNo = b.memNo WHERE a.idx = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(DB.setBinding("Integer", String.valueOf(idx)));
+		Kanban data = DB.executeQueryOne(sql, bindings, new Kanban());
+		
+		/** 첨부파일 S */
+		
+		/** 첨부파일 E */
+		return data;
 	}
 	
 	public Kanban get(HttpServletRequest request) {
