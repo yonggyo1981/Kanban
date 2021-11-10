@@ -128,8 +128,15 @@ public class KanbanDao {
 			status = (String)object;
 		}
 		
+		int memNo = 0;
+		if (request.getAttribute("member") != null) {
+			Member member = (Member)request.getAttribute("member");
+			memNo = member.getMemNo();
+		}
+		
 		ArrayList<DBField> bindings = new ArrayList<>();
 		String sql = "SELECT a.*, b.memId, b.memNm FROM worklist a LEFT JOIN member b ON a.memNo = b.memNo WHERE a.memNo = ?";
+		bindings.add(DB.setBinding("Integer", String.valueOf(memNo)));
 		if (status != null) {
 			sql += " AND a.status = ?";
 			bindings.add(DB.setBinding("String", status));

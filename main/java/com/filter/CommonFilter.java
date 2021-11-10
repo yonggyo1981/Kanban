@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import com.core.*;
 import com.models.file.FileInfo;
-import com.models.kanban.KanbanDao;
+import com.models.kanban.*;
 import com.models.member.*;
 
 /**
