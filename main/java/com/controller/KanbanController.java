@@ -188,10 +188,17 @@ public class KanbanController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void listController(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
-		String status = request.getParameter("status");
-		KanbanDao dao = KanbanDao.getInstance();
-		ArrayList<Kanban> list = dao.getList(status);
-		
+		try {
+			if (request.getParameter("status") == null) {
+				throw new Exception("잘못된 접근입니다.");
+			}
+			
+			KanbanDao dao = KanbanDao.getInstance();
+			ArrayList<Kanban> list = dao.getList(request);
+		} catch (Exception e) {
+			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
+			return;
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/list.jsp");
 		rd.include(request, response);
 	}
