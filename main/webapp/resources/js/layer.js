@@ -26,7 +26,6 @@ const layer = {
 		}
 		
 		/** 레이어 팝업 영역 */
-		let innerDiv;
 		if (!document.querySelector("#layer_popup")) {
 			const div = document.createElement("div");
 			div.id = "layer_popup";
@@ -45,7 +44,7 @@ const layer = {
 			div.appendChild(closeBtn);
 			/** 닫기 버늩 추가 E */
 			
-			innerDiv = document.createElement("div");
+			const innerDiv = document.createElement("div");
 			innerDiv.id = "inner_html";
 
 			div.appendChild(innerDiv);	
