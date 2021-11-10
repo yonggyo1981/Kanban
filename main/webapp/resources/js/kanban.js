@@ -41,6 +41,9 @@ function callbackAddPopup()
 			delFileForm();
 		}, false);
 	}
+	
+	/** 파일 삭제 처리(수정) */
+	
 }
 
 /** 파일 첨부 추가 */

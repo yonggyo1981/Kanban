@@ -50,7 +50,7 @@
 					<c:forEach var="item" items="${attachFiles}" varStatus="status">
 						<li data-idx='${item.idx}'>
 							${status.count}.
-							<a href='../file/download/${item.idx}'>${item.originallName}</a>
+							<a href='../file/download/${item.idx}'>${item.originalName}</a>
 							<i class='xi-trash delete_file'></i>
 						</li>
 					</c:forEach>
