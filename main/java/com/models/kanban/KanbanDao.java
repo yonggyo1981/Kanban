@@ -111,7 +111,15 @@ public class KanbanDao {
 	 * @param status
 	 * @return
 	 */
-	public ArrayList<Kanban> getList(String status) {
+	public ArrayList<Kanban> getList(Object object) {
+		String status = null;
+		if (object instanceof HttpServletRequest) {
+			HttpServletRequest req = (HttpServletRequest)object;
+			status = req.getParameter("status");
+		} else {
+			status = (String)object;
+		}
+		
 		ArrayList<DBField> bindings = new ArrayList<>();
 		String sql = "SELECT a.*, b.memId, b.memNm FROM worklist a LEFT JOIN member b ON a.memNo = b.memNo";
 		if (status != null) {
@@ -125,7 +133,7 @@ public class KanbanDao {
 		
 		return list;
 	}
-	
+		
 	public ArrayList<Kanban> getList() {
 		return getList(null);
 	}

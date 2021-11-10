@@ -48,6 +48,9 @@ public class KanbanController extends HttpServlet {
 			case "view" : // 작업 상세보기
 				viewController(request, response);
 				break;
+			case "list" : // 작업 구분별 리스트 
+				listController(request, response);
+				break;
 			default : // 없는 페이지 
 				RequestDispatcher rd = request.getRequestDispatcher("/views/error/404.jsp");
 				rd.forward(request, response);
@@ -173,6 +176,23 @@ public class KanbanController extends HttpServlet {
 			return;
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/view.jsp");
+		rd.include(request, response);
+	}
+	
+	/**
+	 * 작업 구분별 목록 출력 
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void listController(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		String status = request.getParameter("status");
+		KanbanDao dao = KanbanDao.getInstance();
+		ArrayList<Kanban> list = dao.getList(status);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/list.jsp");
 		rd.include(request, response);
 	}
 }
