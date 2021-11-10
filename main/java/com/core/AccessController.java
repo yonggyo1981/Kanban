@@ -18,7 +18,7 @@ public class AccessController {
 	private static boolean isLogin;
 	
 	/** 회원 전용 URI */
-	private static String[] memberOnlyURI = {"/member/info" };
+	private static String[] memberOnlyURI = {"/member/info", "/kanban" };
 	
 	/** 비회원 전용 URI */
 	private static String[] guestOnlyURI = {"/member/join", "/member/findid", "/member/findpw"};

@@ -2,6 +2,7 @@ package com.models.kanban;
 
 import java.util.*;
 import javax.servlet.http.*;
+import javax.servlet.*;
 
 import com.core.*;
 import com.models.member.*;
@@ -11,6 +12,7 @@ public class KanbanDao {
 	
 	private static KanbanDao instance = new KanbanDao();
 	private ArrayList<FileInfo> attachFiles = null; // 첨부파일 목록
+	private HttpServletRequest request;
 	
 	private KanbanDao() {};
 	
@@ -20,6 +22,10 @@ public class KanbanDao {
 		}
 		
 		return instance;
+	}
+	
+	public static void init(ServletRequest request) {
+		
 	}
 	
 	/**
@@ -121,9 +127,9 @@ public class KanbanDao {
 		}
 		
 		ArrayList<DBField> bindings = new ArrayList<>();
-		String sql = "SELECT a.*, b.memId, b.memNm FROM worklist a LEFT JOIN member b ON a.memNo = b.memNo";
+		String sql = "SELECT a.*, b.memId, b.memNm FROM worklist a LEFT JOIN member b ON a.memNo = b.memNo WHERE a.memNo = ?";
 		if (status != null) {
-			sql += " WHERE a.status = ?";
+			sql += " AND a.status = ?";
 			bindings.add(DB.setBinding("String", status));
 		}
 		
