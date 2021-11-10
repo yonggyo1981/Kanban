@@ -12,7 +12,7 @@ public class KanbanDao {
 	
 	private static KanbanDao instance = new KanbanDao();
 	private ArrayList<FileInfo> attachFiles = null; // 첨부파일 목록
-	private HttpServletRequest request;
+	private static HttpServletRequest request;
 	
 	private KanbanDao() {};
 	
@@ -25,7 +25,9 @@ public class KanbanDao {
 	}
 	
 	public static void init(ServletRequest request) {
-		
+		if (request instanceof HttpServletRequest) {
+			KanbanDao.request = (HttpServletRequest)request;
+		}
 	}
 	
 	/**
