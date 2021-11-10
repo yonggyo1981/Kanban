@@ -64,7 +64,25 @@ public class KanbanDao {
 	 */
 	public boolean edit(HttpServletRequest request) throws Exception {
 		
-		return false;
+		HashMap<String, String> params = FileUpload.getInstance().upload(request).get();
+				
+		/** 유효성 검사 S */
+		if (params.get("idx") == null) {
+			throw new Exception("잘못된 접근입니다.");
+		}
+		
+		checkWorkData(params);
+		/** 유효성 검사 E */
+		
+		String sql = "UPDATE worklist SET status = ?, subject = ?, content = ?, modDt = NOW() WHERE idx = ?";
+		ArrayList<DBField> bindings = new ArrayList<>();
+		bindings.add(DB.setBinding("String", params.get("status")));
+		bindings.add(DB.setBinding("String", params.get("subject")));
+		bindings.add(DB.setBinding("String", params.get("content")));
+		bindings.add(DB.setBinding("Integer", params.get("idx")));
+		
+		int rs = DB.executeUpdate(sql, bindings);
+		return (rs >0)?true:false;
 	}
 	
 	/**
