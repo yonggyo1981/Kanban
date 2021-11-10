@@ -42,6 +42,22 @@
 			<textarea name="content">${data.content}</textarea>
 		</dd>
 	</dl>
+	<c:if test="${attachFiles != null}">
+		<dl>
+			<dt>첨부파일목록</dt>
+			<dd>
+				<ul class="attach_files">
+					<c:forEach var="item" items="${attachFiles}" varStatus="status">
+						<li data-idx='${item.idx}'>
+							${status.count}.
+							<a href='../file/download/${item.idx}'>${item.originallName}</a>
+							<i class='xi-trash delete_file'></i>
+						</li>
+					</c:forEach>
+				</ul>
+			</dd>
+		</dl>
+	</c:if>
 	<dl>
 		<dt>
 			파일첨부<br>

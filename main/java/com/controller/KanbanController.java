@@ -109,9 +109,11 @@ public class KanbanController extends HttpServlet {
 				if (data == null) {
 					throw new Exception("작업내용이 없습니다.");
 				}
+				ArrayList<FileInfo> attachFiles = dao.getAttachFiles();
 				
 				request.setAttribute("mode", "edit");
 				request.setAttribute("data", data);
+				request.setAttribute("attachFiles", attachFiles);
 			} catch (Exception e) {
 				out.printf("<script>alert('%s');layer.close();</script>", e.getMessage());
 				return;
