@@ -86,6 +86,7 @@ public class KanbanController extends HttpServlet {
 			}
 			
 		} else { // 등록 양식
+			request.setAttribute("mode", "add");
 			request.setAttribute("gid", System.currentTimeMillis());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/form.jsp");
@@ -100,16 +101,24 @@ public class KanbanController extends HttpServlet {
 			
 		} else { // 수정 양식
 			try {
+				if (request.getParameter("idx") == null) {
+					throw new Exception("잘못된 접근입니다.");
+				}
+				
 				Kanban data = dao.get(request);
-				throw new Exception("테스트!");
+				if (data == null) {
+					throw new Exception("작업내용이 없습니다.");
+				}
+				
+				request.setAttribute("mode", "edit");
+				request.setAttribute("data", data);
 			} catch (Exception e) {
 				out.printf("<script>alert('%s');layer.close();</script>", e.getMessage());
 				return;
 			}
-			/*
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/form.jsp");
 			rd.include(request, response);
-			*/
 		}
 	}
 
