@@ -98,9 +98,11 @@ public class KanbanController extends HttpServlet {
 	private void editController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		KanbanDao dao = KanbanDao.getInstance();
 		if (httpMethod.equals("POST")) { // 수정 처리
-			
-			
-			
+			try {
+				dao.edit(request);
+			} catch (Exception e) {
+				out.printf("<script>alert('%s');</script>", e.getMessage());
+			}
 		} else { // 수정 양식
 			try {
 				if (request.getParameter("idx") == null) {
