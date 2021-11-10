@@ -54,6 +54,7 @@ function addFileForm() {
 		const addRows = file.cloneNode(true);
 		const cnt = fileUpload.childElementCount + 1;
 		addRows.firstElementChild.name = "file" + cnt;
+		addRows.firstElementChild.value = "";
 		
 		fileUpload.appendChild(addRows);
 	}
