@@ -62,7 +62,10 @@ const layer = {
 			url : url,
 		})
 		.then((res) => {
-			innerDiv.innerHTML = res.data;
+			const el = document.querySelector("#layer_popup #inner_html");
+			if (el) {
+				el.innerHTML = res.data;
+			}
 			if (typeof callback == 'function') {
 				callback();
 			}
