@@ -68,7 +68,14 @@
 			<div class='rows'><input type="file" name="file1"></div>
 		</dd>
 	</dl>	
-	<input type="submit" value="작업등록">
+	<c:choose> 
+		<c:when test="${data == null}">
+			<input type="submit" value="작업등록">
+		</c:when>
+		<c:otherwise>
+			<input type="submit" value="작업수정">
+		</c:otherwise>
+	</c:choose>
 </form>
 
 
