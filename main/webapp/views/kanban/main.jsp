@@ -1,5 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String status = request.getParameter("status");
+%>
+<c:set var="status" value="<%=status%>" />
 <main class='layout_width'>
 	<div class='top_btn'>
 		<button type="button" class='btn1 add_work'>작업등록</button>

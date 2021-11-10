@@ -195,11 +195,12 @@ public class KanbanController extends HttpServlet {
 			
 			KanbanDao dao = KanbanDao.getInstance();
 			ArrayList<Kanban> list = dao.getList(request);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 			return;
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/list.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/main.jsp");
 		rd.include(request, response);
 	}
 }
