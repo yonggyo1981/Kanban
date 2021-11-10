@@ -29,6 +29,7 @@
 	</h1>
 	
 	<div class='work_list'>
+		<c:if test="${status == null || status == 'ready'}">
 		<div class='box ready'>
 			<h2>준비중</h2>
 			<ul>
@@ -39,6 +40,7 @@
 			</c:forEach>
 			</ul>		
 		</div>
+		</c:if>
 		<div class='box progress'>
 			<h2>진행중</h2>
 			<ul>
