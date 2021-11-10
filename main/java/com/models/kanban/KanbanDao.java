@@ -33,19 +33,8 @@ public class KanbanDao {
 		HashMap<String, String> params = FileUpload.getInstance().upload(request).get();
 		
 		/** 유효성 검사 S */
-		String[] required = {
-				"status//작업구분을 선택하세요",
-				"subject//제목을 입력하세요.",
-				"content//작업내용을 입력하세요",
-		};
-		for (String s : required) {
-			String[] param = s.split("//");
-			String value = params.get(param[0]);
-			if (value == null || value.trim().equals("")) {
-				throw new Exception(param[1]);
-			}
-		}
-		/** 유혀성 검사 E */
+		checkWorkData(params);
+		/** 유효성 검사 E */
 		
 		int memNo = 0;
 		if (request.getAttribute("member") != null) {
@@ -66,6 +55,38 @@ public class KanbanDao {
 		return (rs  > 0)?true:false;
 	}
 	
+	/**
+	 * 작업 수정 처리 
+	 * 
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean edit(HttpServletRequest request) throws Exception {
+		
+		return false;
+	}
+	
+	/**
+	 * 작업 추가, 수정시 데이터 검증 
+	 * 
+	 * @param params
+	 * @throws Exception
+	 */
+	public void checkWorkData(HashMap<String, String> params) throws Exception {
+		String[] required = {
+				"status//작업구분을 선택하세요",
+				"subject//제목을 입력하세요.",
+				"content//작업내용을 입력하세요",
+		};
+		for (String s : required) {
+			String[] param = s.split("//");
+			String value = params.get(param[0]);
+			if (value == null || value.trim().equals("")) {
+				throw new Exception(param[1]);
+			}
+		}
+	}
 	/**
 	 * 작업 목록 조회 
 	 * 
