@@ -33,13 +33,13 @@
 	<dl>
 		<dt>제목</dt>
 		<dd>
-			<input type="text" name="subject">
+			<input type="text" name="subject" value="${data.subject}">
 		</dd>
 	</dl>
 	<dl>
 		<dt>작업내용</dt>
 		<dd>
-			<textarea name="content"></textarea>
+			<textarea name="content">${data.content}</textarea>
 		</dd>
 	</dl>
 	<dl>
