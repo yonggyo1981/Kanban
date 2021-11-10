@@ -99,7 +99,11 @@ public class KanbanController extends HttpServlet {
 		KanbanDao dao = KanbanDao.getInstance();
 		if (httpMethod.equals("POST")) { // 수정 처리
 			try {
-				dao.edit(request);
+				boolean result = dao.edit(request);
+				if (!result) {
+					throw new Exception("수정에 실패하였습니다.");
+				}
+				out.print("<script>parent.location.reload();</script>");
 			} catch (Exception e) {
 				out.printf("<script>alert('%s');</script>", e.getMessage());
 			}
