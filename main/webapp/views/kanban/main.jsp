@@ -4,6 +4,13 @@
 	String status = request.getParameter("status");
 %>
 <c:set var="status" value="<%=status%>" />
+<c:if test="${status != null}">
+<style>
+	.work_list .box { width: 100%; padding: 0; }
+	.work_list li { float: left; width: calc(100% / 3 - 10px); margin-right: 10px; }
+	.work_list ul:after { content: ''; display: block; clear: left; }
+</style>
+</c:if>
 <main class='layout_width'>
 	<div class='top_btn'>
 		<button type="button" class='btn1 add_work'>작업등록</button>
@@ -41,6 +48,7 @@
 			</ul>		
 		</div>
 		</c:if>
+		<c:if test="${status == null || status == 'progress'}">
 		<div class='box progress'>
 			<h2>진행중</h2>
 			<ul>
@@ -51,6 +59,8 @@
 			</c:forEach>
 			</ul>		
 		</div>
+		</c:if>
+		<c:if test="${status == null || status == 'done' }">
 		<div class='box done'>
 			<h2>완료</h2>
 			<ul>
@@ -61,6 +71,6 @@
 			</c:forEach>
 			</ul>		
 		</div>
+		</c:if>
 	</div>
-	
 </main>
