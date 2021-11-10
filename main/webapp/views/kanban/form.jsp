@@ -12,7 +12,15 @@
 	
 </div>
 <form name="frmAdd" id="frmAdd" method="post" action="../kanban/${mode}" target="ifrmHidden" autocomplete="off" enctype="multipart/form-data">
-	<input type="hidden" name="gid" value="${gid}" />
+	<c:choose>
+		<c:when test="${data == null}">
+			<input type="hidden" name="gid" value="${gid}" />
+		</c:when>
+		<c:otherwise>
+			<input type="hidden" name="idx" value="${data.idx}" />
+			<input type="hidden" name="gid" value="${data.gid}" />
+		</c:otherwise>
+	</c:choose>
 	<dl>
 		<dt>작업구분</dt>
 		<dd class='status_type'>

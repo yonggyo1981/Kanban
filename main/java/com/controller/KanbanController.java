@@ -99,6 +99,8 @@ public class KanbanController extends HttpServlet {
 		KanbanDao dao = KanbanDao.getInstance();
 		if (httpMethod.equals("POST")) { // 수정 처리
 			
+			
+			
 		} else { // 수정 양식
 			try {
 				if (request.getParameter("idx") == null) {
