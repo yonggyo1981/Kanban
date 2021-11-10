@@ -9,7 +9,24 @@
 		<button type="button" class='btn1 add_work'>작업등록</button>
 	</div>
 	
-	<h1>작업 요약</h1>
+	<h1>
+		작업 요약
+		<c:if test="${status != null}">
+		(
+		<c:choose>
+			<c:when test="${status == 'done'}">
+				완료
+			</c:when>
+			<c:when test="${status == 'progress'}">
+				진행중
+			</c:when>
+			<c:otherwise>
+				준비중
+			</c:otherwise>
+		</c:choose>
+		)
+		</c:if>
+	</h1>
 	
 	<div class='work_list'>
 		<div class='box ready'>
