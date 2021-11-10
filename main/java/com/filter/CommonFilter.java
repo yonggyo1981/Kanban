@@ -154,11 +154,9 @@ public class CommonFilter implements Filter {
 			/** 정적 경로 제외 E */
 			
 			String outline = request.getParameter("outline");
-			
 			/** 요청 메서드 GET 방식이 아닌 경우 제외 */
 			String method = req.getMethod().toUpperCase();
-			if (!method.equals("GET") && (outline != null && !outline.equals("print"))) {
-				System.out.println("테스트");
+			if ((!method.equals("GET") && outline == null) || (!method.equals("GET") && outline != null && !outline.equals("print"))) {
 				return false;
 			}
 			
