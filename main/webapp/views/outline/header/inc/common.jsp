@@ -28,16 +28,24 @@
 </header>
 <nav>
 	<ul class='layout_width'>
-		<li>
+		<li
+			<c:if test="${menu == 'work'}"> class='on'</c:if>
+		>
 			<a href="${rootURL}/kanban/work">작업요약</a>
 		</li>
-		<li>
+		<li
+			<c:if test="${menu == 'list_ready'}"> class='on'</c:if>
+		>
 			<a href="${rootURL}/kanban/list?status=ready">준비중</a>
 		</li>
-		<li>
+		<li
+			<c:if test="${menu == 'list_progress'}"> class='on'</c:if>
+		>
 			<a href="${rootURL}/kanban/list?status=progress">진행중</a>
 		</li>
-		<li>
+		<li
+			<c:if test="${menu == 'list_work'}"> class='on'</c:if>
+		>
 			<a href="${rootURL}/kanban/list?status=done">완료</a>
 		</li>
 	</ul>
