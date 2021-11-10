@@ -95,11 +95,21 @@ public class KanbanController extends HttpServlet {
 	
 	/** 작업 수정 */
 	private void editController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		KanbanDao dao = KanbanDao.getInstance();
 		if (httpMethod.equals("POST")) { // 수정 처리
 			
-		} else { // 수정 양식 
+		} else { // 수정 양식
+			try {
+				Kanban data = dao.get(request);
+				throw new Exception("테스트!");
+			} catch (Exception e) {
+				out.printf("<script>alert('%s');layer.close();</script>", e.getMessage());
+				return;
+			}
+			/*
 			RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/form.jsp");
 			rd.include(request, response);
+			*/
 		}
 	}
 
