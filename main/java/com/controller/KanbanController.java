@@ -32,6 +32,14 @@ public class KanbanController extends HttpServlet {
 		}
 		
 		out = response.getWriter();
+		
+		String menu = mode;
+		if (mode.equals("list")) {
+			String status = request.getParameter("status");
+			menu += "_" + status;
+		}
+		request.setAttribute("menu", menu);
+
 		switch(mode) {
 			case "work" : // 작업목록
 				workController(request, response);
@@ -56,12 +64,6 @@ public class KanbanController extends HttpServlet {
 				rd.forward(request, response);
 				
 		}
-		String menu = mode;
-		if (mode.equals("list")) {
-			String status = request.getParameter("status");
-			menu += "_" + status;
-		}
-		request.setAttribute("menu", menu);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
