@@ -43,7 +43,7 @@ function callbackAddPopup()
 	}
 	
 	/** 파일 삭제 처리(수정) */
-	
+	callbackWorkView();
 }
 
 /** 파일 첨부 추가 */
