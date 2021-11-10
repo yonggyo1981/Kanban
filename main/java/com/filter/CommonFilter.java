@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import com.core.*;
 import com.models.file.FileInfo;
+import com.models.kanban.KanbanDao;
 import com.models.member.*;
 
 /**
@@ -85,6 +86,10 @@ public class CommonFilter implements Filter {
 		
 		/** 파일 정보 초기 설정 */
 		FileInfo.init(request);
+		
+		
+		/** KanbanDao */
+		KanbanDao.init(request);
 		
 		// 헤더 출력
 		if (isPrintOk(request)) {
