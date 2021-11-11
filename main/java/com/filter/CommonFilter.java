@@ -27,8 +27,10 @@ public class CommonFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+		Request.set(request);
+		Response.set(response);
+		
 		/** 사이트 설정 초기화 */
-		Config.init(request);
 		Config config = Config.getInstance();
 		
 		/** 로거 초기화 */
