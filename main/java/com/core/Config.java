@@ -28,9 +28,7 @@ public class Config {
 	*  
 	*/
 	private Config() {
-		request = Request.get();
-		requestURI = request.getRequestURI();
-		
+		requestURI = request.getRequestURI();		
 		String configPath = request.getServletContext().getRealPath(".");
 		configPath += File.separator + ".." + File.separator + "config" + File.separator + "config.json";
 		
@@ -77,7 +75,11 @@ public class Config {
 		return instance;
 	}
 	
-	
+	public static void init(ServletRequest request) {
+		if (request instanceof HttpServletRequest) {
+			Config.request = (HttpServletRequest)request;
+		}
+	}
 	/**
 	 * 설정 조회 
 	 * 
@@ -222,7 +224,7 @@ public class Config {
 	 * @return
 	 */
 	public String getBodyClass() {
-		String rootURL = Request.get().getServletContext().getContextPath();
+		String rootURL = request.getServletContext().getContextPath();
 		String URI = requestURI.replace(rootURL, "").replace("index.jsp", "");
 		if (URI.equals("/")) { // 메인페이지
 			return "body-main body-index";

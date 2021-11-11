@@ -26,63 +26,8 @@ public class CommonFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
-		Request.set(request);
-		Response.set(response);
+		BootStrap.init(request, response);
 		
-		/** 사이트 설정 초기화 */
-		Config config = Config.getInstance();
-		
-		/** 로거 초기화 */
-		Logger.init();
-		
-		/** 접속자 정보 로그 */
-		Logger.log();
-		
-		/** URI별 추가 CSS */
-		request.setAttribute("addCss", config.getCss());
-		
-		/** URI별 추가 JS */
-		request.setAttribute("addScripts", config.getScripts());
-		
-		/** 사이트 기본 제목 */
-		request.setAttribute("pageTitle", config.get("PageTitle"));
-		
-		/** Environment - development(개발중), production(서비스 중) */
-		String env = ((String)config.get("Environment")).equals("production")?"production":"development";
-		request.setAttribute("environment", env);
-		
-		/** CSS, JS 버전 */
-		String cssJsVersion = null;
-		if (env.equals("development")) {
-			cssJsVersion = "?v=" + String.valueOf(System.currentTimeMillis());
-		}
-		request.setAttribute("cssJsVersion", cssJsVersion);
-		
-		/** Body 태그 추가 클래스 */
-		request.setAttribute("bodyClass",  config.getBodyClass());
-		
-		/** rootURL */
-		String rootURL = request.getServletContext().getContextPath();
-		request.setAttribute("rootURL", rootURL);
-		
-		/** rootPath */
-		String rootPath = request.getServletContext().getRealPath(".");
-		request.setAttribute("rootPath", rootPath);
-		
-		/** 요청 메서드 + requestURL, Request Encoding 설정 */
-		if (request instanceof HttpServletRequest) {
-			HttpServletRequest req = (HttpServletRequest)request;
-			
-			request.setAttribute("httpMethod", req.getMethod().toUpperCase());
-			request.setAttribute("requestURL", req.getRequestURL().toString());
-			
-			req.setCharacterEncoding("UTF-8");
-		}
-		
-		/** 로그인 유지 */
-		MemberDao.init();
-		
-	
 		// 헤더 출력
 		if (isPrintOk(request)) {
 			printHeader(request, response);
@@ -94,16 +39,6 @@ public class CommonFilter implements Filter {
 		if (isPrintOk(request)) {
 			printFooter(request, response);
 		}	
-		
-		/** URL 접속 권한 체크 */
-		/*
-		try {
-			AccessController.init();
-		} catch(Exception e) {
-			PrintWriter out = Response.get().getWriter();
-			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
-		}
-		*/
 	}
 	
 	/** 

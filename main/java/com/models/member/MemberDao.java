@@ -36,11 +36,12 @@ public class MemberDao {
 	 * 
 	 * @param request
 	 */
-	public static void init() {
+	public static void init(ServletRequest request) {
+		if (request instanceof HttpServletRequest) {
 			MemberDao dao = getInstance();
-			HttpServletRequest request = Request.get();
+			HttpServletRequest req = (HttpServletRequest)request;
 			
-			HttpSession session = request.getSession();
+			HttpSession session = req.getSession();
 			int memNo = 0;
 			Member member = null;
 			if (session.getAttribute("memNo") != null) {
@@ -57,9 +58,9 @@ public class MemberDao {
 			
 			/** 소셜 프로필 유지 처리 */
 			if (socialMember == null) {
-				socialMember = SocialLogin.getSocialMember();
+				socialMember = SocialLogin.getSocialMember(req);
 			}
-
+		}
 	}
 	
 	/**

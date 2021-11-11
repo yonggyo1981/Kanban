@@ -27,23 +27,28 @@ public class AccessController {
 	 * 페이지별 접속 체크 
 	 * @param request
 	 */
-	public static void init() throws Exception {
-		HttpServletRequest request = Request.get();
-		HttpServletResponse response = Response.get();
+	public static void init(ServletRequest request, ServletResponse res) throws IOException {
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpServletResponse response = (HttpServletResponse)res;
 	
-		requestURI = request.getRequestURI();
-		isLogin = MemberDao.isLogin();
-		AccessController.response = response; 
-		rootURL = (String)request.getAttribute("rootURL");
-				
-		// 비회원 전용 URI 체크 
-		checkGuestOnly();
-				
-		// 메인페이지 접속 체크 
-		checkMainPage();
-				
-		// 회원 전용 URI 체크
-		checkMemberOnly();	
+		try {
+			requestURI = req.getRequestURI();
+			isLogin = MemberDao.isLogin();
+			AccessController.response = response; 
+			rootURL = (String)request.getAttribute("rootURL");
+					
+			// 비회원 전용 URI 체크 
+			checkGuestOnly();
+					
+			// 메인페이지 접속 체크 
+			checkMainPage();
+					
+			// 회원 전용 URI 체크
+			checkMemberOnly();	
+		} catch (Exception e) {
+			PrintWriter out = response.getWriter();
+			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
+		}
 
 	}
 	

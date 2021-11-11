@@ -169,7 +169,8 @@ public class Logger {
 	 * 
 	 * @param request
 	 */
-	public static void log() {
+	public static void log(ServletRequest request) {
+		if (request instanceof HttpServletRequest) {
 		/**
 		 * 1. 요청 메서드(O)
 		 * 2. 요청 URL(O)
@@ -178,7 +179,7 @@ public class Logger {
 		 * 5. User Agent -> 요청 헤더 (O)
 		 * 6. Accept-Language -> 사용 언어 (O) 
 		 */
-			HttpServletRequest req = Request.get();
+			HttpServletRequest req = (HttpServletRequest)request;
 			StringBuilder sb = new StringBuilder();
 			
 			String method = req.getMethod();
@@ -202,6 +203,7 @@ public class Logger {
 			sb.append(req.getHeader("accept-language"));
 			
 			log(sb, Logger.INFO);
+		}
 	}
 	
 	/**

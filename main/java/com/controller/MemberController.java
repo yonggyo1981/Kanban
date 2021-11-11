@@ -79,7 +79,7 @@ public class MemberController extends HttpServlet {
 			
 			request.setAttribute("action", "../member/join"); // 양식 처리 경로
 			String socialType = "none";
-			Member socialMember = SocialLogin.getSocialMember();
+			Member socialMember = SocialLogin.getSocialMember(request);
 			if (socialMember != null) {
 				socialType = socialMember.getSocialType();
 			}
@@ -91,7 +91,7 @@ public class MemberController extends HttpServlet {
 			rd.include(request, response);
 		} else { // 양식 처리
 			MemberDao dao = MemberDao.getInstance();
-			Member socialMember = SocialLogin.getSocialMember();
+			Member socialMember = SocialLogin.getSocialMember(request);
 			try {
 				boolean result = dao.join(request);
 				if (!result) { // 가입 실패
