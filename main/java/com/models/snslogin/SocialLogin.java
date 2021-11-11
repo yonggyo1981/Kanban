@@ -71,7 +71,6 @@ public abstract class SocialLogin {
 		HttpServletRequest request = Request.get();
 		Member socialMember = null;
 		HttpSession session = request.getSession();
-		System.out.println("session : " + session);
 		for (String type : socialTypes) {
 			if (session.getAttribute(type + "_member") != null) {
 				socialMember = (Member)session.getAttribute(type + "_member");
