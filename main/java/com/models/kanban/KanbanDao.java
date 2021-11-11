@@ -36,7 +36,7 @@ public class KanbanDao {
 	 */
 	public boolean add() throws Exception {
 	
-		HashMap<String, String> params = FileUpload.getInstance().upload(request).get();
+		HashMap<String, String> params = FileUpload.getInstance().upload().get();
 		
 		/** 유효성 검사 S */
 		checkWorkData(params);
@@ -70,7 +70,7 @@ public class KanbanDao {
 	 */
 	public boolean edit() throws Exception {
 		
-		HashMap<String, String> params = FileUpload.getInstance().upload(request).get();
+		HashMap<String, String> params = FileUpload.getInstance().upload().get();
 				
 		/** 유효성 검사 S */
 		if (params.get("idx") == null) {

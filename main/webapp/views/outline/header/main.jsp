@@ -26,11 +26,10 @@
 		<c:forEach var="css" items="${addCss}">
 		<link rel="stylesheet" type="text/css" href="${rootURL}/resources/css/${css}.css${version}" />
 		</c:forEach>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script type="text/babel" src="${rootURL}/resources/js/layer.js${version}"></script>
-		<script type="text/babel" src="${rootURL}/resources/js/common.js${version}"></script>
+		<script type="text/javascript" src="${rootURL}/resources/js/layer.js${version}"></script>
+		<script type="text/javascript" src="${rootURL}/resources/js/common.js${version}"></script>
 		<c:forEach var="script" items="${addScripts}">
 		<script type="text/javascript" src="${rootURL}/resources/js/${script}.js${version}"></script>
 		</c:forEach>

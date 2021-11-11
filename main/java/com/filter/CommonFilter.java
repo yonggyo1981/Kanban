@@ -3,10 +3,9 @@ package com.filter;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.core.*;
-import com.models.file.FileInfo;
-import com.models.kanban.*;
 import com.models.member.*;
 
 /**
@@ -83,9 +82,7 @@ public class CommonFilter implements Filter {
 		/** 로그인 유지 */
 		MemberDao.init();
 		
-		/** URL 접속 권한 체크 */
-		AccessController.init();
-		
+	
 		// 헤더 출력
 		if (isPrintOk(request)) {
 			printHeader(request, response);
@@ -97,6 +94,16 @@ public class CommonFilter implements Filter {
 		if (isPrintOk(request)) {
 			printFooter(request, response);
 		}	
+		
+		/** URL 접속 권한 체크 */
+		/*
+		try {
+			AccessController.init();
+		} catch(Exception e) {
+			PrintWriter out = Response.get().getWriter();
+			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
+		}
+		*/
 	}
 	
 	/** 

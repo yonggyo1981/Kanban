@@ -42,7 +42,8 @@ public class FileUpload {
 	 * 						 -> 메서드 체이닝 방식으로 get 함수 호출시 
 	 * @param request
 	 */
-	public FileUpload upload(HttpServletRequest request) {
+	public FileUpload upload() {
+		HttpServletRequest request = Request.get();
 		try {
 			
 			String uploadPath = request.getServletContext().getRealPath(File.separator + "resources" + File.separator + "upload");
