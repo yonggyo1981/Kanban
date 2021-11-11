@@ -67,7 +67,7 @@ public class AccessController {
 		 */
 		if (isLogin) {
 			for(String URI : guestOnlyURI) {
-				if (requestURI.indexOf(URI) != -1) { // 비회원 전용 페이지 접근한 경우 
+				if (requestURI.indexOf(URI) != -1 && requestURI.indexOf("/resources") == -1) { // 비회원 전용 페이지 접근한 경우 
 					throw new Exception("접근권한이 없습니다.");
 				}
 			}
@@ -95,7 +95,7 @@ public class AccessController {
 		/** 로그인 하지 않았을때 접속 하면 X */
 		if (!isLogin) {
 			for (String URI : memberOnlyURI) {
-				if (requestURI.indexOf(URI) != -1) { // 비회원이 회원전용 URI에 접속 
+				if (requestURI.indexOf(URI) != -1 && requestURI.indexOf("/resources") == -1) { // 비회원이 회원전용 URI에 접속 
 					throw new Exception("회원 전용 페이지 입니다.");
 				}
 			}
