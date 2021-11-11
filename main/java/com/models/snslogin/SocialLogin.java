@@ -24,7 +24,7 @@ public abstract class SocialLogin {
 	 * Access Token을 발급 받기위한 인증 code 발급 URL 생성 
 	 * @return
 	 */
-	public abstract String getCodeURL(HttpServletRequest request);
+	public abstract String getCodeURL();
 	
 	/**
 	 * Access Token 발급 
@@ -34,7 +34,7 @@ public abstract class SocialLogin {
 	 * @return
 	 */
 	public abstract String getAccessToken(String code, String state) throws Exception;
-	public abstract String getAccessToken(HttpServletRequest request) throws Exception;
+	public abstract String getAccessToken() throws Exception;
 	
 	/**
 	 * 회원 프로필 조회 API를 통해서 각 소셜 채널별 회원 정보 추출 
@@ -42,7 +42,7 @@ public abstract class SocialLogin {
 	 * @param accessToken
 	 * @return
 	 */
-	public abstract Member getProfile(HttpServletRequest request, String accessToken);
+	public abstract Member getProfile(String accessToken);
 	
 	/**
 	 * 소셜 회원 가입이 되어 있는지 여부 체크 

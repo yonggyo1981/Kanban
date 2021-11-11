@@ -43,8 +43,8 @@ public class NaverLogin extends SocialLogin {
 	}
 	
 	@Override
-	public String getCodeURL(HttpServletRequest request) {
-		
+	public String getCodeURL() {
+		HttpServletRequest request = Request.get();
 		HttpSession session = request.getSession();
 		String state = String.valueOf(System.currentTimeMillis());
 		session.setAttribute("state", state);
@@ -90,7 +90,8 @@ public class NaverLogin extends SocialLogin {
 	}
 
 	@Override
-	public String getAccessToken(HttpServletRequest request) throws Exception {
+	public String getAccessToken() throws Exception {
+		HttpServletRequest request = Request.get();
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
 		if (code == null || code.trim().equals("")) {
@@ -111,7 +112,8 @@ public class NaverLogin extends SocialLogin {
 	}
 	
 	@Override
-	public Member getProfile(HttpServletRequest request, String accessToken) {
+	public Member getProfile(String accessToken) {
+		
 		/**
 		 * 접근 토큰(access token)을 전달하는 헤더
 		* 다음과 같은 형식으로 헤더 값에 접근 토큰(access token)을 포함합니다. 
@@ -151,7 +153,7 @@ public class NaverLogin extends SocialLogin {
 			 * (회원가입, 회원 가입처리 ....)
 			 * 세션을 통해서 데이터 유지
 			 */
-			HttpSession session = request.getSession();
+			HttpSession session = Request.get().getSession();
 			session.setAttribute("naver_member", member);
 		}
 		

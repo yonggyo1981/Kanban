@@ -15,9 +15,9 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
 		
-		SocialLogin.clear(request);
+		SocialLogin.clear();
 		
-		String naverCodeURL = NaverLogin.getInstance().getCodeURL(request);
+		String naverCodeURL = NaverLogin.getInstance().getCodeURL();
 		request.setAttribute("naverCodeURL", naverCodeURL);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/views/main/index.jsp");

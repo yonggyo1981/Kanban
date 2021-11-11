@@ -168,7 +168,7 @@ public class MemberController extends HttpServlet {
 		if (httpMethod.equals("GET")) {
 			SocialLogin.clear();
 			
-			String naverCodeURL = NaverLogin.getInstance().getCodeURL(request);
+			String naverCodeURL = NaverLogin.getInstance().getCodeURL();
 			request.setAttribute("naverCodeURL", naverCodeURL);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/main/index.jsp");
@@ -328,8 +328,8 @@ public class MemberController extends HttpServlet {
 	private void naverLoginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NaverLogin naver = NaverLogin.getInstance();
 		try {
-			String accessToken = naver.getAccessToken(request);
-			naver.getProfile(request, accessToken);
+			String accessToken = naver.getAccessToken();
+			naver.getProfile(accessToken);
 			
 			/**
 			 *  네이버 소셜 채널로 이미 가입이 완료된 경우 -> 로그인 처리 
