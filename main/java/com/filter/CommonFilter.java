@@ -84,12 +84,8 @@ public class CommonFilter implements Filter {
 		MemberDao.init();
 		
 		/** URL 접속 권한 체크 */
-		AccessController.init(request, response);
-		
-		/** 파일 정보 초기 설정 */
-		FileInfo.init(request);
-		
-		
+		AccessController.init();
+				
 		/** KanbanDao */
 		KanbanDao.init(request);
 		

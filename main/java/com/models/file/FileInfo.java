@@ -2,8 +2,10 @@ package com.models.file;
 
 import java.sql.*;
 import java.io.*;
+
+import com.core.Request;
 import com.models.*;
-import javax.servlet.*;
+import javax.servlet.http.*;
 
 public class FileInfo extends Dto<FileInfo> {
 	
@@ -16,8 +18,6 @@ public class FileInfo extends Dto<FileInfo> {
 	private String uploadedUrl; // 업로드된 파일 접속 URL
 	private boolean isImage = false; // 이미지 여부
 	
-	private static ServletRequest request;
-	
 	public FileInfo() {}
 	
 	public FileInfo(int idx, long gid, String originalName, String mimeType, String regDt) {
@@ -28,6 +28,8 @@ public class FileInfo extends Dto<FileInfo> {
 		this.regDt = regDt;
 		
 		isImage = (mimeType.indexOf("image") != -1)?true:false; 
+		
+		HttpServletRequest request = Request.get();
 		
 		String rootURL = (String)request.getAttribute("rootURL");
 		String rootPath = (String)request.getAttribute("rootPath");
@@ -55,11 +57,7 @@ public class FileInfo extends Dto<FileInfo> {
 			rs.getString("regDt")
 		);	
 	}
-	
-	public static void init(ServletRequest request) {
-		FileInfo.request = request;
-	}
-	
+		
 	public int getIdx() {
 		return idx;
 	}
