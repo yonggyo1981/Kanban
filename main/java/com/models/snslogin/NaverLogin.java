@@ -159,7 +159,8 @@ public class NaverLogin extends SocialLogin {
 	}
 
 	@Override
-	public boolean isJoin(HttpServletRequest request) {
+	public boolean isJoin() {
+		HttpServletRequest request = Request.get();
 		HttpSession session = request.getSession();
 		if (session.getAttribute("naver_member") == null) {
 			return false;
@@ -182,16 +183,16 @@ public class NaverLogin extends SocialLogin {
 	}
 
 	@Override
-	public boolean login(HttpServletRequest request) {
-		Member member = getMember(request);
+	public boolean login() {
+		Member member = getMember();
 		if (member != null) {
-			request.getSession().setAttribute("memNo", member.getMemNo());
+			Request.get().getSession().setAttribute("memNo", member.getMemNo());
 			
 			return true;
 		}
 		
 		// 프로필 정보 세션 비우기
-		SocialLogin.clear(request);
+		SocialLogin.clear();
 		
 		return false;
 	}
@@ -202,7 +203,8 @@ public class NaverLogin extends SocialLogin {
 	 * @param request
 	 * @return
 	 */
-	public Member getMember(HttpServletRequest request) {
+	public Member getMember() {
+		HttpServletRequest request = Request.get();
 		Member member = null;
 		HttpSession session = request.getSession();
 		if (session.getAttribute("naver_member") != null) {

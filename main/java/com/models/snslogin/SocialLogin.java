@@ -50,7 +50,7 @@ public abstract class SocialLogin {
 	 * @param request
 	 * @return
 	 */
-	public abstract boolean isJoin(HttpServletRequest request);
+	public abstract boolean isJoin();
 	
 	/**
 	 * 소셜가입 회원 로그인 처리 
@@ -58,7 +58,7 @@ public abstract class SocialLogin {
 	 * @param request
 	 * @return
 	 */
-	public abstract boolean login(HttpServletRequest request);
+	public abstract boolean login();
 	
 	
 	/**
@@ -67,7 +67,8 @@ public abstract class SocialLogin {
 	 * @param request
 	 * @return
 	 */
-	public static Member getSocialMember(HttpServletRequest request) {
+	public static Member getSocialMember() {
+		HttpServletRequest request = Request.get();
 		Member socialMember = null;
 		HttpSession session = request.getSession();
 		
@@ -86,8 +87,8 @@ public abstract class SocialLogin {
 	 * @param request
 	 * @return
 	 */
-	public static SocialLogin getSocialInstance(HttpServletRequest request) {
-		Member member = getSocialMember(request);
+	public static SocialLogin getSocialInstance() {
+		Member member = getSocialMember();
 		String type = "none";
 		SocialLogin instance = null;
 		if (member != null) {
@@ -108,8 +109,8 @@ public abstract class SocialLogin {
 	 * 
 	 * @param request
 	 */
-	public static void clear(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public static void clear() {
+		HttpSession session = Request.get().getSession();
 		for (String type : socialTypes) {
 			session.removeAttribute(type + "_member");
 		}

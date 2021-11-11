@@ -79,7 +79,7 @@ public class MemberController extends HttpServlet {
 			
 			request.setAttribute("action", "../member/join"); // 양식 처리 경로
 			String socialType = "none";
-			Member socialMember = SocialLogin.getSocialMember(request);
+			Member socialMember = SocialLogin.getSocialMember();
 			if (socialMember != null) {
 				socialType = socialMember.getSocialType();
 			}
@@ -91,7 +91,7 @@ public class MemberController extends HttpServlet {
 			rd.include(request, response);
 		} else { // 양식 처리
 			MemberDao dao = MemberDao.getInstance();
-			Member socialMember = SocialLogin.getSocialMember(request);
+			Member socialMember = SocialLogin.getSocialMember();
 			try {
 				boolean result = dao.join(request);
 				if (!result) { // 가입 실패
@@ -166,7 +166,7 @@ public class MemberController extends HttpServlet {
 	 */
 	private void loginController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (httpMethod.equals("GET")) {
-			SocialLogin.clear(request);
+			SocialLogin.clear();
 			
 			String naverCodeURL = NaverLogin.getInstance().getCodeURL(request);
 			request.setAttribute("naverCodeURL", naverCodeURL);
@@ -335,8 +335,8 @@ public class MemberController extends HttpServlet {
 			 *  네이버 소셜 채널로 이미 가입이 완료된 경우 -> 로그인 처리 
 			 *  가입이 안되어 있는 경우 -> 회원 가입 처리 
 			 */
-			if (naver.isJoin(request)) { // 가입되어 있는 경우 
-				boolean result = naver.login(request); // 로그인
+			if (naver.isJoin()) { // 가입되어 있는 경우 
+				boolean result = naver.login(); // 로그인
 				if (!result) { // 로그인 실패 
 					throw new Exception("네이버 아이디 로그인 실패!");
 				}

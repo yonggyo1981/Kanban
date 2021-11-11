@@ -37,7 +37,7 @@ public class CommonFilter implements Filter {
 		Logger.init();
 		
 		/** 접속자 정보 로그 */
-		Logger.log(request);
+		Logger.log();
 		
 		/** URI별 추가 CSS */
 		request.setAttribute("addCss", config.getCss());
