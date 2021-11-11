@@ -83,10 +83,7 @@ public class CommonFilter implements Filter {
 		/** 로그인 유지 */
 		MemberDao.init();
 		
-		/** URL 접속 권한 체크 */
-		AccessController.init();
-				
-		
+	
 		// 헤더 출력
 		if (isPrintOk(request)) {
 			printHeader(request, response);
@@ -98,6 +95,10 @@ public class CommonFilter implements Filter {
 		if (isPrintOk(request)) {
 			printFooter(request, response);
 		}
+		
+		/** URL 접속 권한 체크 */
+		AccessController.init();
+		
 	}
 	
 	/** 
