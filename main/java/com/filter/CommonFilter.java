@@ -86,8 +86,6 @@ public class CommonFilter implements Filter {
 		/** URL 접속 권한 체크 */
 		AccessController.init();
 				
-		/** KanbanDao */
-		KanbanDao.init(request);
 		
 		// 헤더 출력
 		if (isPrintOk(request)) {
