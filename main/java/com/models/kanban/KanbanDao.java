@@ -227,7 +227,32 @@ public class KanbanDao {
 		if (request.getParameter("idx") != null) {
 			idx = Integer.valueOf(request.getParameter("idx"));
 		}
+		
+		/** 수정, 삭제 권한이 있는지 체크 */
+		checkAuth(request, idx);
+		
 		return delete(idx);
+	}
+	
+	/**
+	 * 수정, 삭제 권한 여부 체크 
+	 * @param request
+	 * @param idx
+	 * @return
+	 */
+	public boolean checkAuth(HttpServletRequest request, int idx) {
+		if (!MemberDao.isLogin(request)) { // 로그인이 안된 경우 -> 권한 없음
+			return false;
+		}
+		
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		Kanban data = get(idx);
+		int memNo = member.getMemNo();
+		if (data != null && memNo == data.getMemNo()) {
+			return true; // 수정, 삭제권한 있음..
+		}
+		return false;
 	}
 }
 
