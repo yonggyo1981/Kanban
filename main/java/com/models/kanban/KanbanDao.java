@@ -77,6 +77,12 @@ public class KanbanDao {
 			throw new Exception("잘못된 접근입니다.");
 		}
 		
+		/** 수정 권한 체크 */
+		boolean result = checkAuth(request, Integer.valueOf(params.get("idx")));
+		if (!result) {
+			throw new Exception("수정 권한이 없습니다.");
+		}
+		
 		checkWorkData(params);
 		/** 유효성 검사 E */
 		
