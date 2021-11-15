@@ -222,14 +222,17 @@ public class KanbanDao {
 		return (rs > 0)?true:false;
 	}
 	
-	public boolean delete(HttpServletRequest request) {
+	public boolean delete(HttpServletRequest request) throws Exception {
 		int idx = 0;
 		if (request.getParameter("idx") != null) {
 			idx = Integer.valueOf(request.getParameter("idx"));
 		}
 		
 		/** 수정, 삭제 권한이 있는지 체크 */
-		checkAuth(request, idx);
+		boolean result = checkAuth(request, idx);
+		if (!result) { // 삭제 권한 없음 
+			throw new Exception("삭제 권한이 없습니다.");
+		}
 		
 		return delete(idx);
 	}
