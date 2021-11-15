@@ -121,6 +121,10 @@ public class KanbanController extends HttpServlet {
 				if (data == null) {
 					throw new Exception("작업내용이 없습니다.");
 				}
+				/** 수정 권한 체크 */
+				int idx = Integer.valueOf(request.getParameter("idx"));
+				boolean result = dao.checkAuth(request, idx);
+				
 				ArrayList<FileInfo> attachFiles = dao.getAttachFiles();
 				
 				request.setAttribute("mode", "edit");
