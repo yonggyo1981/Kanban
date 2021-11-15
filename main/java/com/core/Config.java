@@ -223,7 +223,7 @@ public class Config {
 	 * 	
 	 * @return
 	 */
-	public String getBodyClass() {
+	public String getBodyClass(ServletRequest request) {
 		String rootURL = request.getServletContext().getContextPath();
 		String URI = requestURI.replace(rootURL, "").replace("index.jsp", "");
 		if (URI.equals("/")) { // 메인페이지

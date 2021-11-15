@@ -47,6 +47,7 @@ public class AccessController {
 			checkMemberOnly();	
 		} catch (Exception e) {
 			response.setCharacterEncoding("UTF-8");
+			Logger.log(e);
 			PrintWriter out = response.getWriter();
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 		}

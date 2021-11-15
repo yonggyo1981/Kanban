@@ -195,7 +195,7 @@ public class KanbanController extends HttpServlet {
 			}
 			
 			KanbanDao dao = KanbanDao.getInstance();
-			ArrayList<Kanban> list = dao.getList();
+			ArrayList<Kanban> list = dao.getList(request);
 			request.setAttribute("list", list);
 		} catch (Exception e) {
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());

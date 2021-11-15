@@ -44,7 +44,7 @@ public class BootStrap  {
 		request.setAttribute("cssJsVersion", cssJsVersion);
 		
 		/** Body 태그 추가 클래스 */
-		request.setAttribute("bodyClass",  config.getBodyClass());
+		request.setAttribute("bodyClass",  config.getBodyClass(request));
 		
 		/** rootURL */
 		String rootURL = request.getServletContext().getContextPath();
