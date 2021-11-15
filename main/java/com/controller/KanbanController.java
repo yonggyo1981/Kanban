@@ -121,12 +121,7 @@ public class KanbanController extends HttpServlet {
 				if (data == null) {
 					throw new Exception("작업내용이 없습니다.");
 				}
-				/** 수정 권한 체크 */
-				int idx = Integer.valueOf(request.getParameter("idx"));
-				boolean result = dao.checkAuth(request, idx);
-				if (!result) {
-					throw new Exception("수정권한이 없습니다.");
-				}
+				
 				
 				ArrayList<FileInfo> attachFiles = dao.getAttachFiles();
 				
@@ -139,7 +134,7 @@ public class KanbanController extends HttpServlet {
 			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/kanban/form.jsp");
-			rd.include(request, response);
+			rd.include(request, response);			
 		}
 	}
 
