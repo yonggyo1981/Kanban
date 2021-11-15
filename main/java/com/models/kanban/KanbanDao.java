@@ -126,7 +126,7 @@ public class KanbanDao {
 		} else {
 			status = (String)object;
 		}
-		
+		System.out.println("member : " + request.getAttribute("member"));
 		int memNo = 0;
 		if (request.getAttribute("member") != null) {
 			Member member = (Member)request.getAttribute("member");
