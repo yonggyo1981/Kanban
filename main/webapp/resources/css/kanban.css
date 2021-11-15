@@ -136,6 +136,12 @@
 .work_view .btns .btn { 
 	width: 50%;
 	display: block;  
+	border: 1px solid #212121;
+	color: #212121;
+	font-weight: bold;
+	height: 45px;
+	line-height: 43px;
+	text-align: center; 
 }
 .work_view .btns .btn:first-child {
 	float: left;
