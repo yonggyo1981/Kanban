@@ -110,5 +110,46 @@
 	color: #ffffff;
 } 
 
+/** kanban/view.jsp */
+.work_view dl { 
+	display: table; 
+	width: 100%;
+	padding: 10px 0;
+	border-bottom: 1px dashed #d5d5d5;
+}
+.work_view dl:last-of-type { 
+	border-bottom: 0;
+}
+
+.work_view dt {
+	display: table-cell;
+	vertical-align: middle; 
+	width: 100px; 
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.work_view .btns {
+	margin-top: 30px;
+}
+
+.work_view .btns .btn { 
+	width: 50%;
+	display: block;  
+}
+.work_view .btns .btn:first-child {
+	float: left;
+}
+.work_view .btns .btn:last-child {
+	float: right;
+}
+
+.work_view .btns:after {
+	clear: both;
+	content: '';
+	display: block;
+}
+
+
 
 

@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<div id='frmAdd'>
+<div class='popup_tit'>
+	작업 내용 확인
+</div>
+<div class='work_view'>
 	<dl>
 		<dt>작업구분</dt>
 		<dd class='status_type'>
