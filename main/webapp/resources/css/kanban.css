@@ -141,13 +141,16 @@
 	font-weight: bold;
 	height: 45px;
 	line-height: 43px;
-	text-align: center; 
+	text-align: center;
+	cursor: pointer; 
 }
 .work_view .btns .btn:first-child {
 	float: left;
 }
 .work_view .btns .btn:last-child {
 	float: right;
+	background-color: #212121;
+	color: #ffffff;
 }
 
 .work_view .btns:after {
