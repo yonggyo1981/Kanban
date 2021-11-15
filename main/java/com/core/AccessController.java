@@ -33,7 +33,7 @@ public class AccessController {
 	
 		try {
 			requestURI = req.getRequestURI();
-			isLogin = MemberDao.isLogin();
+			isLogin = MemberDao.isLogin(request);
 			AccessController.response = response; 
 			rootURL = (String)request.getAttribute("rootURL");
 					

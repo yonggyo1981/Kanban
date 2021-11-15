@@ -69,8 +69,7 @@ public class MemberDao {
 	 * @param request
 	 * @return
 	 */
-	public static boolean isLogin() {
-		HttpServletRequest request = Req.get();
+	public static boolean isLogin(ServletRequest request) {
 		boolean isLogin = false;
 		if (request.getAttribute("isLogin") != null) {
 			isLogin = (Boolean)request.getAttribute("isLogin");

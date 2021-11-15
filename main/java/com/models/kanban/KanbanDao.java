@@ -119,9 +119,10 @@ public class KanbanDao {
 	 */
 	public ArrayList<Kanban> getList(Object object) {
 		String status = null;
+		HttpServletRequest request = Req.get();
 		if (object instanceof HttpServletRequest) {
-			HttpServletRequest req = (HttpServletRequest)object;
-			status = req.getParameter("status");
+			request = (HttpServletRequest)object;
+			status = request.getParameter("status");
 		} else {
 			status = (String)object;
 		}
