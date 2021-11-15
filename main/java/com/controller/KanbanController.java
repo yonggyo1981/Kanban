@@ -152,6 +152,7 @@ public class KanbanController extends HttpServlet {
 			
 			out.print("<script>parent.location.reload();</script>");
 		} catch (Exception e) {
+			Logger.log(e);
 			out.printf("<script>alert('%s');</script>", e.getMessage());
 		}
 	}
@@ -175,6 +176,7 @@ public class KanbanController extends HttpServlet {
 			request.setAttribute("attachFiles", attachFiles);
 			
 		} catch (Exception e) {
+			Logger.log(e);
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 			return;
 		}

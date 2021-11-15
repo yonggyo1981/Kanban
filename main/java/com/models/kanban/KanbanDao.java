@@ -243,11 +243,17 @@ public class KanbanDao {
 	 * @return
 	 */
 	public boolean checkAuth(HttpServletRequest request, int idx) {
+		return true;
+		/*
 		if (!MemberDao.isLogin(request)) { // 로그인이 안된 경우 -> 권한 없음
 			return false;
 		}
 		
 		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("member") == null) {
+			return false;
+		}
 		Member member = (Member)session.getAttribute("member");
 		Kanban data = get(idx);
 		int memNo = member.getMemNo();
@@ -255,6 +261,7 @@ public class KanbanDao {
 			return true; // 수정, 삭제권한 있음..
 		}
 		return false;
+		*/
 	}
 }
 
