@@ -117,7 +117,7 @@ public class KanbanController extends HttpServlet {
 					throw new Exception("잘못된 접근입니다.");
 				}
 				
-				Kanban data = dao.get();
+				Kanban data = dao.get(request);
 				if (data == null) {
 					throw new Exception("작업내용이 없습니다.");
 				}
@@ -162,7 +162,7 @@ public class KanbanController extends HttpServlet {
 			}
 			
 			KanbanDao dao = KanbanDao.getInstance();
-			Kanban data = dao.get();
+			Kanban data = dao.get(request);
 			if (data == null) {
 				throw new Exception("작업내용이 없습니다.");
 			}

@@ -173,7 +173,7 @@ public class KanbanDao {
 		return data;
 	}
 	
-	public Kanban get() {
+	public Kanban get(HttpServletRequest request) {
 		int idx = 0;
 		if (request.getParameter("idx") != null) {
 			idx = Integer.valueOf(request.getParameter("idx"));
