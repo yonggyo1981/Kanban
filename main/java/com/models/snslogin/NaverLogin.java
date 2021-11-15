@@ -44,7 +44,7 @@ public class NaverLogin extends SocialLogin {
 	
 	@Override
 	public String getCodeURL() {
-		HttpServletRequest request = Request.get();
+		HttpServletRequest request = Req.get();
 		HttpSession session = request.getSession();
 		String state = String.valueOf(System.currentTimeMillis());
 		session.setAttribute("state", state);
@@ -91,7 +91,7 @@ public class NaverLogin extends SocialLogin {
 
 	@Override
 	public String getAccessToken() throws Exception {
-		HttpServletRequest request = Request.get();
+		HttpServletRequest request = Req.get();
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
 		if (code == null || code.trim().equals("")) {
@@ -153,7 +153,7 @@ public class NaverLogin extends SocialLogin {
 			 * (회원가입, 회원 가입처리 ....)
 			 * 세션을 통해서 데이터 유지
 			 */
-			HttpSession session = Request.get().getSession();
+			HttpSession session = Req.get().getSession();
 			session.setAttribute("naver_member", member);
 		}
 		
@@ -162,7 +162,7 @@ public class NaverLogin extends SocialLogin {
 
 	@Override
 	public boolean isJoin() {
-		HttpServletRequest request = Request.get();
+		HttpServletRequest request = Req.get();
 		HttpSession session = request.getSession();
 		if (session.getAttribute("naver_member") == null) {
 			return false;
@@ -188,7 +188,7 @@ public class NaverLogin extends SocialLogin {
 	public boolean login() {
 		Member member = getMember();
 		if (member != null) {
-			Request.get().getSession().setAttribute("memNo", member.getMemNo());
+			Req.get().getSession().setAttribute("memNo", member.getMemNo());
 			
 			return true;
 		}
@@ -206,7 +206,7 @@ public class NaverLogin extends SocialLogin {
 	 * @return
 	 */
 	public Member getMember() {
-		HttpServletRequest request = Request.get();
+		HttpServletRequest request = Req.get();
 		Member member = null;
 		HttpSession session = request.getSession();
 		if (session.getAttribute("naver_member") != null) {

@@ -3,12 +3,12 @@ package com.core;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletRequest;
 
-public class Request {
+public class Req {
 	private static HttpServletRequest request;
 	
 	public static void set(ServletRequest request) {
 		if (request instanceof HttpServletRequest) {
-			Request.request = (HttpServletRequest)request;
+			Req.request = (HttpServletRequest)request;
 		}
 	}
 	

@@ -46,6 +46,7 @@ public class AccessController {
 			// 회원 전용 URI 체크
 			checkMemberOnly();	
 		} catch (Exception e) {
+			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
 			out.printf("<script>alert('%s');history.back();</script>", e.getMessage());
 		}

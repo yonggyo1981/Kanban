@@ -25,7 +25,7 @@ public class BootStrap  {
 		
 		/** URI별 추가 CSS */
 		request.setAttribute("addCss", config.getCss());
-		
+
 		/** URI별 추가 JS */
 		request.setAttribute("addScripts", config.getScripts());
 		
@@ -67,9 +67,9 @@ public class BootStrap  {
 		/** 로그인 유지 */
 		MemberDao.init(request);
 		
-		//AccessController.init(request, response);
+		AccessController.init(request, response);
 		
-		Request.set(request);
-		Response.set(response);
+		Req.set(request);
+		Res.set(response);
 	}
 }

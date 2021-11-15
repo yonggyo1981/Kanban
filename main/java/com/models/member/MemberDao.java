@@ -10,7 +10,7 @@ import org.mindrot.jbcrypt.*;
 import com.core.DB;
 import com.core.DBField;
 import com.core.Logger;
-import com.core.Request;
+import com.core.Req;
 import com.models.snslogin.*;
 
 /**
@@ -70,7 +70,7 @@ public class MemberDao {
 	 * @return
 	 */
 	public static boolean isLogin() {
-		HttpServletRequest request = Request.get();
+		HttpServletRequest request = Req.get();
 		boolean isLogin = false;
 		if (request.getAttribute("isLogin") != null) {
 			isLogin = (Boolean)request.getAttribute("isLogin");

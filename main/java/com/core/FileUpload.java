@@ -43,7 +43,7 @@ public class FileUpload {
 	 * @param request
 	 */
 	public FileUpload upload() {
-		HttpServletRequest request = Request.get();
+		HttpServletRequest request = Req.get();
 		try {
 			
 			String uploadPath = request.getServletContext().getRealPath(File.separator + "resources" + File.separator + "upload");

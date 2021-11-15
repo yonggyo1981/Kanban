@@ -3,7 +3,7 @@ package com.models.file;
 import java.sql.*;
 import java.io.*;
 
-import com.core.Request;
+import com.core.Req;
 import com.models.*;
 import javax.servlet.http.*;
 
@@ -29,7 +29,7 @@ public class FileInfo extends Dto<FileInfo> {
 		
 		isImage = (mimeType.indexOf("image") != -1)?true:false; 
 		
-		HttpServletRequest request = Request.get();
+		HttpServletRequest request = Req.get();
 		
 		String rootURL = (String)request.getAttribute("rootURL");
 		String rootPath = (String)request.getAttribute("rootPath");

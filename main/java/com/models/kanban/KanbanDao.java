@@ -22,7 +22,7 @@ public class KanbanDao {
 		}
 		
 		if (request == null) {
-			request = Request.get();
+			request = Req.get();
 		}
 		
 		return instance;
