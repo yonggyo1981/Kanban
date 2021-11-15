@@ -80,7 +80,7 @@ public class KanbanController extends HttpServlet {
 		if (httpMethod.equals("POST")) { // 등록 처리 
 			try {
 				KanbanDao dao = KanbanDao.getInstance();
-				boolean result = dao.add();
+				boolean result = dao.add(request);
 				if (!result) {
 					throw new Exception("작업등록 실패하였습니다.");
 				}
@@ -103,7 +103,7 @@ public class KanbanController extends HttpServlet {
 		KanbanDao dao = KanbanDao.getInstance();
 		if (httpMethod.equals("POST")) { // 수정 처리
 			try {
-				boolean result = dao.edit();
+				boolean result = dao.edit(request);
 				if (!result) {
 					throw new Exception("수정에 실패하였습니다.");
 				}
@@ -143,7 +143,7 @@ public class KanbanController extends HttpServlet {
 				throw new Exception("잘못된 접근입니다.");
 			}
 			KanbanDao dao = KanbanDao.getInstance();
-			boolean result = dao.delete();
+			boolean result = dao.delete(request);
 			if (!result) {
 				throw new Exception("삭제 실패하였습니다.");
 			}

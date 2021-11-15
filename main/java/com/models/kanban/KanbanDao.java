@@ -34,9 +34,9 @@ public class KanbanDao {
 	 * @param request
 	 * @return
 	 */
-	public boolean add() throws Exception {
+	public boolean add(HttpServletRequest request) throws Exception {
 	
-		HashMap<String, String> params = FileUpload.getInstance().upload().get();
+		HashMap<String, String> params = FileUpload.getInstance().upload(request).get();
 		
 		/** 유효성 검사 S */
 		checkWorkData(params);
@@ -68,9 +68,9 @@ public class KanbanDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean edit() throws Exception {
+	public boolean edit(HttpServletRequest request) throws Exception {
 		
-		HashMap<String, String> params = FileUpload.getInstance().upload().get();
+		HashMap<String, String> params = FileUpload.getInstance().upload(request).get();
 				
 		/** 유효성 검사 S */
 		if (params.get("idx") == null) {
@@ -222,7 +222,7 @@ public class KanbanDao {
 		return (rs > 0)?true:false;
 	}
 	
-	public boolean delete() {
+	public boolean delete(HttpServletRequest request) {
 		int idx = 0;
 		if (request.getParameter("idx") != null) {
 			idx = Integer.valueOf(request.getParameter("idx"));
