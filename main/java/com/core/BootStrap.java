@@ -14,12 +14,21 @@ public class BootStrap  {
 	public static void init(ServletRequest request, ServletResponse response) throws IOException, ServletException {
 	
 		
+		
 		/** 사이트 설정 초기화 */
 		Config.init(request);
-		Config config = Config.getInstance();
+		Config config = Config.getInstance(true);
 		
 		/** 로그인 유지 */
 		MemberDao.init(request);
+		
+		/** rootURL */
+		String rootURL = request.getServletContext().getContextPath();
+		request.setAttribute("rootURL", rootURL);
+		
+		/** rootPath */
+		String rootPath = request.getServletContext().getRealPath(".");
+		request.setAttribute("rootPath", rootPath);
 		
 		/** 로거 초기화 */
 		Logger.init();
@@ -49,14 +58,6 @@ public class BootStrap  {
 		
 		/** Body 태그 추가 클래스 */
 		request.setAttribute("bodyClass",  config.getBodyClass(request));
-		
-		/** rootURL */
-		String rootURL = request.getServletContext().getContextPath();
-		request.setAttribute("rootURL", rootURL);
-		
-		/** rootPath */
-		String rootPath = request.getServletContext().getRealPath(".");
-		request.setAttribute("rootPath", rootPath);
 		
 		/** 요청 메서드 + requestURL, Request Encoding 설정 */
 		if (request instanceof HttpServletRequest) {

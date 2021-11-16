@@ -28,7 +28,8 @@ public class Config {
 	*  
 	*/
 	private Config() {
-		requestURI = request.getRequestURI();		
+		requestURI = request.getRequestURI();
+		System.out.println(requestURI);
 		String configPath = request.getServletContext().getRealPath(".");
 		configPath += File.separator + ".." + File.separator + "config" + File.separator + "config.json";
 		
@@ -69,6 +70,14 @@ public class Config {
 
 	public static Config getInstance() {
 		if (instance == null) {
+			instance = new Config();
+		}
+		
+		return instance;
+	}
+	
+	public static Config getInstance(boolean isNew) {
+		if (instance == null || isNew) {
 			instance = new Config();
 		}
 		
