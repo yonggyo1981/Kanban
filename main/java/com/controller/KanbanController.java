@@ -66,7 +66,7 @@ public class KanbanController extends HttpServlet {
 	/** 작업 목록 */
 	private void workController(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		KanbanDao dao = KanbanDao.getInstance();
-		ArrayList<Kanban> list = dao.getList();
+		ArrayList<Kanban> list = dao.getList(request);
 		
 		request.setAttribute("list", list);
 		

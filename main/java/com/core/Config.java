@@ -29,7 +29,6 @@ public class Config {
 	*/
 	private Config() {
 		requestURI = request.getRequestURI();
-		System.out.println(requestURI);
 		String configPath = request.getServletContext().getRealPath(".");
 		configPath += File.separator + ".." + File.separator + "config" + File.separator + "config.json";
 		
@@ -87,8 +86,10 @@ public class Config {
 	public static void init(ServletRequest request) {
 		if (request instanceof HttpServletRequest) {
 			Config.request = (HttpServletRequest)request;
+			Config.requestURI = Config.request.getRequestURI();
 		}
 	}
+	
 	/**
 	 * 설정 조회 
 	 * 

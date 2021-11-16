@@ -17,7 +17,7 @@ public class BootStrap  {
 		
 		/** 사이트 설정 초기화 */
 		Config.init(request);
-		Config config = Config.getInstance(true);
+		Config config = Config.getInstance();
 		
 		/** 로그인 유지 */
 		MemberDao.init(request);
